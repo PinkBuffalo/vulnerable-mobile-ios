@@ -13,9 +13,10 @@
 @property (nonatomic, readwrite) CGFloat padding;
 @property (nonatomic, readwrite) CGFloat buttonHeight;
 
-@property (strong, nonatomic, readonly) UIImageView *logoView;
+@property (strong, nonatomic, readonly) UIImageView *logoImageView;
 @property (strong, nonatomic, readonly) UIButton *logInButton;
 @property (strong, nonatomic, readonly) UIButton *signUpButton;
 @property (strong, nonatomic, readonly) UILabel *learnMoreLabel;
+@property (strong, nonatomic, readonly) UIImageView *arrowImageView;
 
 @end

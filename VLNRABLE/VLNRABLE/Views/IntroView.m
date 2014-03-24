@@ -11,10 +11,11 @@
 
 @interface IntroView ()
 
-@property (strong, nonatomic, readwrite) UIImageView *logoView;
+@property (strong, nonatomic, readwrite) UIImageView *logoImageView;
 @property (strong, nonatomic, readwrite) UIButton *logInButton;
 @property (strong, nonatomic, readwrite) UIButton *signUpButton;
 @property (strong, nonatomic, readwrite) UILabel *learnMoreLabel;
+@property (strong, nonatomic, readwrite) UIImageView *arrowImageView;
 @property (strong, nonatomic, readwrite) UIView *headerView;
 @property (strong, nonatomic, readwrite) CAGradientLayer *headerGradient;
 @property (strong, nonatomic, readwrite) UIView *footerView;
@@ -29,20 +30,20 @@
 		self.backgroundColor = [UIColor whiteColor];
 
 		_padding = 5.0f;
-		_buttonHeight = 44.0f;
+		_buttonHeight = 50.0f;
 
 		_headerGradient = [VLNRABLEColor tealToBlueGradient];
 
 		_headerView = [[UIView alloc] init];
 		_headerView.backgroundColor = [UIColor clearColor];
 
-		_logoView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vlnrable_logo"]];
-		_logoView.contentMode = UIViewContentModeScaleAspectFit;
+		_logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vlnrable_logo"]];
+		_logoImageView.contentMode = UIViewContentModeScaleAspectFit;
 
-		_logoView.layer.shadowColor = [UIColor blackColor].CGColor;
-		_logoView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
-		_logoView.layer.shadowOpacity = 0.33f;
-		_logoView.layer.shadowRadius = 1.0f;
+		_logoImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+		_logoImageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+		_logoImageView.layer.shadowOpacity = 0.33f;
+		_logoImageView.layer.shadowRadius = 1.0f;
 
 		_footerView = [[UIView alloc] init];
 		_footerView.backgroundColor = [UIColor whiteColor];
@@ -50,24 +51,30 @@
 		_logInButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_logInButton setTitle:@"Log In" forState:UIControlStateNormal];
 		_logInButton.backgroundColor = [VLNRABLEColor blueColor];
+		_logInButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_signUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_signUpButton setTitle:@"Sign Up" forState:UIControlStateNormal];
 		_signUpButton.backgroundColor = [VLNRABLEColor tealColor];
+		_signUpButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_learnMoreLabel = [[UILabel alloc] init];
 		_learnMoreLabel.backgroundColor = [UIColor clearColor];
-		_learnMoreLabel.font = [UIFont systemFontOfSize:12.0f];
+		_learnMoreLabel.font = [UIFont systemFontOfSize:11.0f];
 		_learnMoreLabel.textAlignment = NSTextAlignmentCenter;
 		_learnMoreLabel.textColor = [VLNRABLEColor lightGrayColor];
 		_learnMoreLabel.text = @"Learn more about VLNRABLE   ";
 
+		_arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow_right"]];
+		_arrowImageView.contentMode = UIViewContentModeScaleAspectFit;
+
 		[self addSubview:_headerView];
-		[self addSubview:_logoView];
+		[self addSubview:_logoImageView];
 
 		[_footerView addSubview:_logInButton];
 		[_footerView addSubview:_signUpButton];
 		[_footerView addSubview:_learnMoreLabel];
+		[_footerView addSubview:_arrowImageView];
 		[self addSubview:_footerView];
     }
 
@@ -91,13 +98,16 @@
 	_headerGradient.frame = _headerView.bounds;
 	[_headerView.layer addSublayer:_headerGradient];
 
-	_logoView.frame = CGRectInset(_headerView.bounds, (_padding * 12.0f), (_padding * 12.0f));
+	_logoImageView.frame = CGRectInset(_headerView.bounds, (_padding * 12.0f), (_padding * 12.0f));
 
-	UIEdgeInsets headerViewEdgeInsets = UIEdgeInsetsMake(_headerView.frame.size.height + (_padding * 12.0f), 0.0f, (_padding * 4.0f), 0.0f);
+	UIEdgeInsets headerViewEdgeInsets = UIEdgeInsetsMake(_headerView.frame.size.height + (_padding * 10.0f),
+														 0.0f,
+														 (_padding * 4.0f),
+														 0.0f);
 
 	_footerView.frame = UIEdgeInsetsInsetRect(bounds, headerViewEdgeInsets);
 
-	CGRect footerViewInset = CGRectInset(_footerView.bounds, _padding * 4.0f, 0.0);
+	CGRect footerViewInset = CGRectInset(_footerView.bounds, _padding * 4.0f, 0.0f);
 
 	xOrigin = footerViewInset.origin.x;
 	yOrigin = footerViewInset.origin.y;
@@ -114,12 +124,20 @@
 									 footerViewInset.size.width,
 									 _buttonHeight);
 
-	CGFloat learnMoreLabelHeight = [_learnMoreLabel.text sizeWithAttributes:@{ NSFontAttributeName: _learnMoreLabel.font }].height;
+	CGSize learnMoreLabelSize = [_learnMoreLabel.text sizeWithAttributes:@{ NSFontAttributeName: _learnMoreLabel.font }];
 
-	_learnMoreLabel.frame = CGRectMake(xOrigin,
-									   _footerView.frame.size.height - learnMoreLabelHeight,
-									   footerViewInset.size.width,
-									   learnMoreLabelHeight);
+	_learnMoreLabel.frame = CGRectMake((_footerView.frame.size.width - learnMoreLabelSize.width) / 2.0f,
+									   _footerView.frame.size.height - learnMoreLabelSize.height,
+									   learnMoreLabelSize.width,
+									   learnMoreLabelSize.height);
+
+	xOrigin = _learnMoreLabel.frame.origin.x + _learnMoreLabel.frame.size.width;
+	yOrigin = _learnMoreLabel.frame.origin.y;
+
+	_arrowImageView.frame = CGRectMake(xOrigin,
+									   yOrigin,
+									   learnMoreLabelSize.height,
+									   learnMoreLabelSize.height);
 }
 
 @end
