@@ -37,6 +37,8 @@
 		_headerView = [[UIView alloc] init];
 		_headerView.backgroundColor = [UIColor clearColor];
 
+		[_headerView.layer addSublayer:_headerGradient];
+
 		_logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vlnrable_logo"]];
 		_logoImageView.contentMode = UIViewContentModeScaleAspectFit;
 
@@ -90,24 +92,11 @@
 	CGFloat xOrigin = bounds.origin.x;
 	CGFloat yOrigin = bounds.origin.y;
 
-	_headerView.frame = CGRectMake(xOrigin,
-								   yOrigin,
-								   bounds.size.width,
-								   bounds.size.width);
+	UIEdgeInsets footerEdgeInsets = UIEdgeInsetsMake((bounds.size.height / 2.0f), 0.0f, 0.0f, 0.0f);
 
-	_headerGradient.frame = _headerView.bounds;
-	[_headerView.layer addSublayer:_headerGradient];
+	_footerView.frame = UIEdgeInsetsInsetRect(bounds, footerEdgeInsets);
 
-	_logoImageView.frame = CGRectInset(_headerView.bounds, (_padding * 12.0f), (_padding * 12.0f));
-
-	UIEdgeInsets headerViewEdgeInsets = UIEdgeInsetsMake(_headerView.frame.size.height + (_padding * 10.0f),
-														 0.0f,
-														 (_padding * 4.0f),
-														 0.0f);
-
-	_footerView.frame = UIEdgeInsetsInsetRect(bounds, headerViewEdgeInsets);
-
-	CGRect footerViewInset = CGRectInset(_footerView.bounds, _padding * 4.0f, 0.0f);
+	CGRect footerViewInset = CGRectInset(_footerView.bounds, (_padding * 4.0f), (_footerView.bounds.size.height / 4.0f));
 
 	xOrigin = footerViewInset.origin.x;
 	yOrigin = footerViewInset.origin.y;
@@ -117,7 +106,7 @@
 									footerViewInset.size.width,
 									_buttonHeight);
 
-	yOrigin += _buttonHeight + (_padding * 4.0f);
+	yOrigin = _footerView.frame.origin.y - _buttonHeight - (_footerView.frame.size.height / 4.0f);
 
 	_signUpButton.frame = CGRectMake(xOrigin,
 									 yOrigin,
@@ -126,8 +115,11 @@
 
 	CGSize learnMoreLabelSize = [_learnMoreLabel.text sizeWithAttributes:@{ NSFontAttributeName: _learnMoreLabel.font }];
 
-	_learnMoreLabel.frame = CGRectMake((_footerView.frame.size.width - learnMoreLabelSize.width) / 2.0f,
-									   _footerView.frame.size.height - learnMoreLabelSize.height,
+	xOrigin = (_footerView.frame.size.width - learnMoreLabelSize.width) / 2.0f;
+	yOrigin = _footerView.frame.origin.y - learnMoreLabelSize.height - (_footerView.frame.size.height / 12.0f);
+
+	_learnMoreLabel.frame = CGRectMake(xOrigin,
+									   yOrigin,
 									   learnMoreLabelSize.width,
 									   learnMoreLabelSize.height);
 
@@ -138,6 +130,16 @@
 									   yOrigin,
 									   learnMoreLabelSize.height,
 									   learnMoreLabelSize.height);
+
+	xOrigin = bounds.origin.x;
+	yOrigin = bounds.origin.y;
+
+	UIEdgeInsets headerEdgeInsets = UIEdgeInsetsMake(0.0f, 0.0f, _footerView.frame.size.height, 0.0f);
+
+	_headerView.frame = UIEdgeInsetsInsetRect(bounds, headerEdgeInsets);
+	_headerGradient.frame = _headerView.bounds;
+
+	_logoImageView.frame = CGRectInset(_headerView.bounds, (_headerView.bounds.size.width / 4.0f), (_headerView.bounds.size.height / 3.0f));
 }
 
 @end
