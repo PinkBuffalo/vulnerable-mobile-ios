@@ -36,12 +36,10 @@
 
 		_headerView = [[UIView alloc] init];
 		_headerView.backgroundColor = [UIColor clearColor];
-
 		[_headerView.layer addSublayer:_headerGradient];
 
 		_logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"vlnrable_logo"]];
 		_logoImageView.contentMode = UIViewContentModeScaleAspectFit;
-
 		_logoImageView.layer.shadowColor = [UIColor blackColor].CGColor;
 		_logoImageView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		_logoImageView.layer.shadowOpacity = 0.33f;
@@ -75,11 +73,10 @@
 
 		[_footerView addSubview:_logInButton];
 		[_footerView addSubview:_signUpButton];
-		[_footerView addSubview:_learnMoreLabel];
 		[_footerView addSubview:_arrowImageView];
+		[_footerView addSubview:_learnMoreLabel];
 		[self addSubview:_footerView];
     }
-
     return self;
 }
 

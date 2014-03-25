@@ -8,8 +8,14 @@
 
 #import "IntroViewController.h"
 #import "IntroView.h"
+#import "GetStartedViewController.h"
 
 @interface IntroViewController ()
+
+@property (strong, nonatomic, readwrite) IntroView *introView;
+@property (strong, nonatomic, readwrite) GetStartedViewController *getStartedVC;
+@property (strong, nonatomic, readwrite) UITapGestureRecognizer *learnMoreLabelTap;
+@property (strong, nonatomic, readwrite) UITapGestureRecognizer *learnMoreArrowTap;
 
 @end
 
@@ -17,18 +23,52 @@
 
 - (void)loadView
 {
-	IntroView *introView = [[IntroView alloc] init];
-	
-	[self setView:introView];
+	[self setView:self.introView];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+	[self.introView addGestureRecognizer:self.learnMoreLabelTap];
+	[self.introView addGestureRecognizer:self.learnMoreArrowTap];
+}
+
+#pragma mark - Lazy loading methods
+- (IntroView *)introView
+{
+	if (!_introView) {
+		_introView = [[IntroView alloc] init];
+	}
+	return _introView;
+}
+
+- (UITapGestureRecognizer *)learnMoreLabelTap
+{
+	if (!_learnMoreLabelTap) {
+		_learnMoreLabelTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+																	 action:@selector(presentGetStartedViewController)];
+
+	}
+	return _learnMoreLabelTap;
+}
+
+- (UITapGestureRecognizer *)learnMoreArrowTap
+{
+	if (!_learnMoreArrowTap) {
+		_learnMoreArrowTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+																	 action:@selector(presentGetStartedViewController)];
+
+	}
+	return _learnMoreArrowTap;
 }
 
 #pragma mark - Action methods
-
+- (void)presentGetStartedViewController
+{
+	self.getStartedVC = [[GetStartedViewController alloc] init];
+	[self.navigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+	[self.navigationController presentViewController:self.getStartedVC animated:YES completion:nil];
+}
 
 @end

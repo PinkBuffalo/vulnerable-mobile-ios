@@ -30,6 +30,10 @@
 		AD00A30218DFDAB300AAABBA /* VLNRABLEColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRABLEColor.m */; };
 		AD00A30318DFDAB300AAABBA /* VLNRABLEColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRABLEColor.m */; };
 		AD00A30618DFE30E00AAABBA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD00A30518DFE30E00AAABBA /* QuartzCore.framework */; };
+		ADBE2E0618E1425E0094196E /* GetStartedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0518E1425E0094196E /* GetStartedViewController.m */; };
+		ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0518E1425E0094196E /* GetStartedViewController.m */; };
+		ADBE2E0A18E142850094196E /* GetStartedView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0918E142850094196E /* GetStartedView.m */; };
+		ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0918E142850094196E /* GetStartedView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,10 @@
 		AD00A30118DFDAB300AAABBA /* VLNRABLEColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRABLEColor.m; sourceTree = "<group>"; };
 		AD00A30418DFDBDF00AAABBA /* MagicMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicMacro.h; sourceTree = "<group>"; };
 		AD00A30518DFE30E00AAABBA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		ADBE2E0418E1425E0094196E /* GetStartedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedViewController.h; path = Controllers/GetStartedViewController.h; sourceTree = "<group>"; };
+		ADBE2E0518E1425E0094196E /* GetStartedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedViewController.m; path = Controllers/GetStartedViewController.m; sourceTree = "<group>"; };
+		ADBE2E0818E142850094196E /* GetStartedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedView.h; path = Views/GetStartedView.h; sourceTree = "<group>"; };
+		ADBE2E0918E142850094196E /* GetStartedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedView.m; path = Views/GetStartedView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +192,8 @@
 		AD00A2FA18DFCC4400AAABBA /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				ADBE2E0418E1425E0094196E /* GetStartedViewController.h */,
+				ADBE2E0518E1425E0094196E /* GetStartedViewController.m */,
 				AD00A2F618DFCC4100AAABBA /* IntroViewController.h */,
 				AD00A2F718DFCC4100AAABBA /* IntroViewController.m */,
 			);
@@ -195,6 +205,8 @@
 			children = (
 				AD00A2FB18DFCE7F00AAABBA /* IntroView.h */,
 				AD00A2FC18DFCE7F00AAABBA /* IntroView.m */,
+				ADBE2E0818E142850094196E /* GetStartedView.h */,
+				ADBE2E0918E142850094196E /* GetStartedView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -334,7 +346,9 @@
 				AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */,
 				AD00A30218DFDAB300AAABBA /* VLNRABLEColor.m in Sources */,
 				AD00A2D718DFCACF00AAABBA /* VLNRABLE.xcdatamodeld in Sources */,
+				ADBE2E0A18E142850094196E /* GetStartedView.m in Sources */,
 				AD00A2F818DFCC4100AAABBA /* IntroViewController.m in Sources */,
+				ADBE2E0618E1425E0094196E /* GetStartedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,7 +359,9 @@
 				AD00A2ED18DFCACF00AAABBA /* VLNRABLETests.m in Sources */,
 				AD00A2F918DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				AD00A2FE18DFCE7F00AAABBA /* IntroView.m in Sources */,
+				ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */,
 				AD00A30318DFDAB300AAABBA /* VLNRABLEColor.m in Sources */,
+				ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
