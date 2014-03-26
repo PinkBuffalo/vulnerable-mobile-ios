@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "IntroViewController.h"
+#import "GetStartedViewController.h"
 
 @implementation AppDelegate
 
@@ -21,7 +22,8 @@
     self.window.backgroundColor = [UIColor whiteColor];
 
 	IntroViewController *introVC = [[IntroViewController alloc] init];
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
+	GetStartedViewController *getStartedVC = [[GetStartedViewController alloc] init];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:getStartedVC];
 	navController.navigationBarHidden = YES;
 
 	[application setStatusBarStyle:UIStatusBarStyleLightContent];

@@ -8,10 +8,18 @@
 
 #import "GetStartedViewController.h"
 #import "GetStartedView.h"
+#import "GetStartedTableViewCell.h"
 
-@interface GetStartedViewController ()
+NSString * const kGetStartedWriteKey = @"Write";
+NSString * const kGetStartedDiscoverKey = @"Discover";
+NSString * const kGetStartedPrivacyKey = @"Privacy";
+
+static NSString *getStartedCellIdentifier = @"getStartedCellIdentifier";
+
+@interface GetStartedViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic, readwrite) GetStartedView *getStartedView;
+@property (strong, nonatomic, readwrite) NSDictionary *descriptionInfo;
 
 @end
 
@@ -25,7 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+	[self.getStartedView.tableView registerClass:[GetStartedTableViewCell class]
+						  forCellReuseIdentifier:getStartedCellIdentifier];
 }
 
 #pragma mark - Lazy loading methods
@@ -33,8 +42,42 @@
 {
 	if (!_getStartedView) {
 		_getStartedView = [[GetStartedView alloc] init];
+		_getStartedView.tableView.dataSource = self;
+		_getStartedView.tableView.delegate = self;
 	}
 	return _getStartedView;
+}
+
+- (NSDictionary *)descriptionInfo
+{
+	if (!_descriptionInfo) {
+		_descriptionInfo = @{ kGetStartedWriteKey: @"Explain a past experience or get a secret off your chest, then share your story anonymously with others.",
+							  kGetStartedDiscoverKey: @"Browse stories that interest you, select from categories or find new ones from users that you follow.",
+							  kGetStartedPrivacyKey: @"The only personal information shared in the app is your first name or a pseudonym, if desired." };
+	}
+	return _descriptionInfo;
+}
+
+#pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return [self.descriptionInfo allKeys].count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	GetStartedTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:getStartedCellIdentifier forIndexPath:indexPath];
+
+	cell.titleLabel.text = [[self.descriptionInfo allKeys] objectAtIndex:indexPath.row];
+	cell.detailLabel.text = [[self.descriptionInfo allValues] objectAtIndex:indexPath.row];
+
+	return cell;
+}
+
+#pragma mark - Table view delegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return [GetStartedTableViewCell height];
 }
 
 #pragma mark - Action methods

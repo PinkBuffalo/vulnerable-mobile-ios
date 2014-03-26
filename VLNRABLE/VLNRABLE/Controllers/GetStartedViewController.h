@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const kGetStartedWriteKey;
+extern NSString * const kGetStartedDiscoverKey;
+extern NSString * const kGetStartedPrivacyKey;
+
 @interface GetStartedViewController : UIViewController
 
 @end
