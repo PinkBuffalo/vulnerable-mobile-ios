@@ -1,20 +1,23 @@
-workspace 'VLNRABLE'
-platform :ios, '7.0'
+platform :ios, "7.0"
+
+inhibit_all_warnings!
+
 xcodeproj 'VLNRABLE/VLNRABLE.xcodeproj'
 
-pod 'AFNetworking'
-pod 'CocoaLumberjack'
-pod 'GoogleAnalytics-iOS-SDK'
-pod 'GoogleTagManager'
-pod 'Kiwi'
-pod 'M13Checkbox'
-pod 'MZFormSheetController'
-pod 'NewRelicAgent'
-pod 'Nocilla'
-pod 'Reachability'
-pod 'SDWebImage'
-pod 'SDWebImage-ProgressView'
-pod 'SVProgressHUD'
-pod 'TestFlightFeedback'
-pod 'TestFlightLogger'
-pod 'TestFlightSDK'
+link_with "VLNRABLE", "VLNRABLETests"
+
+pod "AFNetworking", "2.0.0"
+pod "CocoaLumberjack", "1.8.1"
+pod "GoogleAnalytics-iOS-SDK", "3.0.6"
+pod "GoogleTagManager", "3.02"
+pod "M13Checkbox", "1.0.0"
+pod "MZFormSheetController", "2.3.3"
+pod "Nocilla", "0.8.1"
+pod "NewRelicAgent", "3.289"
+pod "Reachability", "3.1.1"
+pod "SDWebImage", "3.6"
+pod "SDWebImage-ProgressView", "0.3.1"
+pod "SVProgressHUD", "1.0"
+pod "TestFlightFeedback", "2.1.0"
+pod "TestFlightLogger", "0.0.3"
+pod "TestFlightSDK", "3.0.0"

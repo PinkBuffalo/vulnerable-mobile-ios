@@ -33,8 +33,13 @@ static NSString *getStartedCellIdentifier = @"getStartedCellIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	[self.getStartedView.tableView registerClass:[GetStartedTableViewCell class]
 						  forCellReuseIdentifier:getStartedCellIdentifier];
+
+	[self.getStartedView.getStartedButton addTarget:self
+											 action:@selector(dismissViewController)
+								   forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - Lazy loading methods
@@ -81,9 +86,12 @@ static NSString *getStartedCellIdentifier = @"getStartedCellIdentifier";
 }
 
 #pragma mark - Action methods
-- (void)presentSignUpViewController
+- (void)dismissViewController
 {
-	
+//	SignUpViewController *signUpVC = [[SignUpViewController alloc] init];
+//	UINavigationController *navController = (UINavigationController *)self.presentingViewController;
+//	[navController setViewControllers:@[ signUpVC ]];
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

@@ -9,13 +9,11 @@
 #import "IntroViewController.h"
 #import "IntroView.h"
 #import "GetStartedViewController.h"
+#import "SignUpViewController.h"
 
 @interface IntroViewController ()
 
 @property (strong, nonatomic, readwrite) IntroView *introView;
-@property (strong, nonatomic, readwrite) GetStartedViewController *getStartedVC;
-@property (strong, nonatomic, readwrite) UITapGestureRecognizer *learnMoreLabelTap;
-@property (strong, nonatomic, readwrite) UITapGestureRecognizer *learnMoreArrowTap;
 
 @end
 
@@ -30,8 +28,27 @@
 {
     [super viewDidLoad];
 
-	[self.introView addGestureRecognizer:self.learnMoreLabelTap];
-	[self.introView addGestureRecognizer:self.learnMoreArrowTap];
+	[self.introView.signUpButton addTarget:self
+									action:@selector(pushToSignUpViewController)
+						  forControlEvents:UIControlEventTouchUpInside];
+
+	//TODO: Figure out why these taps don't work for the subviews.
+	UITapGestureRecognizer *learnMoreLabelTap = [[UITapGestureRecognizer alloc] init];
+	[learnMoreLabelTap addTarget:self action:@selector(presentGetStartedViewController)];
+	[self.introView.learnMoreLabel setUserInteractionEnabled:YES];
+	[self.introView.learnMoreLabel addGestureRecognizer:learnMoreLabelTap];
+
+	UITapGestureRecognizer *learnMoreArrowTap = [[UITapGestureRecognizer alloc] init];
+	[learnMoreArrowTap addTarget:self action:@selector(presentGetStartedViewController)];
+	[self.introView.arrowImageView setUserInteractionEnabled:YES];
+	[self.introView.arrowImageView addGestureRecognizer:learnMoreArrowTap];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+
+	self.navigationController.navigationBarHidden = YES;
 }
 
 #pragma mark - Lazy loading methods
@@ -43,32 +60,18 @@
 	return _introView;
 }
 
-- (UITapGestureRecognizer *)learnMoreLabelTap
-{
-	if (!_learnMoreLabelTap) {
-		_learnMoreLabelTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-																	 action:@selector(presentGetStartedViewController)];
-
-	}
-	return _learnMoreLabelTap;
-}
-
-- (UITapGestureRecognizer *)learnMoreArrowTap
-{
-	if (!_learnMoreArrowTap) {
-		_learnMoreArrowTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-																	 action:@selector(presentGetStartedViewController)];
-
-	}
-	return _learnMoreArrowTap;
-}
-
 #pragma mark - Action methods
+- (void)pushToSignUpViewController
+{
+	SignUpViewController *signUpVC = [[SignUpViewController alloc] init];
+	[self.navigationController pushViewController:signUpVC animated:YES];
+}
+
 - (void)presentGetStartedViewController
 {
-	self.getStartedVC = [[GetStartedViewController alloc] init];
+	GetStartedViewController *getStartedVC = [[GetStartedViewController alloc] init];
 	[self.navigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-	[self.navigationController presentViewController:self.getStartedVC animated:YES completion:nil];
+	[self.navigationController presentViewController:getStartedVC animated:YES completion:nil];
 }
 
 @end
