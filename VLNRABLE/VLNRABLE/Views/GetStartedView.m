@@ -44,7 +44,7 @@
 		_tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 160)];
 		[_tableHeaderView addSubview:_titleLabel];
 
-		_tableFooterView = [[UIView alloc] init];
+		_tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 160)];
 
 		_getStartedButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_getStartedButton setTitle:@"Get Started" forState:UIControlStateNormal];
