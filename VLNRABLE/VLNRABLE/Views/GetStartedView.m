@@ -30,7 +30,7 @@
 		_padding = 5.0f;
 		_buttonHeight = 50.0f;
 
-		_backgroundGradient = [VLNRABLEColor tealToBlueGradient];
+		_backgroundGradient = [VLNRColor tealToBlueGradient];
 		[self.layer addSublayer:_backgroundGradient];
 
 		_titleLabel = [[UILabel alloc] init];
@@ -48,7 +48,7 @@
 
 		_getStartedButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_getStartedButton setTitle:@"Get Started" forState:UIControlStateNormal];
-		[_getStartedButton setTitleColor:[VLNRABLEColor blueColor] forState:UIControlStateNormal];
+		[_getStartedButton setTitleColor:[VLNRColor blueColor] forState:UIControlStateNormal];
 		_getStartedButton.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.85f];
 		_getStartedButton.layer.cornerRadius = _buttonHeight / 2.0f;
 

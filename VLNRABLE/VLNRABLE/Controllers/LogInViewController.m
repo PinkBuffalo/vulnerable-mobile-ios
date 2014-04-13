@@ -36,7 +36,7 @@
 					forControlEvents:UIControlEventValueChanged];
 
 	self.navigationItem.titleView = self.segmentedControl;
-	self.navigationController.navigationBar.barTintColor = [VLNRABLEColor tealColor];
+	self.navigationController.navigationBar.barTintColor = [VLNRColor tealColor];
 	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
@@ -44,7 +44,7 @@
 {
 	[super viewDidAppear:animated];
 
-	self.navigationController.navigationBarHidden = NO;
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (LogInView *)logInView

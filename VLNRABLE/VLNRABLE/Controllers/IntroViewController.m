@@ -51,7 +51,14 @@
 {
 	[super viewWillAppear:animated];
 
-	self.navigationController.navigationBarHidden = YES;
+	[self.navigationController setNavigationBarHidden:YES animated:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 #pragma mark - Lazy loading methods
@@ -81,6 +88,7 @@
 	GetStartedViewController *getStartedVC = [[GetStartedViewController alloc] init];
 	[self.navigationController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
 	[self.navigationController presentViewController:getStartedVC animated:YES completion:nil];
+	[self.navigationController setNavigationBarHidden:YES];
 }
 
 @end

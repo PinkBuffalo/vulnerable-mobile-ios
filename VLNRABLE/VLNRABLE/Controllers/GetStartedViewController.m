@@ -93,6 +93,7 @@ static NSString *getStartedCellIdentifier = @"getStartedCellIdentifier";
 	UINavigationController *navController = (UINavigationController *)self.presentingViewController;
 	[navController pushViewController:signUpVC animated:NO];
 	[self dismissViewControllerAnimated:YES completion:nil];
+	[navController setNavigationBarHidden:NO];
 }
 
 @end
