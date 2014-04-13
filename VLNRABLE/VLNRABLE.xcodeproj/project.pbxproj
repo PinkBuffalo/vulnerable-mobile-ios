@@ -27,11 +27,16 @@
 		AD00A2F918DFCC4100AAABBA /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A2F718DFCC4100AAABBA /* IntroViewController.m */; };
 		AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A2FC18DFCE7F00AAABBA /* IntroView.m */; };
 		AD00A2FE18DFCE7F00AAABBA /* IntroView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A2FC18DFCE7F00AAABBA /* IntroView.m */; };
-		AD00A30218DFDAB300AAABBA /* VLNRABLEColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRABLEColor.m */; };
-		AD00A30318DFDAB300AAABBA /* VLNRABLEColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRABLEColor.m */; };
+		AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRColor.m */; };
+		AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRColor.m */; };
 		AD00A30618DFE30E00AAABBA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD00A30518DFE30E00AAABBA /* QuartzCore.framework */; };
 		AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */; };
 		AD12D0B518E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */; };
+		AD28D0F618FB020600520EAE /* UILabel+VLNRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0F318FB020600520EAE /* UILabel+VLNRLabel.m */; };
+		AD28D0F718FB020600520EAE /* UILabel+VLNRLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0F318FB020600520EAE /* UILabel+VLNRLabel.m */; };
+		AD28D0F818FB020600520EAE /* UITextField+VLNRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0F518FB020600520EAE /* UITextField+VLNRTextField.m */; };
+		AD28D0F918FB020600520EAE /* UITextField+VLNRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0F518FB020600520EAE /* UITextField+VLNRTextField.m */; };
+		AD28D0FB18FB10E900520EAE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD28D0FA18FB10E900520EAE /* CoreText.framework */; };
 		AD4CE77318F6487000147C82 /* Kiwi-XCTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */; };
 		AD4CE77418F6487000147C82 /* Kiwi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77118F6487000147C82 /* Kiwi.framework */; };
 		AD4CE77518F6487000147C82 /* libKiwi-XCTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */; };
@@ -85,12 +90,17 @@
 		AD00A2F718DFCC4100AAABBA /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = Controllers/IntroViewController.m; sourceTree = "<group>"; };
 		AD00A2FB18DFCE7F00AAABBA /* IntroView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IntroView.h; path = Views/IntroView.h; sourceTree = "<group>"; };
 		AD00A2FC18DFCE7F00AAABBA /* IntroView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroView.m; path = Views/IntroView.m; sourceTree = "<group>"; };
-		AD00A30018DFDAB300AAABBA /* VLNRABLEColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRABLEColor.h; sourceTree = "<group>"; };
-		AD00A30118DFDAB300AAABBA /* VLNRABLEColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRABLEColor.m; sourceTree = "<group>"; };
+		AD00A30018DFDAB300AAABBA /* VLNRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRColor.h; sourceTree = "<group>"; };
+		AD00A30118DFDAB300AAABBA /* VLNRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRColor.m; sourceTree = "<group>"; };
 		AD00A30418DFDBDF00AAABBA /* MagicMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicMacro.h; sourceTree = "<group>"; };
 		AD00A30518DFE30E00AAABBA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedTableViewCell.h; path = Views/GetStartedTableViewCell.h; sourceTree = "<group>"; };
 		AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedTableViewCell.m; path = Views/GetStartedTableViewCell.m; sourceTree = "<group>"; };
+		AD28D0F218FB020600520EAE /* UILabel+VLNRLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UILabel+VLNRLabel.h"; path = "Categories/UILabel+VLNRLabel.h"; sourceTree = "<group>"; };
+		AD28D0F318FB020600520EAE /* UILabel+VLNRLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+VLNRLabel.m"; path = "Categories/UILabel+VLNRLabel.m"; sourceTree = "<group>"; };
+		AD28D0F418FB020600520EAE /* UITextField+VLNRTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+VLNRTextField.h"; path = "Categories/UITextField+VLNRTextField.h"; sourceTree = "<group>"; };
+		AD28D0F518FB020600520EAE /* UITextField+VLNRTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+VLNRTextField.m"; path = "Categories/UITextField+VLNRTextField.m"; sourceTree = "<group>"; };
+		AD28D0FA18FB10E900520EAE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Kiwi-XCTest.zip"; sourceTree = "<group>"; };
 		AD4CE77118F6487000147C82 /* Kiwi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kiwi.framework; sourceTree = "<group>"; };
 		AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKiwi-XCTest.a"; sourceTree = "<group>"; };
@@ -113,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD28D0FB18FB10E900520EAE /* CoreText.framework in Frameworks */,
 				AD00A30618DFE30E00AAABBA /* QuartzCore.framework in Frameworks */,
 				AD00A2C418DFCACF00AAABBA /* CoreGraphics.framework in Frameworks */,
 				AD00A2C818DFCACF00AAABBA /* CoreData.framework in Frameworks */,
@@ -163,6 +174,7 @@
 		AD00A2C018DFCACF00AAABBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD28D0FA18FB10E900520EAE /* CoreText.framework */,
 				AD00A30518DFE30E00AAABBA /* QuartzCore.framework */,
 				AD00A2C118DFCACF00AAABBA /* Foundation.framework */,
 				AD00A2C318DFCACF00AAABBA /* CoreGraphics.framework */,
@@ -179,13 +191,12 @@
 			children = (
 				AD00A2D218DFCACF00AAABBA /* AppDelegate.h */,
 				AD00A2D318DFCACF00AAABBA /* AppDelegate.m */,
+				AD28D0F118FB01E600520EAE /* Categories */,
 				AD00A2FA18DFCC4400AAABBA /* Controllers */,
 				AD00A2FF18DFCE8200AAABBA /* Views */,
-				AD00A2D818DFCACF00AAABBA /* Images.xcassets */,
-				AD00A2D518DFCACF00AAABBA /* VLNRABLE.xcdatamodeld */,
 				AD00A2CA18DFCACF00AAABBA /* Supporting Files */,
-				AD00A30018DFDAB300AAABBA /* VLNRABLEColor.h */,
-				AD00A30118DFDAB300AAABBA /* VLNRABLEColor.m */,
+				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
+				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
 			);
 			path = VLNRABLE;
 			sourceTree = "<group>";
@@ -193,11 +204,13 @@
 		AD00A2CA18DFCACF00AAABBA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD00A2D818DFCACF00AAABBA /* Images.xcassets */,
 				AD00A2CC18DFCACF00AAABBA /* InfoPlist.strings */,
+				AD00A30418DFDBDF00AAABBA /* MagicMacro.h */,
 				AD00A2CF18DFCACF00AAABBA /* main.m */,
 				AD00A2CB18DFCACF00AAABBA /* VLNRABLE-Info.plist */,
 				AD00A2D118DFCACF00AAABBA /* VLNRABLE-Prefix.pch */,
-				AD00A30418DFDBDF00AAABBA /* MagicMacro.h */,
+				AD00A2D518DFCACF00AAABBA /* VLNRABLE.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -250,6 +263,17 @@
 				AD4CE77B18F6539500147C82 /* SignUpView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		AD28D0F118FB01E600520EAE /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				AD28D0F218FB020600520EAE /* UILabel+VLNRLabel.h */,
+				AD28D0F318FB020600520EAE /* UILabel+VLNRLabel.m */,
+				AD28D0F418FB020600520EAE /* UITextField+VLNRTextField.h */,
+				AD28D0F518FB020600520EAE /* UITextField+VLNRTextField.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		AD4CE76418F647C900147C82 /* Third Party Libraries */ = {
@@ -438,7 +462,9 @@
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
 				AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */,
 				AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */,
-				AD00A30218DFDAB300AAABBA /* VLNRABLEColor.m in Sources */,
+				AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */,
+				AD28D0F818FB020600520EAE /* UITextField+VLNRTextField.m in Sources */,
+				AD28D0F618FB020600520EAE /* UILabel+VLNRLabel.m in Sources */,
 				AD00A2D718DFCACF00AAABBA /* VLNRABLE.xcdatamodeld in Sources */,
 				ADBE2E0A18E142850094196E /* GetStartedView.m in Sources */,
 				AD4CE77818F64A4300147C82 /* LogInViewController.m in Sources */,
@@ -460,9 +486,11 @@
 				AD00A2F918DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				AD00A2FE18DFCE7F00AAABBA /* IntroView.m in Sources */,
 				ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */,
-				AD00A30318DFDAB300AAABBA /* VLNRABLEColor.m in Sources */,
+				AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */,
+				AD28D0F918FB020600520EAE /* UITextField+VLNRTextField.m in Sources */,
 				AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */,
 				AD4CE77D18F6539500147C82 /* SignUpView.m in Sources */,
+				AD28D0F718FB020600520EAE /* UILabel+VLNRLabel.m in Sources */,
 				ADE7279B18FA5EE00036F409 /* SignUpViewController.m in Sources */,
 				ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */,
 			);

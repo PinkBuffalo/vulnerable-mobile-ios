@@ -13,7 +13,7 @@
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
 
-@interface SignUpViewController ()
+@interface SignUpViewController () <UIScrollViewDelegate, UITextFieldDelegate, TTTAttributedLabelDelegate>
 
 @property (nonatomic, strong, readwrite) SignUpView *signUpView;
 @property (nonatomic, strong, readwrite) UISegmentedControl *segmentedControl;
@@ -31,12 +31,16 @@
 {
     [super viewDidLoad];
 
+	UITapGestureRecognizer *scrollTap = [[UITapGestureRecognizer alloc] init];
+	[scrollTap addTarget:self action:@selector(hideKeyboard)];
+	[self.signUpView.scrollView addGestureRecognizer:scrollTap];
+
 	[self.segmentedControl addTarget:self
 							  action:@selector(switchView:)
 					forControlEvents:UIControlEventValueChanged];
 
 	self.navigationItem.titleView = self.segmentedControl;
-	self.navigationController.navigationBar.barTintColor = [VLNRABLEColor tealColor];
+	self.navigationController.navigationBar.barTintColor = [VLNRColor tealColor];
 	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
@@ -44,13 +48,13 @@
 {
 	[super viewDidAppear:animated];
 
-	self.navigationController.navigationBarHidden = NO;
+	[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (SignUpView *)signUpView
 {
 	if (!_signUpView) {
-		_signUpView = [[SignUpView alloc] init];
+		_signUpView = [[SignUpView alloc] initWithDelegate:self];
 	}
 	return _signUpView;
 }
@@ -77,6 +81,11 @@
 	LogInViewController *logInVC = [[LogInViewController alloc] init];
 	IntroViewController *introVC = [[self.navigationController viewControllers] firstObject];
 	[self.navigationController setViewControllers:@[ introVC, logInVC ]];
+}
+
+- (void)hideKeyboard
+{
+	[self.signUpView endEditing:YES];
 }
 
 @end

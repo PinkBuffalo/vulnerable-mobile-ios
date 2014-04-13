@@ -8,6 +8,7 @@
 
 #import "IntroView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "UILabel+VLNRLabel.h"
 
 @interface IntroView ()
 
@@ -32,7 +33,7 @@
 		_padding = 5.0f;
 		_buttonHeight = 50.0f;
 
-		_headerGradient = [VLNRABLEColor tealToBlueGradient];
+		_headerGradient = [VLNRColor tealToBlueGradient];
 
 		_headerView = [[UIView alloc] init];
 		_headerView.backgroundColor = [UIColor clearColor];
@@ -50,19 +51,18 @@
 
 		_logInButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_logInButton setTitle:@"Log In" forState:UIControlStateNormal];
-		_logInButton.backgroundColor = [VLNRABLEColor blueColor];
+		_logInButton.backgroundColor = [VLNRColor blueColor];
 		_logInButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_signUpButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_signUpButton setTitle:@"Sign Up" forState:UIControlStateNormal];
-		_signUpButton.backgroundColor = [VLNRABLEColor tealColor];
+		_signUpButton.backgroundColor = [VLNRColor tealColor];
 		_signUpButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
-		_learnMoreLabel = [[UILabel alloc] init];
-		_learnMoreLabel.backgroundColor = [UIColor clearColor];
-		_learnMoreLabel.font = [UIFont systemFontOfSize:11.0f];
-		_learnMoreLabel.textAlignment = NSTextAlignmentCenter;
-		_learnMoreLabel.textColor = [VLNRABLEColor lightGrayColor];
+		_learnMoreLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
+														font:VLNRABLE_DEFAULT_FONT_SIZE
+											   textAlignment:NSTextAlignmentCenter
+											   numberOfLines:1];
 		_learnMoreLabel.text = @"Learn more about VLNRABLE   ";
 
 		_arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow_right"]];

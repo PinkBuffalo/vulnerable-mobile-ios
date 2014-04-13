@@ -1,5 +1,5 @@
 //
-//  VLNRABLEColor.h
+//  VLNRColor.h
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 3/23/14.
@@ -9,12 +9,16 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 
-@interface VLNRABLEColor : UIColor
+#define FACEBOOK_BLUE UIColorFromRGB(0x4C66A4)
+
+@interface VLNRColor : UIColor
 
 //---------------------------------------------
 /* Primary colors */
 //---------------------------------------------
 + (UIColor *)blueColor;
++ (UIColor *)lightTealColor;
++ (UIColor *)lightTealTextColor;
 + (UIColor *)tealColor;
 
 //---------------------------------------------

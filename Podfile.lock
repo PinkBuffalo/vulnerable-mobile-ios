@@ -46,6 +46,7 @@ PODS:
     - CocoaLumberjack
     - TestFlightSDK
   - TestFlightSDK (3.0.0)
+  - TTTAttributedLabel (1.9.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0.0)
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - TestFlightFeedback (~> 2.1.0)
   - TestFlightLogger (~> 0.0.3)
   - TestFlightSDK (~> 3.0.0)
+  - TTTAttributedLabel (~> 1.9.4)
 
 SPEC CHECKSUMS:
   AFNetworking: e499052cbf3d743e9bb727bb37adb9dc2547ba15
@@ -81,5 +83,6 @@ SPEC CHECKSUMS:
   TestFlightFeedback: 4d5f657b933bc8c054f44fc21a8b2dd302486988
   TestFlightLogger: 030f80932b79a0fc9414115a63c209bc62bb8f98
   TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
+  TTTAttributedLabel: 617e14e3590a4afc9bc35dd999eb37e888996f36
 
 COCOAPODS: 0.31.1
