@@ -9,6 +9,7 @@
 #import "SignUpViewController.h"
 #import "IntroViewController.h"
 #import "LogInViewController.h"
+#import "SignUpView.h"
 
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
