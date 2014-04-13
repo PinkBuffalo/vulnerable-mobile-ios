@@ -9,11 +9,12 @@
 #import "LogInViewController.h"
 #import "IntroViewController.h"
 #import "SignUpViewController.h"
+#import "LogInView.h"
 
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
 
-@interface LogInViewController ()
+@interface LogInViewController () <UIScrollViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong, readwrite) LogInView *logInView;
 @property (nonatomic, strong, readwrite) UISegmentedControl *segmentedControl;
@@ -50,7 +51,7 @@
 - (LogInView *)logInView
 {
 	if (!_logInView) {
-		_logInView = [[LogInView alloc] init];
+		_logInView = [[LogInView alloc] initWithDelegate:self];
 	}
 	return _logInView;
 }

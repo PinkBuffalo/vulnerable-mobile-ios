@@ -5,7 +5,7 @@
 #import "UITextField+VLNRTextField.h"
 #import "UILabel+VLNRLabel.h"
 
-#define LOG_IN_COPY @"Already a memeber? Log in."
+#define LOG_IN_COPY @"Already a member? Log in."
 #define LEGAL_COPY @"By joining VLNRABLE, you will receive our email notifications. You may unsubscribe at any time.\n\nTerms of Use | Privacy Policy"
 #define TERMS_OF_USE_URL @"http://www.pxpgraphics.com/"
 #define PRIVACY_POLICY_URL @"http://www.pxpgraphics.com/"
@@ -82,8 +82,6 @@
 													font:VLNRABLE_DEFAULT_FONT_SIZE
 										   textAlignment:NSTextAlignmentCenter
 										   numberOfLines:1];
-		_legalLabel.delegate = delegate;
-		_legalLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
 
 		NSMutableAttributedString *logInText = [[NSMutableAttributedString alloc] initWithString:LOG_IN_COPY];
 		NSRange logInRange = [LOG_IN_COPY rangeOfString:@"Log in"];
@@ -194,7 +192,7 @@
 								  _switchHeight);
 
 	xOrigin = insetBounds.origin.x;
-	yOrigin += _switchHeight + (_padding * 2.0f);
+	yOrigin += _switchHeight + _padding;
 
 	_signUpButton.frame = CGRectMake(xOrigin,
 									 yOrigin,
