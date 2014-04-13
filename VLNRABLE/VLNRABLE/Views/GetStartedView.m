@@ -41,10 +41,10 @@
 		_titleLabel.numberOfLines = 3;
 		_titleLabel.adjustsFontSizeToFitWidth = YES;
 
-		_tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 160)];
+		_tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 190.0f)];
 		[_tableHeaderView addSubview:_titleLabel];
 
-		_tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 160)];
+		_tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, 60.0f)];
 
 		_getStartedButton = [UIButton buttonWithType:UIButtonTypeCustom];
 		[_getStartedButton setTitle:@"Get Started" forState:UIControlStateNormal];
@@ -78,7 +78,7 @@
 	CGRect insetBounds = CGRectInset(bounds, (_padding * 4.0f), (_padding * 4.0f));
 
 	CGFloat xOrigin = insetBounds.origin.x;
-	CGFloat yOrigin = insetBounds.origin.y + (_padding * 2.0f);
+	CGFloat yOrigin = insetBounds.origin.y + (_padding * 6.0f);
 
 	CGSize titleLabelSize = [_titleLabel.text sizeWithAttributes:@{ NSFontAttributeName: _titleLabel.font }];
 
@@ -87,33 +87,12 @@
 								   insetBounds.size.width,
 								   (titleLabelSize.height));
 
+	yOrigin = insetBounds.origin.y + (_padding * 3.0f);
+
 	_getStartedButton.frame = CGRectMake(xOrigin,
 										 yOrigin,
 										 insetBounds.size.width,
 										 _buttonHeight);
-
-//	UIEdgeInsets scrollViewEdgeInsets = UIEdgeInsetsMake(0.0f, 0.0f, (_padding * 8.0f) + _buttonHeight, 0.0f);
-//
-//	_tableView.frame = UIEdgeInsetsInsetRect(bounds, scrollViewEdgeInsets);
-//
-//	CGRect insetBounds = CGRectInset(bounds, (_padding * 4.0f), (_padding * 4.0f));
-//
-//	CGFloat xOrigin = insetBounds.origin.x;
-//	CGFloat yOrigin = insetBounds.origin.y + (_padding * 8.0f);
-//
-//	CGSize titleLabelSize = [_titleLabel.text sizeWithAttributes:@{ NSFontAttributeName: _titleLabel.font }];
-//
-//	_titleLabel.frame = CGRectMake(xOrigin,
-//								   yOrigin,
-//								   insetBounds.size.width,
-//								   (titleLabelSize.height));
-//
-//	yOrigin = insetBounds.origin.y + insetBounds.size.height - _buttonHeight;
-//
-//	_getStartedButton.frame = CGRectMake(xOrigin,
-//										 yOrigin,
-//										 insetBounds.size.width,
-//										 _buttonHeight);
 }
 
 @end

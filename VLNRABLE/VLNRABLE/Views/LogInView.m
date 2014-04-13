@@ -1,8 +1,8 @@
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 
-#import "SignUpView.h"
+#import "LogInView.h"
 
-@implementation SignUpView
+@implementation LogInView
 
 - (id)init
 {

@@ -9,6 +9,7 @@
 #import "GetStartedViewController.h"
 #import "GetStartedView.h"
 #import "GetStartedTableViewCell.h"
+#import "SignUpViewController.h"
 
 NSString * const kGetStartedWriteKey = @"Write";
 NSString * const kGetStartedDiscoverKey = @"Discover";
@@ -18,8 +19,8 @@ static NSString *getStartedCellIdentifier = @"getStartedCellIdentifier";
 
 @interface GetStartedViewController () <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic, readwrite) GetStartedView *getStartedView;
-@property (strong, nonatomic, readwrite) NSDictionary *descriptionInfo;
+@property (nonatomic, strong, readwrite) GetStartedView *getStartedView;
+@property (nonatomic, strong, readwrite) NSDictionary *descriptionInfo;
 
 @end
 
@@ -88,9 +89,9 @@ static NSString *getStartedCellIdentifier = @"getStartedCellIdentifier";
 #pragma mark - Action methods
 - (void)dismissViewController
 {
-//	SignUpViewController *signUpVC = [[SignUpViewController alloc] init];
-//	UINavigationController *navController = (UINavigationController *)self.presentingViewController;
-//	[navController setViewControllers:@[ signUpVC ]];
+	SignUpViewController *signUpVC = [[SignUpViewController alloc] init];
+	UINavigationController *navController = (UINavigationController *)self.presentingViewController;
+	[navController pushViewController:signUpVC animated:NO];
 	[self dismissViewControllerAnimated:YES completion:nil];
 }
 

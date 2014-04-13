@@ -1,5 +1,5 @@
 //
-//  SignUpViewController.h
+//  LogInViewController.m
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 3/24/14.
@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SignUpView.h"
+#import "LogInView.h"
 
-@interface SignUpViewController : UIViewController
+@interface LogInViewController : UIViewController
 
-@property (nonatomic, strong, readonly) SignUpView *signUpView;
+@property (nonatomic, strong, readonly) LogInView *logInView;
 @property (nonatomic, strong, readonly) UISegmentedControl *segmentedControl;
 
 @end

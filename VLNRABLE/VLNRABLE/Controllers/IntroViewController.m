@@ -2,18 +2,18 @@
 //  IntroViewController.m
 //  VLNRABLE
 //
-//  Created by Paris Pinkney on 3/23/14.
+//  Created by Paris Pinkney on 3/24/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
 #import "IntroViewController.h"
-#import "IntroView.h"
 #import "GetStartedViewController.h"
+#import "LogInViewController.h"
 #import "SignUpViewController.h"
 
 @interface IntroViewController ()
 
-@property (strong, nonatomic, readwrite) IntroView *introView;
+@property (nonatomic, strong, readwrite) IntroView *introView;
 
 @end
 
@@ -28,11 +28,14 @@
 {
     [super viewDidLoad];
 
+	[self.introView.logInButton addTarget:self
+									action:@selector(pushToLogInViewController)
+						  forControlEvents:UIControlEventTouchUpInside];
+
 	[self.introView.signUpButton addTarget:self
 									action:@selector(pushToSignUpViewController)
 						  forControlEvents:UIControlEventTouchUpInside];
 
-	//TODO: Figure out why these taps don't work for the subviews.
 	UITapGestureRecognizer *learnMoreLabelTap = [[UITapGestureRecognizer alloc] init];
 	[learnMoreLabelTap addTarget:self action:@selector(presentGetStartedViewController)];
 	[self.introView.learnMoreLabel setUserInteractionEnabled:YES];
@@ -61,6 +64,12 @@
 }
 
 #pragma mark - Action methods
+- (void)pushToLogInViewController
+{
+	LogInViewController *logInVC = [[LogInViewController alloc] init];
+	[self.navigationController pushViewController:logInVC animated:YES];
+}
+
 - (void)pushToSignUpViewController
 {
 	SignUpViewController *signUpVC = [[SignUpViewController alloc] init];

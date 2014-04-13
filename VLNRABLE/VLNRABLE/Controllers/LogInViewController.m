@@ -1,30 +1,30 @@
 //
-//  SignUpViewController.m
+//  LogInViewController.h
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 3/24/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
-#import "SignUpViewController.h"
-#import "IntroViewController.h"
 #import "LogInViewController.h"
+#import "IntroViewController.h"
+#import "SignUpViewController.h"
 
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
 
-@interface SignUpViewController ()
+@interface LogInViewController ()
 
-@property (nonatomic, strong, readwrite) SignUpView *signUpView;
+@property (nonatomic, strong, readwrite) LogInView *logInView;
 @property (nonatomic, strong, readwrite) UISegmentedControl *segmentedControl;
 
 @end
 
-@implementation SignUpViewController
+@implementation LogInViewController
 
 - (void)loadView
 {
-	[self setView:self.signUpView];
+	[self setView:self.logInView];
 }
 
 - (void)viewDidLoad
@@ -47,19 +47,19 @@
 	self.navigationController.navigationBarHidden = NO;
 }
 
-- (SignUpView *)signUpView
+- (LogInView *)logInView
 {
-	if (!_signUpView) {
-		_signUpView = [[SignUpView alloc] init];
+	if (!_logInView) {
+		_logInView = [[LogInView alloc] init];
 	}
-	return _signUpView;
+	return _logInView;
 }
 
 - (UISegmentedControl *)segmentedControl
 {
 	if (!_segmentedControl) {
 		_segmentedControl = [[UISegmentedControl alloc] initWithItems:@[ @"Log In", @"Sign Up" ]];
-		_segmentedControl.selectedSegmentIndex = SIGN_UP_SEGMENT_INDEX;
+		_segmentedControl.selectedSegmentIndex = LOG_IN_SEGMENT_INDEX;
 		CGFloat screenWidth = [[UIScreen mainScreen] applicationFrame].size.width;
 		[_segmentedControl setWidth:(screenWidth / 4.0f) forSegmentAtIndex:LOG_IN_SEGMENT_INDEX];
 		[_segmentedControl setWidth:(screenWidth / 4.0f) forSegmentAtIndex:SIGN_UP_SEGMENT_INDEX];
@@ -70,13 +70,13 @@
 #pragma mark - Action methods
 - (void)switchView:(UISegmentedControl *)sender
 {
-	if (sender.selectedSegmentIndex == SIGN_UP_SEGMENT_INDEX) {
+	if (sender.selectedSegmentIndex == LOG_IN_SEGMENT_INDEX) {
 		return;
 	}
 
-	LogInViewController *logInVC = [[LogInViewController alloc] init];
+	SignUpViewController *signUpVC = [[SignUpViewController alloc] init];
 	IntroViewController *introVC = [[self.navigationController viewControllers] firstObject];
-	[self.navigationController setViewControllers:@[ introVC, logInVC ]];
+	[self.navigationController setViewControllers:@[ introVC, signUpVC ]];
 }
 
 @end
