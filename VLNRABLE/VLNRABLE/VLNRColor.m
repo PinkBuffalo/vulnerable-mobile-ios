@@ -11,6 +11,16 @@
 @implementation VLNRColor
 
 #pragma mark - Primary colors
++ (UIColor *)lightBlueColor
+{
+	return UIColorFromRGB(0xF6FBFE);
+}
+
++ (UIColor *)lightBlueTextColor
+{
+	return UIColorFromRGB(0x69AAEB);
+}
+
 + (UIColor *)blueColor
 {
 	return UIColorFromRGB(0x0087A9);
@@ -40,6 +50,11 @@
 + (UIColor *)grayColor
 {
 	return UIColorFromRGB(0xCCCCCC);
+}
+
++ (UIColor *)grayTextColor
+{
+	return UIColorFromRGB(0x657173);
 }
 
 + (UIColor *)darkGrayColor

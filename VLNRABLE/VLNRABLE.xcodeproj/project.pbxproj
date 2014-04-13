@@ -37,6 +37,12 @@
 		AD28D0F818FB020600520EAE /* UITextField+VLNRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0F518FB020600520EAE /* UITextField+VLNRTextField.m */; };
 		AD28D0F918FB020600520EAE /* UITextField+VLNRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0F518FB020600520EAE /* UITextField+VLNRTextField.m */; };
 		AD28D0FB18FB10E900520EAE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD28D0FA18FB10E900520EAE /* CoreText.framework */; };
+		AD28D0FE18FB23E100520EAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0FD18FB23E100520EAE /* HomeViewController.m */; };
+		AD28D0FF18FB23E100520EAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D0FD18FB23E100520EAE /* HomeViewController.m */; };
+		AD28D10618FB2BE700520EAE /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10518FB2BE700520EAE /* TabBarViewController.m */; };
+		AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10518FB2BE700520EAE /* TabBarViewController.m */; };
+		AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
+		AD28D10B18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
 		AD4CE77318F6487000147C82 /* Kiwi-XCTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */; };
 		AD4CE77418F6487000147C82 /* Kiwi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77118F6487000147C82 /* Kiwi.framework */; };
 		AD4CE77518F6487000147C82 /* libKiwi-XCTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */; };
@@ -101,6 +107,12 @@
 		AD28D0F418FB020600520EAE /* UITextField+VLNRTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITextField+VLNRTextField.h"; path = "Categories/UITextField+VLNRTextField.h"; sourceTree = "<group>"; };
 		AD28D0F518FB020600520EAE /* UITextField+VLNRTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITextField+VLNRTextField.m"; path = "Categories/UITextField+VLNRTextField.m"; sourceTree = "<group>"; };
 		AD28D0FA18FB10E900520EAE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		AD28D0FC18FB23E100520EAE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeViewController.h; path = Controllers/HomeViewController.h; sourceTree = "<group>"; };
+		AD28D0FD18FB23E100520EAE /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeViewController.m; path = Controllers/HomeViewController.m; sourceTree = "<group>"; };
+		AD28D10418FB2BE700520EAE /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarViewController.h; path = Controllers/TabBarViewController.h; sourceTree = "<group>"; };
+		AD28D10518FB2BE700520EAE /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = Controllers/TabBarViewController.m; sourceTree = "<group>"; };
+		AD28D10818FB418800520EAE /* StoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryTableViewCell.h; path = Views/StoryTableViewCell.h; sourceTree = "<group>"; };
+		AD28D10918FB418800520EAE /* StoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryTableViewCell.m; path = Views/StoryTableViewCell.m; sourceTree = "<group>"; };
 		AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Kiwi-XCTest.zip"; sourceTree = "<group>"; };
 		AD4CE77118F6487000147C82 /* Kiwi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kiwi.framework; sourceTree = "<group>"; };
 		AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKiwi-XCTest.a"; sourceTree = "<group>"; };
@@ -238,12 +250,16 @@
 			children = (
 				ADBE2E0418E1425E0094196E /* GetStartedViewController.h */,
 				ADBE2E0518E1425E0094196E /* GetStartedViewController.m */,
+				AD28D0FC18FB23E100520EAE /* HomeViewController.h */,
+				AD28D0FD18FB23E100520EAE /* HomeViewController.m */,
 				AD00A2F618DFCC4100AAABBA /* IntroViewController.h */,
 				AD00A2F718DFCC4100AAABBA /* IntroViewController.m */,
 				AD4CE77618F64A4300147C82 /* LogInViewController.h */,
 				AD4CE77718F64A4300147C82 /* LogInViewController.m */,
 				ADE7279818FA5EE00036F409 /* SignUpViewController.h */,
 				ADE7279918FA5EE00036F409 /* SignUpViewController.m */,
+				AD28D10418FB2BE700520EAE /* TabBarViewController.h */,
+				AD28D10518FB2BE700520EAE /* TabBarViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -261,6 +277,8 @@
 				ADE7279518FA59F50036F409 /* LogInView.m */,
 				AD4CE77A18F6539500147C82 /* SignUpView.h */,
 				AD4CE77B18F6539500147C82 /* SignUpView.m */,
+				AD28D10818FB418800520EAE /* StoryTableViewCell.h */,
+				AD28D10918FB418800520EAE /* StoryTableViewCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -459,12 +477,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD00A2D418DFCACF00AAABBA /* AppDelegate.m in Sources */,
+				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
+				AD28D10618FB2BE700520EAE /* TabBarViewController.m in Sources */,
 				AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */,
 				AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */,
 				AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */,
 				AD28D0F818FB020600520EAE /* UITextField+VLNRTextField.m in Sources */,
 				AD28D0F618FB020600520EAE /* UILabel+VLNRLabel.m in Sources */,
+				AD28D0FE18FB23E100520EAE /* HomeViewController.m in Sources */,
 				AD00A2D718DFCACF00AAABBA /* VLNRABLE.xcdatamodeld in Sources */,
 				ADBE2E0A18E142850094196E /* GetStartedView.m in Sources */,
 				AD4CE77818F64A4300147C82 /* LogInViewController.m in Sources */,
@@ -483,12 +504,15 @@
 				AD12D0B518E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
 				AD00A2ED18DFCACF00AAABBA /* VLNRABLETests.m in Sources */,
 				ADE7279718FA59F50036F409 /* LogInView.m in Sources */,
+				AD28D10B18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				AD00A2F918DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				AD00A2FE18DFCE7F00AAABBA /* IntroView.m in Sources */,
+				AD28D0FF18FB23E100520EAE /* HomeViewController.m in Sources */,
 				ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */,
 				AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */,
 				AD28D0F918FB020600520EAE /* UITextField+VLNRTextField.m in Sources */,
 				AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */,
+				AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */,
 				AD4CE77D18F6539500147C82 /* SignUpView.m in Sources */,
 				AD28D0F718FB020600520EAE /* UILabel+VLNRLabel.m in Sources */,
 				ADE7279B18FA5EE00036F409 /* SignUpViewController.m in Sources */,

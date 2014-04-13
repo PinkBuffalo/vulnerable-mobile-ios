@@ -36,13 +36,19 @@
 	[scrollTap addTarget:self action:@selector(hideKeyboard)];
 	[self.signUpView.scrollView addGestureRecognizer:scrollTap];
 
+	[self.signUpView.facebookButton addTarget:self
+									   action:@selector(signUpAction)
+							 forControlEvents:UIControlEventTouchUpInside];
+
+	[self.signUpView.signUpButton addTarget:self
+									   action:@selector(signUpAction)
+							 forControlEvents:UIControlEventTouchUpInside];
+
 	[self.segmentedControl addTarget:self
 							  action:@selector(switchView:)
 					forControlEvents:UIControlEventValueChanged];
 
 	self.navigationItem.titleView = self.segmentedControl;
-	self.navigationController.navigationBar.barTintColor = [VLNRColor tealColor];
-	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -87,6 +93,12 @@
 - (void)hideKeyboard
 {
 	[self.signUpView endEditing:YES];
+}
+
+- (void)signUpAction
+{
+	// TODO: Change these test to the user sign up action when ready.
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

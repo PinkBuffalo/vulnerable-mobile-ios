@@ -32,13 +32,23 @@
 {
     [super viewDidLoad];
 
+	UITapGestureRecognizer *scrollTap = [[UITapGestureRecognizer alloc] init];
+	[scrollTap addTarget:self action:@selector(hideKeyboard)];
+	[self.logInView.scrollView addGestureRecognizer:scrollTap];
+
+	[self.logInView.facebookButton addTarget:self
+									  action:@selector(logInAction)
+							forControlEvents:UIControlEventTouchUpInside];
+
+	[self.logInView.logInButton addTarget:self
+								   action:@selector(logInAction)
+						 forControlEvents:UIControlEventTouchUpInside];
+
 	[self.segmentedControl addTarget:self
 							  action:@selector(switchView:)
 					forControlEvents:UIControlEventValueChanged];
 
 	self.navigationItem.titleView = self.segmentedControl;
-	self.navigationController.navigationBar.barTintColor = [VLNRColor tealColor];
-	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -78,6 +88,17 @@
 	SignUpViewController *signUpVC = [[SignUpViewController alloc] init];
 	IntroViewController *introVC = [[self.navigationController viewControllers] firstObject];
 	[self.navigationController setViewControllers:@[ introVC, signUpVC ]];
+}
+
+- (void)hideKeyboard
+{
+	[self.logInView endEditing:YES];
+}
+
+- (void)logInAction
+{
+	// TODO: Change these test to the user log in action when ready.
+	[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

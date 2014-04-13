@@ -71,6 +71,17 @@
 }
 
 #pragma mark - Action methods
+- (UINavigationController *)customNavigationController
+{
+	UINavigationController *navController;
+	if (self.navigationController) {
+		navController = self.navigationController;
+	} else {
+		navController = (UINavigationController *)self.presentingViewController;
+	}
+	return navController;
+}
+
 - (void)pushToLogInViewController
 {
 	LogInViewController *logInVC = [[LogInViewController alloc] init];
