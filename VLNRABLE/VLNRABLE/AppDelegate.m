@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "IntroViewController.h"
-#import "GetStartedViewController.h"
+#import "TabBarViewController.h"
 
 @implementation AppDelegate
 
@@ -21,11 +20,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
-	IntroViewController *introVC = [[IntroViewController alloc] init];
-//	GetStartedViewController *getStartedVC = [[GetStartedViewController alloc] init];
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
-	navController.navigationBarHidden = YES;
+	TabBarViewController *tabBarVC = [[TabBarViewController alloc] init];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tabBarVC];
+	navController.navigationBar.barTintColor = [VLNRColor tealColor];
+	navController.navigationBar.tintColor = [UIColor whiteColor];
 
+	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor whiteColor] }];
+	
 	[application setStatusBarStyle:UIStatusBarStyleLightContent];
 
 	self.window.rootViewController = navController;

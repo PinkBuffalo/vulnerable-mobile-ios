@@ -16,6 +16,8 @@
 //---------------------------------------------
 /* Primary colors */
 //---------------------------------------------
++ (UIColor *)lightBlueColor;
++ (UIColor *)lightBlueTextColor;
 + (UIColor *)blueColor;
 + (UIColor *)lightTealColor;
 + (UIColor *)lightTealTextColor;
@@ -26,6 +28,7 @@
 //---------------------------------------------
 + (UIColor *)lightGrayColor;
 + (UIColor *)grayColor;
++ (UIColor *)grayTextColor;
 + (UIColor *)darkGrayColor;
 
 //---------------------------------------------
