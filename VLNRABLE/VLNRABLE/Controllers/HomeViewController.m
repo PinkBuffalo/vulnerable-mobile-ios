@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "StoryTableViewCell.h"
+#import "AFNetworking.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
@@ -22,6 +23,15 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+	self.refreshControl = [[UIRefreshControl alloc] init];
+	if ([self.refreshControl respondsToSelector:@selector(setTintColor:)]) {
+		self.refreshControl.tintColor = [VLNRColor tealColor];
+	}
+	[self.refreshControl addTarget:self
+							action:@selector(refresh:)
+				  forControlEvents:UIControlEventValueChanged];
+	[self.tableView addSubview:self.refreshControl];
 
 	self.tableView.backgroundColor = [VLNRColor lightTealColor];
 	if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -59,10 +69,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	StoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
 															forIndexPath:indexPath];
 
-	cell.titleLabel.text = [self.stories objectAtIndex:indexPath.row];
-	cell.timeLabel.text = @"15m";
-	cell.storyLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis felis erat, quis porttitor dui aliquam id. Fusce in sapien nisl. Vivamus id quam sit amet felis molestie porttitor quis at eros.";
-	cell.categoryLabel.text = @"Trending in: Relationships";
+	[self configureCell:cell forRowAtIndexPath:indexPath];
 
 	return cell;
 }
@@ -72,5 +79,46 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	return [StoryTableViewCell height];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Action methods
+- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	StoryTableViewCell *storyCell = (StoryTableViewCell *)cell;
+	storyCell.titleLabel.text = [self.stories objectAtIndex:indexPath.row];
+	storyCell.timeLabel.text = @"15m";
+	storyCell.storyLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis felis erat, quis porttitor dui aliquam id. Fusce in sapien nisl. Vivamus id quam sit amet felis molestie porttitor quis at eros.";
+
+	NSMutableAttributedString *categoryStr = [[NSMutableAttributedString alloc] initWithString:@"Trending in: Relationships"];
+	NSRange range = [[categoryStr string] rangeOfString:@"Trending in: "];
+	[categoryStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor grayColor] range:range];
+
+	storyCell.categoryLabel.attributedText = categoryStr;
+}
+
+- (void)refresh:(id)sender
+{
+	// TODO: Add real request.
+	NSURL *url = [NSURL URLWithString:@"http://www.google.com/"];
+	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:url];
+	__typeof__(self) __weak weakSelf = self;
+	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
+	[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+		NSUInteger statusCode = operation.response.statusCode;
+		[weakSelf.tableView reloadData];
+		[(UIRefreshControl *)sender endRefreshing];
+		NSLog(@"\nSUCCESS (%lu):\n%@\n", (unsigned long)statusCode, operation.responseString);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSUInteger statusCode = operation.response.statusCode;
+		[weakSelf.tableView reloadData];
+		[(UIRefreshControl *)sender endRefreshing];
+		NSLog(@"\nFAILURE (%lu):\n%@\n", (unsigned long)statusCode, operation.responseString);
+	}];
+
+	[[[AFHTTPRequestOperationManager manager] operationQueue] addOperation:operation];
+}
 
 @end

@@ -56,7 +56,7 @@
 										   textAlignment:NSTextAlignmentLeft
 										   numberOfLines:3];
 
-		_categoryLabel = [[UILabel alloc] initWithTextColor:[VLNRColor grayColor]
+		_categoryLabel = [[UILabel alloc] initWithTextColor:[VLNRColor blueColor]
 													   font:VLNRABLE_DEFAULT_FONT_SIZE
 											  textAlignment:NSTextAlignmentLeft
 											  numberOfLines:1];
