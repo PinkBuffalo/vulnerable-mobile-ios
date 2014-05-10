@@ -78,6 +78,12 @@
 	return _segmentedControl;
 }
 
+#pragma mark - Text field delegate
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+	
+}
+
 #pragma mark - Action methods
 - (void)switchView:(UISegmentedControl *)sender
 {

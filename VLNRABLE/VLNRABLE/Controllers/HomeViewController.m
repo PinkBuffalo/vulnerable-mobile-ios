@@ -12,7 +12,7 @@
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
-@interface HomeViewController () <UITabBarControllerDelegate>
+@interface HomeViewController () <UITabBarControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
 
 @property (nonatomic, strong, readwrite) NSArray *stories;
 

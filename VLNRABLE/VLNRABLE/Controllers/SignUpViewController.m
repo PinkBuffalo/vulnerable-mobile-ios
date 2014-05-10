@@ -10,6 +10,7 @@
 #import "IntroViewController.h"
 #import "LogInViewController.h"
 #import "SignUpView.h"
+#import "UserManager.h"
 
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
@@ -78,6 +79,12 @@
 	return _segmentedControl;
 }
 
+#pragma mark - Text field delegate
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+
+}
+
 #pragma mark - Action methods
 - (void)switchView:(UISegmentedControl *)sender
 {
@@ -97,8 +104,21 @@
 
 - (void)signUpAction
 {
-	// TODO: Change these test to the user sign up action when ready.
-	[self dismissViewControllerAnimated:YES completion:nil];
+	NSDictionary *userinfo = @{ @"name": [self.signUpView.nameTextField.text copy],
+								@"email": [self.signUpView.emailTextField.text copy] };
+
+	__typeof__(self) __weak weakSelf = self;
+	[[UserManager sharedManager] postUserWithUserInfo:userinfo successBlock:^(User *user) {
+		NSLog(@"User: %@", user);
+		[weakSelf dismissViewControllerAnimated:YES completion:nil];
+	} failureBlock:^(NSError *error) {
+		NSLog(@"Error: %@", error);
+		[[[UIAlertView alloc] initWithTitle:@"Sign Up Failed"
+									message:[error localizedDescription]
+								   delegate:nil
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+	}];
 }
 
 @end

@@ -15,7 +15,6 @@
 		AD00A2CE18DFCACF00AAABBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AD00A2CC18DFCACF00AAABBA /* InfoPlist.strings */; };
 		AD00A2D018DFCACF00AAABBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A2CF18DFCACF00AAABBA /* main.m */; };
 		AD00A2D418DFCACF00AAABBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A2D318DFCACF00AAABBA /* AppDelegate.m */; };
-		AD00A2D718DFCACF00AAABBA /* VLNRABLE.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD00A2D518DFCACF00AAABBA /* VLNRABLE.xcdatamodeld */; };
 		AD00A2D918DFCACF00AAABBA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD00A2D818DFCACF00AAABBA /* Images.xcassets */; };
 		AD00A2E018DFCACF00AAABBA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD00A2DF18DFCACF00AAABBA /* XCTest.framework */; };
 		AD00A2E118DFCACF00AAABBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD00A2C118DFCACF00AAABBA /* Foundation.framework */; };
@@ -54,6 +53,16 @@
 		ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0518E1425E0094196E /* GetStartedViewController.m */; };
 		ADBE2E0A18E142850094196E /* GetStartedView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0918E142850094196E /* GetStartedView.m */; };
 		ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0918E142850094196E /* GetStartedView.m */; };
+		ADDF8FD7191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ADDF8FD5191DC5810071771E /* VLNRABLE.xcdatamodeld */; };
+		ADDF8FD8191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ADDF8FD5191DC5810071771E /* VLNRABLE.xcdatamodeld */; };
+		ADDF9033191DD79B0071771E /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9032191DD79B0071771E /* UserManager.m */; };
+		ADDF9034191DD79B0071771E /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9032191DD79B0071771E /* UserManager.m */; };
+		ADDF903B191DEF8F0071771E /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF903A191DEF8F0071771E /* CoreDataManager.m */; };
+		ADDF903C191DEF8F0071771E /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF903A191DEF8F0071771E /* CoreDataManager.m */; };
+		ADDF9047191DF5820071771E /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9046191DF5820071771E /* Story.m */; };
+		ADDF9048191DF5820071771E /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9046191DF5820071771E /* Story.m */; };
+		ADDF904B191DF59A0071771E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF904A191DF59A0071771E /* User.m */; };
+		ADDF904C191DF59A0071771E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF904A191DF59A0071771E /* User.m */; };
 		ADE7279618FA59F50036F409 /* LogInView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7279518FA59F50036F409 /* LogInView.m */; };
 		ADE7279718FA59F50036F409 /* LogInView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7279518FA59F50036F409 /* LogInView.m */; };
 		ADE7279A18FA5EE00036F409 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7279918FA5EE00036F409 /* SignUpViewController.m */; };
@@ -85,7 +94,6 @@
 		AD00A2D118DFCACF00AAABBA /* VLNRABLE-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VLNRABLE-Prefix.pch"; sourceTree = "<group>"; };
 		AD00A2D218DFCACF00AAABBA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AD00A2D318DFCACF00AAABBA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		AD00A2D618DFCACF00AAABBA /* VLNRABLE.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VLNRABLE.xcdatamodel; sourceTree = "<group>"; };
 		AD00A2D818DFCACF00AAABBA /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AD00A2DE18DFCACF00AAABBA /* VLNRABLETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VLNRABLETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD00A2DF18DFCACF00AAABBA /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -124,6 +132,15 @@
 		ADBE2E0518E1425E0094196E /* GetStartedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedViewController.m; path = Controllers/GetStartedViewController.m; sourceTree = "<group>"; };
 		ADBE2E0818E142850094196E /* GetStartedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedView.h; path = Views/GetStartedView.h; sourceTree = "<group>"; };
 		ADBE2E0918E142850094196E /* GetStartedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedView.m; path = Views/GetStartedView.m; sourceTree = "<group>"; };
+		ADDF8FD6191DC5810071771E /* VLNRABLE.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VLNRABLE.xcdatamodel; sourceTree = "<group>"; };
+		ADDF9031191DD79B0071771E /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = Models/UserManager.h; sourceTree = "<group>"; };
+		ADDF9032191DD79B0071771E /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = Models/UserManager.m; sourceTree = "<group>"; };
+		ADDF9039191DEF8F0071771E /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoreDataManager.h; path = Models/CoreDataManager.h; sourceTree = "<group>"; };
+		ADDF903A191DEF8F0071771E /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CoreDataManager.m; path = Models/CoreDataManager.m; sourceTree = "<group>"; };
+		ADDF9045191DF5820071771E /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Story.h; path = Models/Story.h; sourceTree = "<group>"; };
+		ADDF9046191DF5820071771E /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Story.m; path = Models/Story.m; sourceTree = "<group>"; };
+		ADDF9049191DF59A0071771E /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		ADDF904A191DF59A0071771E /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		ADE7279418FA59F50036F409 /* LogInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogInView.h; path = Views/LogInView.h; sourceTree = "<group>"; };
 		ADE7279518FA59F50036F409 /* LogInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogInView.m; path = Views/LogInView.m; sourceTree = "<group>"; };
 		ADE7279818FA5EE00036F409 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Controllers/SignUpViewController.h; sourceTree = "<group>"; };
@@ -205,8 +222,10 @@
 				AD00A2D318DFCACF00AAABBA /* AppDelegate.m */,
 				AD28D0F118FB01E600520EAE /* Categories */,
 				AD00A2FA18DFCC4400AAABBA /* Controllers */,
-				AD00A2FF18DFCE8200AAABBA /* Views */,
+				AD91CCC1191DC0C800537DDE /* Models */,
+				AD91CCC2191DC0D200537DDE /* Resources */,
 				AD00A2CA18DFCACF00AAABBA /* Supporting Files */,
+				AD00A2FF18DFCE8200AAABBA /* Views */,
 				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
 				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
 			);
@@ -222,7 +241,6 @@
 				AD00A2CF18DFCACF00AAABBA /* main.m */,
 				AD00A2CB18DFCACF00AAABBA /* VLNRABLE-Info.plist */,
 				AD00A2D118DFCACF00AAABBA /* VLNRABLE-Prefix.pch */,
-				AD00A2D518DFCACF00AAABBA /* VLNRABLE.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -311,6 +329,29 @@
 				AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */,
 			);
 			path = Kiwi;
+			sourceTree = "<group>";
+		};
+		AD91CCC1191DC0C800537DDE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADDF9049191DF59A0071771E /* User.h */,
+				ADDF904A191DF59A0071771E /* User.m */,
+				ADDF9045191DF5820071771E /* Story.h */,
+				ADDF9046191DF5820071771E /* Story.m */,
+				ADDF9039191DEF8F0071771E /* CoreDataManager.h */,
+				ADDF903A191DEF8F0071771E /* CoreDataManager.m */,
+				ADDF9031191DD79B0071771E /* UserManager.h */,
+				ADDF9032191DD79B0071771E /* UserManager.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		AD91CCC2191DC0D200537DDE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ADDF8FD5191DC5810071771E /* VLNRABLE.xcdatamodeld */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,21 +518,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD00A2D418DFCACF00AAABBA /* AppDelegate.m in Sources */,
+				ADDF9033191DD79B0071771E /* UserManager.m in Sources */,
 				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
 				AD28D10618FB2BE700520EAE /* TabBarViewController.m in Sources */,
+				ADDF9047191DF5820071771E /* Story.m in Sources */,
+				ADDF904B191DF59A0071771E /* User.m in Sources */,
 				AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */,
 				AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */,
 				AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */,
 				AD28D0F818FB020600520EAE /* UITextField+VLNRTextField.m in Sources */,
 				AD28D0F618FB020600520EAE /* UILabel+VLNRLabel.m in Sources */,
 				AD28D0FE18FB23E100520EAE /* HomeViewController.m in Sources */,
-				AD00A2D718DFCACF00AAABBA /* VLNRABLE.xcdatamodeld in Sources */,
 				ADBE2E0A18E142850094196E /* GetStartedView.m in Sources */,
 				AD4CE77818F64A4300147C82 /* LogInViewController.m in Sources */,
 				AD00A2F818DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
+				ADDF903B191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				ADE7279618FA59F50036F409 /* LogInView.m in Sources */,
+				ADDF8FD7191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */,
 				ADE7279A18FA5EE00036F409 /* SignUpViewController.m in Sources */,
 				ADBE2E0618E1425E0094196E /* GetStartedViewController.m in Sources */,
 			);
@@ -503,18 +548,23 @@
 			files = (
 				AD12D0B518E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
 				AD00A2ED18DFCACF00AAABBA /* VLNRABLETests.m in Sources */,
+				ADDF9034191DD79B0071771E /* UserManager.m in Sources */,
 				ADE7279718FA59F50036F409 /* LogInView.m in Sources */,
 				AD28D10B18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				AD00A2F918DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				AD00A2FE18DFCE7F00AAABBA /* IntroView.m in Sources */,
 				AD28D0FF18FB23E100520EAE /* HomeViewController.m in Sources */,
+				ADDF904C191DF59A0071771E /* User.m in Sources */,
 				ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */,
 				AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */,
 				AD28D0F918FB020600520EAE /* UITextField+VLNRTextField.m in Sources */,
+				ADDF9048191DF5820071771E /* Story.m in Sources */,
 				AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */,
 				AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */,
+				ADDF903C191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				AD4CE77D18F6539500147C82 /* SignUpView.m in Sources */,
 				AD28D0F718FB020600520EAE /* UILabel+VLNRLabel.m in Sources */,
+				ADDF8FD8191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */,
 				ADE7279B18FA5EE00036F409 /* SignUpViewController.m in Sources */,
 				ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */,
 			);
@@ -855,13 +905,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		AD00A2D518DFCACF00AAABBA /* VLNRABLE.xcdatamodeld */ = {
+		ADDF8FD5191DC5810071771E /* VLNRABLE.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				AD00A2D618DFCACF00AAABBA /* VLNRABLE.xcdatamodel */,
+				ADDF8FD6191DC5810071771E /* VLNRABLE.xcdatamodel */,
 			);
-			currentVersion = AD00A2D618DFCACF00AAABBA /* VLNRABLE.xcdatamodel */;
-			path = VLNRABLE.xcdatamodeld;
+			currentVersion = ADDF8FD6191DC5810071771E /* VLNRABLE.xcdatamodel */;
+			name = VLNRABLE.xcdatamodeld;
+			path = Resources/VLNRABLE.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
