@@ -8,13 +8,13 @@
 
 #import "HomeViewController.h"
 #import "StoryTableViewCell.h"
-#import "AFNetworking.h"
+#import "UserManager.h"
+#import "StoryManager.h"
+#import "Story.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
 @interface HomeViewController () <UITabBarControllerDelegate, UISearchBarDelegate, UISearchDisplayDelegate>
-
-@property (nonatomic, strong, readwrite) NSArray *stories;
 
 @end
 
@@ -29,7 +29,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		self.refreshControl.tintColor = [VLNRColor tealColor];
 	}
 	[self.refreshControl addTarget:self
-							action:@selector(refresh:)
+							action:@selector(refreshStories:)
 				  forControlEvents:UIControlEventValueChanged];
 	[self.tableView addSubview:self.refreshControl];
 
@@ -41,26 +41,16 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	[self.tableView registerClass:[StoryTableViewCell class]
 		   forCellReuseIdentifier:cellIdentifier];
 
+	[self refreshStories:nil];
+
 	self.title = @"Home";
 	self.tabBarController.navigationItem.title = @"Home";
-}
-
-- (NSArray *)stories
-{
-	if (!_stories) {
-		_stories = @[ @"Skeletons in the Closet",
-					  @"What Happened in Vegas",
-					  @"I'm Dating Her Ex",
-					  @"I Didn't Deserve This",
-					  @"I Still Love Her" ];
-	}
-	return _stories;
 }
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return self.stories.count;
+	return [StoryManager sharedManager].stories.count;
 }
 
 #pragma mark - Table view delegate
@@ -88,9 +78,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	StoryTableViewCell *storyCell = (StoryTableViewCell *)cell;
-	storyCell.titleLabel.text = [self.stories objectAtIndex:indexPath.row];
+	Story *story = [[[StoryManager sharedManager].stories allObjects] objectAtIndex:indexPath.row];
+	storyCell.titleLabel.text = story.title;
 	storyCell.timeLabel.text = @"15m";
-	storyCell.storyLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis felis erat, quis porttitor dui aliquam id. Fusce in sapien nisl. Vivamus id quam sit amet felis molestie porttitor quis at eros.";
+	storyCell.storyLabel.text = story.body;
 
 	NSMutableAttributedString *categoryStr = [[NSMutableAttributedString alloc] initWithString:@"Trending in: Relationships"];
 	NSRange range = [[categoryStr string] rangeOfString:@"Trending in: "];
@@ -99,26 +90,22 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	storyCell.categoryLabel.attributedText = categoryStr;
 }
 
-- (void)refresh:(id)sender
+- (void)refreshStories:(id)sender
 {
-	// TODO: Add real request.
-	NSURL *url = [NSURL URLWithString:@"http://www.google.com/"];
-	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:url];
-	__typeof__(self) __weak weakSelf = self;
-	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-	[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-		NSUInteger statusCode = operation.response.statusCode;
-		[weakSelf.tableView reloadData];
-		[(UIRefreshControl *)sender endRefreshing];
-		NSLog(@"\nSUCCESS (%lu):\n%@\n", (unsigned long)statusCode, operation.responseString);
-	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-		NSUInteger statusCode = operation.response.statusCode;
-		[weakSelf.tableView reloadData];
-		[(UIRefreshControl *)sender endRefreshing];
-		NSLog(@"\nFAILURE (%lu):\n%@\n", (unsigned long)statusCode, operation.responseString);
-	}];
+	if ([[StoryManager sharedManager] areStoriesLoading]) {
+		return;
+	}
 
-	[[[AFHTTPRequestOperationManager manager] operationQueue] addOperation:operation];
+	__typeof__(self) __weak weakSelf = self;
+	[[StoryManager sharedManager] getStoriesForUser:nil successBlock:^(NSSet *stories) {
+		[weakSelf.tableView reloadData];
+		[(UIRefreshControl *)sender endRefreshing];
+		VLNRLogVerbose(@"\nSUCCESS: %@\n", stories);
+	} failureBlock:^(NSError *error) {
+		[weakSelf.tableView reloadData];
+		VLNRLogError(@"\nFAILURE: %@\n", error);
+		[(UIRefreshControl *)sender endRefreshing];
+	}];
 }
 
 @end

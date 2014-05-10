@@ -10,6 +10,4 @@
 
 @interface HomeViewController : UITableViewController
 
-@property (nonatomic, strong, readonly) NSArray *stories;
-
 @end

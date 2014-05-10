@@ -1,14 +1,14 @@
 //
-//  UILabel+VLNRLabel.m
+//  UILabel+VLNRAdditions.m
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 4/13/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
-#import "UILabel+VLNRLabel.h"
+#import "UILabel+VLNRAdditions.h"
 
-@implementation UILabel (VLNRLabel)
+@implementation UILabel (VLNRAdditions)
 
 - (id)initWithTextColor:(UIColor *)textColor
           textAlignment:(NSTextAlignment)textAlignment

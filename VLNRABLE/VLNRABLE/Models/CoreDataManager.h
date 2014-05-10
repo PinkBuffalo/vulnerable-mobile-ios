@@ -18,6 +18,8 @@ extern NSString * const kUserEntityName;
 
 - (NSURL *)persistentStoreURL;
 - (NSDictionary *)persistentStoreOptions;
+- (BOOL)migrationIsNeeded;
+
 - (void)saveMainQueueContext;
 - (void)savePrivateQueueContext;
 

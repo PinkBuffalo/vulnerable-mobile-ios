@@ -10,6 +10,7 @@
 #import "IntroViewController.h"
 #import "SignUpViewController.h"
 #import "LogInView.h"
+#import "UserManager.h"
 
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
@@ -79,9 +80,23 @@
 }
 
 #pragma mark - Text field delegate
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	
+	switch (textField.tag) {
+		case LogInViewEmailTextFieldTag:
+			[[self.logInView viewWithTag:(textField.tag + 1)] becomeFirstResponder];
+			break;
+			case LogInViewPasswordTextFieldTag:
+		{
+			if ([self textFieldsAreValid]) {
+				[self logInAction];
+			}
+			break;
+		}
+		default:
+			break;
+	}
+	return YES;
 }
 
 #pragma mark - Action methods
@@ -101,10 +116,46 @@
 	[self.logInView endEditing:YES];
 }
 
+- (BOOL)textFieldsAreValid
+{
+	BOOL validTextField = NO;
+	for (UIView *subview in self.logInView.scrollView.subviews) {
+		if ([subview isKindOfClass:[UITextField class]]) {
+			UITextField *textField = (UITextField *)subview;
+			if (textField.text.length > 0) {
+				validTextField = YES;
+			} else {
+				validTextField = NO;
+				[textField becomeFirstResponder];
+				break;
+			}
+		}
+	}
+	return validTextField;
+}
+
 - (void)logInAction
 {
-	// TODO: Change these test to the user log in action when ready.
-	[self dismissViewControllerAnimated:YES completion:nil];
+	if ([[UserManager sharedManager] isUserLoading] || ![self textFieldsAreValid]) {
+		return;
+	}
+
+	// TODO: Log in GET not set up in rails routes.
+	NSDictionary *userInfo = @{ @"email": [self.logInView.emailTextField.text copy],
+								@"password": [self.logInView.passwordTextField.text copy] };
+
+	__typeof__(self) __weak weakSelf = self;
+	[[UserManager sharedManager] getUserWithUserInfo:userInfo successBlock:^(User *user) {
+		VLNRLogVerbose(@"\nUser: %@\n", user);
+		[weakSelf dismissViewControllerAnimated:YES completion:nil];
+	} failureBlock:^(NSError *error) {
+		VLNRLogError(@"\nError: %@\n", error);
+		[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
+									message:[error localizedDescription]
+								   delegate:nil
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+	}];
 }
 
 @end

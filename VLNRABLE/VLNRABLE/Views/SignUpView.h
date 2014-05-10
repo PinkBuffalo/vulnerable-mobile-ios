@@ -3,6 +3,12 @@
 #import <UIKit/UIKit.h>
 #import "TTTAttributedLabel.h"
 
+typedef NS_ENUM(NSUInteger, SignUpViewTextFieldTags) {
+	SignUpViewNameTextFieldTag = 8000,
+	SignUpViewEmailTextFieldTag,
+	SignUpVeiewPasswordTextFieldTag
+};
+
 @interface SignUpView : UIView
 
 @property (nonatomic, readwrite) CGFloat buttonHeight;

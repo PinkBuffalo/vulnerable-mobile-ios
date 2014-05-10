@@ -1,5 +1,5 @@
 //
-//  UILabel+VLNRLabel.h
+//  UILabel+VLNRAdditions.h
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 4/13/14.
@@ -10,7 +10,7 @@
 
 #define VLNRABLE_DEFAULT_FONT_SIZE [UIFont systemFontOfSize:11.0f]
 
-@interface UILabel (VLNRLabel)
+@interface UILabel (VLNRAdditions)
 
 - (id)initWithTextColor:(UIColor *)textColor
           textAlignment:(NSTextAlignment)textAlignment

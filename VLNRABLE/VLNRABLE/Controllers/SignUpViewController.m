@@ -80,9 +80,24 @@
 }
 
 #pragma mark - Text field delegate
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-
+	switch (textField.tag) {
+		case SignUpViewNameTextFieldTag:
+		case SignUpViewEmailTextFieldTag:
+			[[self.signUpView viewWithTag:(textField.tag + 1)] becomeFirstResponder];
+			break;
+		case SignUpVeiewPasswordTextFieldTag:
+		{
+			if ([self textFieldsAreValid]) {
+				[self signUpAction];
+			}
+			break;
+		}
+		default:
+			break;
+	}
+	return YES;
 }
 
 #pragma mark - Action methods
@@ -102,17 +117,40 @@
 	[self.signUpView endEditing:YES];
 }
 
+- (BOOL)textFieldsAreValid
+{
+	BOOL validTextField = NO;
+	for (UIView *subview in self.signUpView.scrollView.subviews) {
+		if ([subview isKindOfClass:[UITextField class]]) {
+			UITextField *textField = (UITextField *)subview;
+			if (textField.text.length > 0) {
+				validTextField = YES;
+			} else {
+				validTextField = NO;
+				[textField becomeFirstResponder];
+				break;
+			}
+		}
+	}
+	return validTextField;
+}
+
 - (void)signUpAction
 {
+	if ([[UserManager sharedManager] isUserLoading] || ![self textFieldsAreValid]) {
+		return;
+	}
+
 	NSDictionary *userinfo = @{ @"name": [self.signUpView.nameTextField.text copy],
-								@"email": [self.signUpView.emailTextField.text copy] };
+								@"email": [self.signUpView.emailTextField.text copy],
+								@"password": [self.signUpView.passwordTextField.text copy] };
 
 	__typeof__(self) __weak weakSelf = self;
 	[[UserManager sharedManager] postUserWithUserInfo:userinfo successBlock:^(User *user) {
-		NSLog(@"User: %@", user);
+		VLNRLogVerbose(@"\nUser: %@\n", user);
 		[weakSelf dismissViewControllerAnimated:YES completion:nil];
 	} failureBlock:^(NSError *error) {
-		NSLog(@"Error: %@", error);
+		VLNRLogError(@"\nError: %@\n", error);
 		[[[UIAlertView alloc] initWithTitle:@"Sign Up Failed"
 									message:[error localizedDescription]
 								   delegate:nil

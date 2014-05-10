@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @class User;
+@class Story;
 
 #define kUserManagerFetchBatchSize 1
 
-typedef void (^UserManagerSuccessBlock)(User * user);
+typedef void (^UserManagerSuccessBlock)(User *user);
 typedef void (^UserManagerFailureBlock)(NSError *error);
 typedef void (^UserManagerCompletionBlock)(User *user);
 

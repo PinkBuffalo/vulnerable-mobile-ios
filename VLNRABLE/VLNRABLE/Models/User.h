@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSString * username;
 @property (nonatomic, retain) NSString * email;
 @property (nonatomic, retain) NSString * password;
-@property (nonatomic, retain) NSNumber * passcode;
+@property (nonatomic, retain) NSString * passcode;
 @property (nonatomic, retain) NSDate * created_at;
 @property (nonatomic, retain) NSDate * updated_at;
 @property (nonatomic, retain) NSSet *stories;

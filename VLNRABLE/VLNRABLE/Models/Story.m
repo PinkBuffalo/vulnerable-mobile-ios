@@ -7,16 +7,18 @@
 //
 
 #import "Story.h"
-
+#import "User.h"
 
 @implementation Story
 
 @dynamic story_id;
 @dynamic title;
 @dynamic author;
+@dynamic body;
 @dynamic mood;
 @dynamic status;
 @dynamic created_at;
 @dynamic updated_at;
+@dynamic user;
 
 @end

@@ -8,9 +8,12 @@
 
 #import "UserManager.h"
 #import "User.h"
+#import "Story.h"
+#import "StoryManager.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "CoreDataManager.h"
+#import "NSDictionary+VLNRAdditions.h"
 
 @interface UserManager ()
 
@@ -36,21 +39,14 @@
 /* Test User */
 //---------------------------------------------
 //											 //
-//  ID: 4									 //
+//  ID: 3									 //
 //  Name: Paris								 //
 //  Email: paris@email.com					 //
+//  Password: password						 //
+//  Passcode: (null)						 //
 //											 //
 //---------------------------------------------
 //---------------------------------------------
-
-#pragma mark - Parsing methods
-- (NSDictionary *)responseObjectFromResponseData:(NSData *)responseData
-{
-	NSError *responseError;
-	return [NSJSONSerialization JSONObjectWithData:responseData
-										   options:kNilOptions
-											 error:&responseError];
-}
 
 #pragma mark - GET methods
 - (void)getUserWithUserInfo:(NSDictionary *)userInfo
@@ -63,17 +59,17 @@
 	AFHTTPRequestOperationManager *operation = [AFHTTPRequestOperationManager manager];
 	operation.requestSerializer = [AFHTTPRequestSerializer serializer];
 	operation.responseSerializer = [AFJSONResponseSerializer serializer];
-	[operation GET:@"http://localhost:3000/api/v1/users/4"
+	[operation GET:@"http://localhost:3000/api/v1/users/4.json"
 		parameters:nil
 		   success:^(AFHTTPRequestOperation *operation, id responseObject) {
 			   weakSelf.userIsLoading = NO;
-			   NSDictionary *response = [weakSelf responseObjectFromResponseData:operation.responseData];
-			   [weakSelf saveUserWithUserInfo:response];
-			   NSLog(@"SUCCESS: %@", response);
+			   [weakSelf saveUserWithResponseObject:responseObject];
+			   VLNRLogInfo(@"\nSUCCESS: %@\n", responseObject);
+			   successBlock(weakSelf.user);
 		   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 			   weakSelf.userIsLoading = NO;
-			   NSDictionary *response = [weakSelf responseObjectFromResponseData:operation.responseData];
-			   NSLog(@"FAILED: %@, %@", response, error);
+			   VLNRLogError(@"\nFAILED: %@, %@\n", operation.responseObject, error);
+			   failureBlock(error);
 		   }];
 }
 
@@ -93,32 +89,32 @@
 		 parameters:parameters
 			success:^(AFHTTPRequestOperation *operation, id responseObject) {
 				weakSelf.userIsLoading = NO;
-				NSDictionary *response = [weakSelf responseObjectFromResponseData:operation.responseData];
-				[weakSelf saveUserWithUserInfo:response];
-				NSLog(@"SUCCESS: %@", response);
+				[weakSelf saveUserWithResponseObject:responseObject];
+				VLNRLogInfo(@"\nSUCCESS: %@\n", responseObject);
 				successBlock(weakSelf.user);
 			} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 				weakSelf.userIsLoading = NO;
-				NSDictionary *response = [weakSelf responseObjectFromResponseData:operation.responseData];
-				NSLog(@"FAILED: %@, %@", response, error);
+				VLNRLogError(@"\nFAILED: %@, %@\n", operation.responseObject, error);
 				failureBlock(error);
 			}];
 }
 
 #pragma mark - SAVE methods
-- (void)saveUserWithUserInfo:(NSDictionary *)userInfo
+- (void)saveUserWithResponseObject:(NSDictionary *)responseObject
 {
-	if (!userInfo.allKeys.count || !userInfo.allValues.count) {
+	if (!responseObject.allKeys.count || !responseObject.allValues.count) {
 		return;
 	}
+
+	responseObject = [responseObject dictionaryByReplacingNullsWithEmptyStrings];
 
 	// Begin fetch & save requests.
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kUserEntityName];
 	[fetchRequest setReturnsObjectsAsFaults:NO];
 	[fetchRequest setFetchBatchSize:kUserManagerFetchBatchSize];
 
-	NSDictionary *dictionary = userInfo[@"user"];
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@", dictionary[@"id"]];
+	NSDictionary *userInfo = responseObject[@"user"];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@", [userInfo valueForKey:@"id"]];
 	[fetchRequest setPredicate:predicate];
 
 	NSError *error;
@@ -132,11 +128,13 @@
 	[dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
 	[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
 
-	user.user_id = @([dictionary[@"id"] integerValue]);
-	user.username = dictionary[@"name"];
-	user.email = dictionary[@"email"];
-	user.created_at = [dateFormatter dateFromString:dictionary[@"created_at"]];
-	user.updated_at = [dateFormatter dateFromString:dictionary[@"updated_at"]];
+	user.user_id = @([[userInfo valueForKey:@"id"] integerValue]);
+	user.username = [userInfo valueForKey:@"name"];
+	user.email = [userInfo valueForKey:@"email"];
+	user.password = [userInfo valueForKey:@"password"];
+	user.passcode = [userInfo valueForKey:@"passcode"];
+	user.created_at = [dateFormatter dateFromString:[userInfo valueForKey:@"created_at"]];
+	user.updated_at = [dateFormatter dateFromString:[userInfo valueForKey:@"updated_at"]];
 
 	[self fetchUserWithCompletionBlock:nil];
 	[[CoreDataManager sharedManager] savePrivateQueueContext];

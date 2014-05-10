@@ -2,6 +2,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, LogInViewTextFieldTags) {
+	LogInViewEmailTextFieldTag = 8000,
+	LogInViewPasswordTextFieldTag
+};
+
 @interface LogInView : UIView
 
 @property (nonatomic, readwrite) CGFloat buttonHeight;

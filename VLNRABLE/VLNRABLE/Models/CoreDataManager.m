@@ -98,7 +98,7 @@ NSString * const kUserEntityName = @"User";
 																 URL:self.persistentStoreURL
 															 options:self.persistentStoreOptions
 															   error:&error]) {
-			NSLog(@"Error adding persistent store. %@, %@", error, [error userInfo]);
+			VLNRLogError(@"Error adding persistent store. %@, %@", error, [error userInfo]);
 		}
 	}
 	return _persistentStoreCoordinator;
@@ -117,7 +117,7 @@ NSString * const kUserEntityName = @"User";
 	if (!_persistentStoreURL) {
 		NSURL *directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 		_persistentStoreURL = [directory URLByAppendingPathComponent:@"VLNRABLE-v1.sqlite"];
-		NSLog(@"Persistent Store URL: %@", _persistentStoreURL);
+		VLNRLogInfo(@"Persistent Store URL: %@", _persistentStoreURL);
 	}
 	return _persistentStoreURL;
 }
@@ -137,23 +137,40 @@ NSString * const kUserEntityName = @"User";
 	return NSSQLiteStoreType;
 }
 
+#pragma mark - Migration methods
+- (BOOL)migrationIsNeeded
+{
+	NSError *error;
+	NSDictionary *sourceMetadata = [NSPersistentStoreCoordinator metadataForPersistentStoreOfType:[self persistentStoreType]
+																							  URL:[self persistentStoreURL]
+																							error:&error];
+
+	NSManagedObjectModel *destinationModel = self.persistentStoreCoordinator.managedObjectModel;
+	BOOL isModelCompatible = [destinationModel isConfiguration:nil compatibleWithStoreMetadata:sourceMetadata];
+	return !isModelCompatible;
+}
+
 #pragma mark - Saving methods
 - (void)saveMainQueueContext
 {
+	__typeof__(self) __weak weakSelf = self;
 	[self.mainQueueContext performBlock:^{
 		NSError *error;
-		if (![self.mainQueueContext save:&error]) {
-			NSLog(@"Error saving main queue context. %@, %@", error, [error userInfo]);
+		[weakSelf migrationIsNeeded];
+		if (![weakSelf.mainQueueContext save:&error]) {
+			VLNRLogError(@"Error saving main queue context. %@, %@", error, [error userInfo]);
 		}
 	}];
 }
 
 - (void)savePrivateQueueContext
 {
+	__typeof__(self) __weak weakSelf = self;
 	[self.privateQueueContext performBlock:^{
 		NSError *error;
-		if (![self.privateQueueContext save:&error]) {
-			NSLog(@"Error saving private queue context. %@, %@", error, [error userInfo]);
+		[weakSelf migrationIsNeeded];
+		if (![weakSelf.privateQueueContext save:&error]) {
+			VLNRLogError(@"Error saving private queue context. %@, %@", error, [error userInfo]);
 		}
 	}];
 }
