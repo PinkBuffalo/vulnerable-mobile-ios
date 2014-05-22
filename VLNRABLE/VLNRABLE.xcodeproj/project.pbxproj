@@ -49,6 +49,10 @@
 		ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0518E1425E0094196E /* GetStartedViewController.m */; };
 		ADBE2E0A18E142850094196E /* GetStartedView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0918E142850094196E /* GetStartedView.m */; };
 		ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBE2E0918E142850094196E /* GetStartedView.m */; };
+		ADCC9228192DC4B600700743 /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCC9227192DC4B600700743 /* MyAccountViewController.m */; };
+		ADCC9229192DC4B600700743 /* MyAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCC9227192DC4B600700743 /* MyAccountViewController.m */; };
+		ADCC922C192DD30700700743 /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCC922B192DD30700700743 /* TableView.m */; };
+		ADCC922D192DD30700700743 /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCC922B192DD30700700743 /* TableView.m */; };
 		ADDF8FD7191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ADDF8FD5191DC5810071771E /* VLNRABLE.xcdatamodeld */; };
 		ADDF8FD8191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ADDF8FD5191DC5810071771E /* VLNRABLE.xcdatamodeld */; };
 		ADDF9033191DD79B0071771E /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9032191DD79B0071771E /* UserManager.m */; };
@@ -137,6 +141,10 @@
 		ADBE2E0518E1425E0094196E /* GetStartedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedViewController.m; path = Controllers/GetStartedViewController.m; sourceTree = "<group>"; };
 		ADBE2E0818E142850094196E /* GetStartedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedView.h; path = Views/GetStartedView.h; sourceTree = "<group>"; };
 		ADBE2E0918E142850094196E /* GetStartedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedView.m; path = Views/GetStartedView.m; sourceTree = "<group>"; };
+		ADCC9226192DC4B600700743 /* MyAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyAccountViewController.h; path = Controllers/MyAccountViewController.h; sourceTree = "<group>"; };
+		ADCC9227192DC4B600700743 /* MyAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyAccountViewController.m; path = Controllers/MyAccountViewController.m; sourceTree = "<group>"; };
+		ADCC922A192DD30700700743 /* TableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableView.h; path = Views/TableView.h; sourceTree = "<group>"; };
+		ADCC922B192DD30700700743 /* TableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableView.m; path = Views/TableView.m; sourceTree = "<group>"; };
 		ADDF8FD6191DC5810071771E /* VLNRABLE.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = VLNRABLE.xcdatamodel; sourceTree = "<group>"; };
 		ADDF9031191DD79B0071771E /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = Models/UserManager.h; sourceTree = "<group>"; };
 		ADDF9032191DD79B0071771E /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = Models/UserManager.m; sourceTree = "<group>"; };
@@ -291,6 +299,8 @@
 				AD00A2F718DFCC4100AAABBA /* IntroViewController.m */,
 				AD4CE77618F64A4300147C82 /* LogInViewController.h */,
 				AD4CE77718F64A4300147C82 /* LogInViewController.m */,
+				ADCC9226192DC4B600700743 /* MyAccountViewController.h */,
+				ADCC9227192DC4B600700743 /* MyAccountViewController.m */,
 				ADE7279818FA5EE00036F409 /* SignUpViewController.h */,
 				ADE7279918FA5EE00036F409 /* SignUpViewController.m */,
 				AD28D10418FB2BE700520EAE /* TabBarViewController.h */,
@@ -314,6 +324,8 @@
 				AD4CE77B18F6539500147C82 /* SignUpView.m */,
 				AD28D10818FB418800520EAE /* StoryTableViewCell.h */,
 				AD28D10918FB418800520EAE /* StoryTableViewCell.m */,
+				ADCC922A192DD30700700743 /* TableView.h */,
+				ADCC922B192DD30700700743 /* TableView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -559,6 +571,7 @@
 				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				ADDF905B191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
 				ADDF9067191EBA9B0071771E /* VLNRApplicationManager.m in Sources */,
+				ADCC9228192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				ADDF9063191EB9D00071771E /* VLNRLogger.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
 				AD28D10618FB2BE700520EAE /* TabBarViewController.m in Sources */,
@@ -577,6 +590,7 @@
 				AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
 				ADDF903B191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				ADE7279618FA59F50036F409 /* LogInView.m in Sources */,
+				ADCC922C192DD30700700743 /* TableView.m in Sources */,
 				ADDF8FD7191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */,
 				ADE7279A18FA5EE00036F409 /* SignUpViewController.m in Sources */,
 				ADBE2E0618E1425E0094196E /* GetStartedViewController.m in Sources */,
@@ -604,6 +618,8 @@
 				ADDF9048191DF5820071771E /* Story.m in Sources */,
 				AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */,
 				ADDF9060191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,
+				ADCC922D192DD30700700743 /* TableView.m in Sources */,
+				ADCC9229192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */,
 				ADDF903C191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				AD4CE77D18F6539500147C82 /* SignUpView.m in Sources */,

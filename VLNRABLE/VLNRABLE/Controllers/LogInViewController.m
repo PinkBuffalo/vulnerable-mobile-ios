@@ -37,6 +37,9 @@
 	[scrollTap addTarget:self action:@selector(hideKeyboard)];
 	[self.logInView.scrollView addGestureRecognizer:scrollTap];
 
+	self.logInView.emailTextField.text = @"david@email.com";
+	self.logInView.passwordTextField.text = @"password123@";
+
 	[self.logInView.facebookButton addTarget:self
 									  action:@selector(logInAction)
 							forControlEvents:UIControlEventTouchUpInside];

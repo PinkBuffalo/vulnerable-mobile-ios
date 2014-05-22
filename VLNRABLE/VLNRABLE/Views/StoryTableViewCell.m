@@ -41,12 +41,12 @@
 		_storyImageView.layer.borderWidth = 1.0f;
 		_storyImageView.layer.cornerRadius = 4.0f;
 
-		_titleLabel = [[UILabel alloc] initWithTextColor:[VLNRColor blueColor]
+		_titleLabel = [[UILabel alloc] initWithTextColor:[VLNRColor grayTextColor]
 													font:VLNRABLE_DEFAULT_FONT_SIZE
 										   textAlignment:NSTextAlignmentLeft
 										   numberOfLines:1];
 
-		_timeLabel = [[UILabel alloc] initWithTextColor:[VLNRColor grayColor]
+		_timeLabel = [[UILabel alloc] initWithTextColor:[VLNRColor grayTextColor]
 												   font:VLNRABLE_DEFAULT_FONT_SIZE
 										  textAlignment:NSTextAlignmentRight
 										  numberOfLines:1];

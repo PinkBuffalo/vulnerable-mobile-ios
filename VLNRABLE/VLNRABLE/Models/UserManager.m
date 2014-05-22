@@ -59,7 +59,7 @@
 	AFHTTPRequestOperationManager *operation = [AFHTTPRequestOperationManager manager];
 	operation.requestSerializer = [AFHTTPRequestSerializer serializer];
 	operation.responseSerializer = [AFJSONResponseSerializer serializer];
-	[operation GET:@"http://localhost:3000/api/v1/users/4.json"
+	[operation GET:@"http://localhost:3000/api/v1/users/1.json"
 		parameters:nil
 		   success:^(AFHTTPRequestOperation *operation, id responseObject) {
 			   weakSelf.userIsLoading = NO;

@@ -113,8 +113,8 @@
 
 		// TODO: Figure out how to add these attributes to the rails schema.
 		story.story_id = [storyInfo valueForKey:@"id"];
-		story.author = @"";
-		story.title = @"";
+		story.author = @"Alan";
+		story.title = @"Hello World!";
 		story.body = [storyInfo valueForKey:@"body"];
 		story.mood = nil;
 		story.status = @"active";
@@ -130,7 +130,7 @@
 			successBlock:(StoryManagerSuccessBlock)successBlock
 			failureBlock:(StoryManagerFailureBlock)failureBlock
 {
-	
+
 }
 
 #pragma mark - FETCH methods
