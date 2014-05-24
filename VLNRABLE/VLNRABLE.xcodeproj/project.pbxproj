@@ -75,8 +75,8 @@
 		ADDF905C191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905A191EA9D80071771E /* UILabel+VLNRAdditions.m */; };
 		ADDF905F191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */; };
 		ADDF9060191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */; };
-		ADDF9067191EBA9B0071771E /* VLNRApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */; };
-		ADDF9068191EBA9B0071771E /* VLNRApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */; };
+		ADDF9067191EBA9B0071771E /* VLNRAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRAppManager.m */; };
+		ADDF9068191EBA9B0071771E /* VLNRAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRAppManager.m */; };
 		ADE367E119306DAE004E0180 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE367E019306DAE004E0180 /* User.m */; };
 		ADE367E219306DAE004E0180 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE367E019306DAE004E0180 /* User.m */; };
 		ADE367E919306DAE004E0180 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE367E819306DAE004E0180 /* Story.m */; };
@@ -172,8 +172,8 @@
 		ADDF905A191EA9D80071771E /* UILabel+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+VLNRAdditions.m"; path = "Categories/UILabel+VLNRAdditions.m"; sourceTree = "<group>"; };
 		ADDF905D191EB02A0071771E /* NSArray+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+VLNRAdditions.h"; path = "Categories/NSArray+VLNRAdditions.h"; sourceTree = "<group>"; };
 		ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+VLNRAdditions.m"; path = "Categories/NSArray+VLNRAdditions.m"; sourceTree = "<group>"; };
-		ADDF9065191EBA9B0071771E /* VLNRApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRApplicationManager.h; sourceTree = "<group>"; };
-		ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRApplicationManager.m; sourceTree = "<group>"; };
+		ADDF9065191EBA9B0071771E /* VLNRAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRAppManager.h; sourceTree = "<group>"; };
+		ADDF9066191EBA9B0071771E /* VLNRAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRAppManager.m; sourceTree = "<group>"; };
 		ADE367DA19306D65004E0180 /* VLNRABLE-v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "VLNRABLE-v1.xcdatamodel"; sourceTree = "<group>"; };
 		ADE367DF19306DAE004E0180 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
 		ADE367E019306DAE004E0180 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
@@ -415,8 +415,8 @@
 			children = (
 				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
 				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
-				ADDF9065191EBA9B0071771E /* VLNRApplicationManager.h */,
-				ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */,
+				ADDF9065191EBA9B0071771E /* VLNRAppManager.h */,
+				ADDF9066191EBA9B0071771E /* VLNRAppManager.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -590,7 +590,7 @@
 				ADDF9053191EA97B0071771E /* NSDictionary+VLNRAdditions.m in Sources */,
 				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				ADDF905B191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
-				ADDF9067191EBA9B0071771E /* VLNRApplicationManager.m in Sources */,
+				ADDF9067191EBA9B0071771E /* VLNRAppManager.m in Sources */,
 				ADCC9228192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
 				AD28D10618FB2BE700520EAE /* TabBarViewController.m in Sources */,
@@ -635,7 +635,7 @@
 				AD28D0FF18FB23E100520EAE /* HomeViewController.m in Sources */,
 				ADDF905C191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
 				ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */,
-				ADDF9068191EBA9B0071771E /* VLNRApplicationManager.m in Sources */,
+				ADDF9068191EBA9B0071771E /* VLNRAppManager.m in Sources */,
 				AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */,
 				AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */,
 				ADDF9060191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,

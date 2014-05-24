@@ -1,5 +1,5 @@
 //
-//  VLNRApplicationManager.h
+//  VLNRAppManager.h
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 5/10/14.
@@ -88,14 +88,18 @@ extern NSString * const kVLNRParseNETKey;
 extern NSString * const kVLNRParseRESTAPIKey;
 extern NSString * const kVLNRParseMasterKey;
 
-@interface VLNRApplicationManager : NSObject
+@interface VLNRAppManager : NSObject
 
-+ (VLNRApplicationManager *)sharedManager;
++ (VLNRAppManager *)sharedManager;
 
 + (NSString *)applicationName;
 + (NSString *)applicationVersion;
 + (NSString *)buildNumber;
 + (NSDateFormatter *)dateToStringFormatterWithDateStyle:(NSDateFormatterStyle)dateStyle;
 + (NSDateFormatter *)stringToDateFormatter;
++ (UIFont *)boldSmallSystemFont;
++ (UIFont *)boldSystemFont;
++ (UIFont *)smallSystemFont;
++ (UIFont *)systemFont;
 
 @end

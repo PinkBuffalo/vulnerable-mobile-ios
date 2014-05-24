@@ -139,7 +139,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
 															forIndexPath:indexPath];
 
-	cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
+	cell.textLabel.font = [VLNRAppManager systemFont];
 
 	switch (indexPath.section) {
 		case 0:

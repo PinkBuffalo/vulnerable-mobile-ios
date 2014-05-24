@@ -19,9 +19,9 @@
 	[DDLog addLogger:[DDTTYLogger sharedInstance]];
 
 	NSString *version = [NSString stringWithFormat:@"%@ %@ (%@)",
-						 [VLNRApplicationManager applicationName],
-						 [VLNRApplicationManager applicationVersion],
-						 [VLNRApplicationManager buildNumber]];
+						 [VLNRAppManager applicationName],
+						 [VLNRAppManager applicationVersion],
+						 [VLNRAppManager buildNumber]];
 
 	VLNRLogInfo(@"%@", version);
 

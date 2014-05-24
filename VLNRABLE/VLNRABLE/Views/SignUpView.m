@@ -49,7 +49,7 @@
 		_facebookButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_signUpLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
-													 font:VLNRABLE_DEFAULT_FONT_SIZE
+													 font:[VLNRAppManager systemFont]
 											textAlignment:NSTextAlignmentCenter
 											numberOfLines:1];
 		_signUpLabel.text = @"or sign up with your email address";
@@ -76,7 +76,7 @@
 		_passwordTextField.tag = SignUpVeiewPasswordTextFieldTag;
 
 		_ageLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
-												  font:VLNRABLE_DEFAULT_FONT_SIZE
+												  font:[VLNRAppManager smallSystemFont]
 										 textAlignment:NSTextAlignmentLeft
 										 numberOfLines:1];
 		_ageLabel.text = @"I am at least 13 years old:";
@@ -91,7 +91,7 @@
 		_signUpButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_logInLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
-													font:VLNRABLE_DEFAULT_FONT_SIZE
+													font:[VLNRAppManager systemFont]
 										   textAlignment:NSTextAlignmentCenter
 										   numberOfLines:1];
 
@@ -102,7 +102,7 @@
 		_logInLabel.attributedText = logInText;
 
 		_legalLabel = [[TTTAttributedLabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
-															   font:VLNRABLE_DEFAULT_FONT_SIZE
+															   font:[VLNRAppManager smallSystemFont]
 													  textAlignment:NSTextAlignmentCenter
 													  numberOfLines:0];
 		_legalLabel.delegate = delegate;
@@ -188,7 +188,7 @@
 										  insetBounds.size.width,
 										  _textFieldHeight);
 
-	yOrigin += _passwordTextField.frame.size.height + (_padding * 2.0f);
+	yOrigin += _passwordTextField.frame.size.height + (_padding * 1.5f);
 
 	_ageLabel.frame = CGRectMake(xOrigin,
 								 yOrigin,
@@ -196,7 +196,7 @@
 								 _switchHeight);
 
 	xOrigin = insetBounds.size.width - _switchWidth + xOrigin;
-	yOrigin += _padding;
+	yOrigin += (_padding * 1.5f);
 
 	_ageSwitch.frame = CGRectMake(xOrigin,
 								  yOrigin,
@@ -227,7 +227,7 @@
 	_legalLabel.frame = CGRectMake(xOrigin,
 								   yOrigin,
 								   insetBounds.size.width,
-								   (legalLabelSize.height * 1.5f));
+								   (legalLabelSize.height * 2.0f));
 
 	yOrigin += _legalLabel.frame.size.height + (_padding * 4.0f);
 	_scrollView.contentSize = CGSizeMake(_scrollView.contentSize.width, yOrigin);

@@ -157,7 +157,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", responseObject[@"objectId"]];
 	[fetchRequest setPredicate:predicate];
 
-	NSDateFormatter *dateFormatter = [VLNRApplicationManager stringToDateFormatter];
+	NSDateFormatter *dateFormatter = [VLNRAppManager stringToDateFormatter];
 
 	NSError *error;
 	User *user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
@@ -194,7 +194,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", userInfo[@"objectId"]];
 		[fetchRequest setPredicate:predicate];
 
-		NSDateFormatter *dateFormatter = [VLNRApplicationManager stringToDateFormatter];
+		NSDateFormatter *dateFormatter = [VLNRAppManager stringToDateFormatter];
 
 		NSError *error;
 		User *user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];

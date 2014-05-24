@@ -109,16 +109,20 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	storyCell.timeLabel.text = @"15m";
 	storyCell.storyLabel.text = story.content;
 
-	NSString *storyTitle = [NSString stringWithFormat:@"%@ written by %@", story.title, story.user.nickname];
+	NSString *storyTitle = [NSString stringWithFormat:@"%@ by %@", story.title, story.user.nickname];
 	NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:storyTitle];
 	NSRange titleRange = [[titleStr string] rangeOfString:story.title];
-	[titleStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor blueColor] range:titleRange];
+	[titleStr addAttributes:@{ NSForegroundColorAttributeName: [VLNRColor blueColor],
+							   NSFontAttributeName: [VLNRAppManager boldSmallSystemFont] }
+					  range:titleRange];
 	storyCell.titleLabel.attributedText = titleStr;
 
 	NSString *storyCategory = @"Trending in: Relationships";
 	NSMutableAttributedString *categoryStr = [[NSMutableAttributedString alloc] initWithString:storyCategory];
 	NSRange categoryRange = [[categoryStr string] rangeOfString:@"Trending in:"];
-	[categoryStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor grayTextColor] range:categoryRange];
+	[categoryStr addAttributes:@{ NSForegroundColorAttributeName: [VLNRColor grayTextColor],
+								  NSFontAttributeName: [VLNRAppManager smallSystemFont] }
+						 range:categoryRange];
 	storyCell.categoryLabel.attributedText = categoryStr;
 }
 
