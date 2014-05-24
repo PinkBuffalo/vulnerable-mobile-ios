@@ -123,7 +123,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)refreshStories:(id)sender
 {
-	if ([[StoryManager sharedManager] areStoriesLoading]) {
+	if ([[StoryManager sharedManager] isLoading]) {
 		return;
 	}
 

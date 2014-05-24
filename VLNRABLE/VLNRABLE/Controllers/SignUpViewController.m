@@ -137,16 +137,16 @@
 
 - (void)signUpAction
 {
-	if ([[UserManager sharedManager] isUserLoading] || ![self textFieldsAreValid]) {
+	if ([[UserManager sharedManager] isLoading] || ![self textFieldsAreValid]) {
 		return;
 	}
 
-	NSDictionary *userinfo = @{ @"name": [self.signUpView.nameTextField.text copy],
-								@"email": [self.signUpView.emailTextField.text copy],
+	NSDictionary *userinfo = @{ @"nickname": [self.signUpView.nameTextField.text copy],
+								@"username": [self.signUpView.emailTextField.text copy],
 								@"password": [self.signUpView.passwordTextField.text copy] };
 
 	__typeof__(self) __weak weakSelf = self;
-	[[UserManager sharedManager] postUserWithUserInfo:userinfo successBlock:^(User *user) {
+	[[UserManager sharedManager] signUpUserWithUserInfo:userinfo successBlock:^(User *user) {
 		VLNRLogVerbose(@"\nUser: %@\n", user);
 		[weakSelf dismissViewControllerAnimated:YES completion:nil];
 	} failureBlock:^(NSError *error) {

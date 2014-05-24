@@ -13,6 +13,7 @@
 //---------------------------------------------
 #import "VLNRColor.h"
 #import "DDLog.h"
+#import <Parse/Parse.h>
 
 //---------------------------------------------
 /* Apple device idioms */
@@ -79,6 +80,13 @@ typedef NS_ENUM(NSUInteger, HTTPStatusCodes) {
     HTTPStatusCode503ServiceUnavailable,
     HTTPStatusCode504GatewayTimeout
 };
+
+extern NSString * const kVLNRParseApplicationID;
+extern NSString * const kVLNRParseClientKey;
+extern NSString * const kVLNRParseJavascriptKey;
+extern NSString * const kVLNRParseNETKey;
+extern NSString * const kVLNRParseRESTAPIKey;
+extern NSString * const kVLNRParseMasterKey;
 
 @interface VLNRApplicationManager : NSObject
 

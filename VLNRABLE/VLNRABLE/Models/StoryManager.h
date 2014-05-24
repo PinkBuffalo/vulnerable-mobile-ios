@@ -20,7 +20,7 @@ typedef void (^StoryManagerCompletionBlock)(NSSet *stories);
 @interface StoryManager : NSObject
 
 @property (nonatomic, readonly, strong) NSSet *stories;
-@property (nonatomic, assign, getter = areStoriesLoading) BOOL storiesAreLoading;
+@property (nonatomic, readonly, getter = isLoading) BOOL loading;
 
 + (StoryManager *)sharedManager;
 

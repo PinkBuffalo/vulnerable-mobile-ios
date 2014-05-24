@@ -20,17 +20,25 @@ typedef void (^UserManagerCompletionBlock)(User *user);
 @interface UserManager : NSObject
 
 @property (nonatomic, readonly, strong) User *user;
-@property (nonatomic, assign, getter = isUserLoading) BOOL userIsLoading;
+@property (nonatomic, readonly, getter = isLoading) BOOL loading;
 
 + (UserManager *)sharedManager;
 
-- (void)getUserWithUserInfo:(NSDictionary *)userInfo
-			   successBlock:(UserManagerSuccessBlock)successBlock
-			   failureBlock:(UserManagerFailureBlock)failureBlock;
+- (void)loginUserWithUserInfo:(NSDictionary *)userInfo
+				 successBlock:(UserManagerSuccessBlock)successBlock
+				 failureBlock:(UserManagerFailureBlock)failureBlock;
 
-- (void)postUserWithUserInfo:(NSDictionary *)userInfo
-				successBlock:(UserManagerSuccessBlock)successBlock
-				failureBlock:(UserManagerFailureBlock)failureBlock;
+- (void)signUpUserWithUserInfo:(NSDictionary *)userInfo
+				  successBlock:(UserManagerSuccessBlock)successBlock
+				  failureBlock:(UserManagerFailureBlock)failureBlock;
+
+- (void)updateUserWithUserInfo:(NSDictionary *)userInfo
+				  successBlock:(UserManagerSuccessBlock)successBlock
+				  failureBlock:(UserManagerFailureBlock)failureBlock;
+
+- (void)replaceUserWithUserInfo:(NSDictionary *)userInfo
+				   successBlock:(UserManagerSuccessBlock)successBlock
+				   failureBlock:(UserManagerFailureBlock)failureBlock;
 
 - (void)fetchUserWithCompletionBlock:(UserManagerCompletionBlock)completionBlock;
 

@@ -19,6 +19,7 @@
 @interface UserManager ()
 
 @property (nonatomic, readwrite, strong) User *user;
+@property (nonatomic, assign) BOOL loading;
 
 @end
 
@@ -37,54 +38,74 @@
 }
 
 #pragma mark - GET methods
-- (void)getUserWithUserInfo:(NSDictionary *)userInfo
+- (void)loginUserWithUserInfo:(NSDictionary *)userInfo
 			   successBlock:(UserManagerSuccessBlock)successBlock
 			   failureBlock:(UserManagerFailureBlock)failureBlock
 {
-	self.userIsLoading = YES;
+	self.loading = YES;
+
+	NSDictionary *parameters = @{ @"username" : userInfo[@"username"],
+								  @"password" : userInfo[@"password"] };
+
+	VLNRLogVerbose(@"Parameters: %@", parameters);
 
 	__typeof__(self) __weak weakSelf = self;
-	AFHTTPRequestOperationManager *operation = [AFHTTPRequestOperationManager manager];
-	operation.requestSerializer = [AFHTTPRequestSerializer serializer];
-	operation.responseSerializer = [AFJSONResponseSerializer serializer];
-	[operation GET:@"http://localhost:3000/api/v1/users/1.json"
-		parameters:nil
-		   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-			   weakSelf.userIsLoading = NO;
-			   [weakSelf saveUserWithResponseObject:responseObject];
-			   VLNRLogInfo(@"\nSUCCESS: %@\n", responseObject);
-			   successBlock(weakSelf.user);
-		   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-			   weakSelf.userIsLoading = NO;
-			   VLNRLogError(@"\nFAILED: %@, %@\n", operation.responseObject, error);
-			   failureBlock(error);
-		   }];
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	[manager.requestSerializer setValue:kVLNRParseApplicationID forHTTPHeaderField:@"X-Parse-Application-Id"];
+	[manager.requestSerializer setValue:kVLNRParseRESTAPIKey forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	[manager GET:@"https://api.parse.com/1/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		weakSelf.loading = NO;
+		VLNRLogInfo(@"Response: %@", responseObject);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		weakSelf.loading = NO;
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+	}];
 }
 
 #pragma mark - POST methods
-- (void)postUserWithUserInfo:(NSDictionary *)userInfo
-				successBlock:(UserManagerSuccessBlock)successBlock
-				failureBlock:(UserManagerFailureBlock)failureBlock
+- (void)signUpUserWithUserInfo:(NSDictionary *)userInfo
+				  successBlock:(UserManagerSuccessBlock)successBlock
+				  failureBlock:(UserManagerFailureBlock)failureBlock
 {
-	self.userIsLoading = YES;
+	self.loading = YES;
+
+	NSDictionary *parameters = @{ @"nickname" : userInfo[@"nickname"],
+								  @"username" : userInfo[@"username"],
+								  @"email" : userInfo[@"username"],
+								  @"password" : userInfo[@"password"] };
+
+	VLNRLogVerbose(@"Parameters: %@", parameters);
 
 	__typeof__(self) __weak weakSelf = self;
-	NSDictionary *parameters = @{ @"user": userInfo };
-	AFHTTPRequestOperationManager *operation = [AFHTTPRequestOperationManager manager];
-	operation.requestSerializer = [AFJSONRequestSerializer serializer];
-	operation.responseSerializer = [AFJSONResponseSerializer serializer];
-	[operation POST:@"http://localhost:3000/api/v1/users"
-		 parameters:parameters
-			success:^(AFHTTPRequestOperation *operation, id responseObject) {
-				weakSelf.userIsLoading = NO;
-				[weakSelf saveUserWithResponseObject:responseObject];
-				VLNRLogInfo(@"\nSUCCESS: %@\n", responseObject);
-				successBlock(weakSelf.user);
-			} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-				weakSelf.userIsLoading = NO;
-				VLNRLogError(@"\nFAILED: %@, %@\n", operation.responseObject, error);
-				failureBlock(error);
-			}];
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.requestSerializer = [AFJSONRequestSerializer serializer];
+	[manager.requestSerializer setValue:kVLNRParseApplicationID forHTTPHeaderField:@"X-Parse-Application-Id"];
+	[manager.requestSerializer setValue:kVLNRParseRESTAPIKey forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	[manager POST:@"https://api.parse.com/1/users" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		weakSelf.loading = NO;
+		VLNRLogInfo(@"Response: %@", responseObject);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		weakSelf.loading = NO;
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+	}];
+}
+
+#pragma mark - PATCH methods
+- (void)updateUserWithUserInfo:(NSDictionary *)userInfo
+				  successBlock:(UserManagerSuccessBlock)successBlock
+				  failureBlock:(UserManagerFailureBlock)failureBlock
+{
+
+}
+
+#pragma mark - PUT methods
+- (void)replaceUserWithUserInfo:(NSDictionary *)userInfo
+				   successBlock:(UserManagerSuccessBlock)successBlock
+				   failureBlock:(UserManagerFailureBlock)failureBlock
+{
+
 }
 
 #pragma mark - SAVE methods

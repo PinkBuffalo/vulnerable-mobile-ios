@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "TabBarViewController.h"
 #import "CoreDataManager.h"
-#import <Parse/Parse.h>
 #import "DDTTYLogger.h"
 
 @implementation AppDelegate
@@ -29,8 +28,8 @@
 
 	VLNRLogInfo(@"%@", version);
 
-	[Parse setApplicationId:@"D3KkkC7xsH324JB48CenGDmfSBJZHH0Ky5tii4qj"
-				  clientKey:@"kRH3AkVdlHSEqPLzQoqhkPAjtsEEyVD5vSpiBFCt"];
+	[Parse setApplicationId:kVLNRParseApplicationID
+				  clientKey:kVLNRParseClientKey];
 
 	[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 

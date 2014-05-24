@@ -37,8 +37,8 @@
 	[scrollTap addTarget:self action:@selector(hideKeyboard)];
 	[self.logInView.scrollView addGestureRecognizer:scrollTap];
 
-	self.logInView.emailTextField.text = @"david@email.com";
-	self.logInView.passwordTextField.text = @"password123@";
+	self.logInView.emailTextField.text = @"holler@dennisgable.com";
+	self.logInView.passwordTextField.text = @"password123";
 
 	[self.logInView.facebookButton addTarget:self
 									  action:@selector(logInAction)
@@ -102,6 +102,26 @@
 	return YES;
 }
 
+/*
+#pragma mark - Parse delegate
+- (void)logInViewController:(PFLogInViewController *)logInController
+			   didLogInUser:(PFUser *)user
+{
+	VLNRLogInfo(@"User: %@", user);
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController
+	didFailToLogInWithError:(NSError *)error
+{
+	VLNRLogError(@"Error: %@", error.localizedDescription);
+}
+
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController
+{
+	VLNRLogWarn(@"Login Cancelled!");
+}
+ */
+
 #pragma mark - Action methods
 - (void)switchView:(UISegmentedControl *)sender
 {
@@ -139,16 +159,15 @@
 
 - (void)logInAction
 {
-	if ([[UserManager sharedManager] isUserLoading] || ![self textFieldsAreValid]) {
+	if ([[UserManager sharedManager] isLoading] || ![self textFieldsAreValid]) {
 		return;
 	}
 
-	// TODO: Log in GET not set up in rails routes.
-	NSDictionary *userInfo = @{ @"email": [self.logInView.emailTextField.text copy],
+	NSDictionary *userInfo = @{ @"username": [self.logInView.emailTextField.text copy],
 								@"password": [self.logInView.passwordTextField.text copy] };
 
 	__typeof__(self) __weak weakSelf = self;
-	[[UserManager sharedManager] getUserWithUserInfo:userInfo successBlock:^(User *user) {
+	[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^(User *user) {
 		VLNRLogVerbose(@"\nUser: %@\n", user);
 		[weakSelf dismissViewControllerAnimated:YES completion:nil];
 	} failureBlock:^(NSError *error) {

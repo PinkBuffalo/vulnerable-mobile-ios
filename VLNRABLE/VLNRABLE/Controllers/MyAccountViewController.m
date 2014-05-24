@@ -165,7 +165,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 #pragma mark - Action methods
 - (void)refreshMyAccount:(id)sender
 {
-	if ([[UserManager sharedManager] isUserLoading]) {
+	if ([[UserManager sharedManager] isLoading]) {
 		return;
 	}
 

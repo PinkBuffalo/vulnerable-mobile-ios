@@ -18,6 +18,7 @@
 @interface StoryManager ()
 
 @property (nonatomic, readwrite, strong) NSSet *stories;
+@property (nonatomic, assign) BOOL loading;
 
 @end
 
@@ -35,50 +36,35 @@
 	return sharedManager;
 }
 
-//---------------------------------------------
-/* Test Story */
-//---------------------------------------------
-//											 //
-//  ID: 1									 //
-//  Author: Paris							 //
-//  Title: Hello							 //
-//  Body: Hello World!						 //
-//  Status: active							 //
-//  Mood: (null)							 //
-//											 //
-//---------------------------------------------
-//---------------------------------------------
-
 #pragma mark - GET methods
 - (void)getStoriesForUser:(User *)user
 			 successBlock:(StoryManagerSuccessBlock)successBlock
 			 failureBlock:(StoryManagerFailureBlock)failureBlock
 {
-	self.storiesAreLoading = YES;
-	NSString *storiesURL;
-	if (user) {
-		storiesURL = [NSString stringWithFormat:@"http://localhost:3000/api/v1/users/%@/stories.json", user.user_id];
-	} else {
-		storiesURL = @"http://localhost:3000/api/v1/stories.json";
-	}
+	self.loading = YES;
+
+	/*
+	PFQuery *query = [PFQuery queryWithClassName:@"Story"];
+	[query getObjectInBackgroundWithId:@"wGZ73QnVkG" block:^(PFObject *object, NSError *error) {
+		VLNRLogInfo(@"Story: %@", object);
+		if (error) {
+			VLNRLogError(@"Error: %@", error.localizedDescription);
+		}
+	}];
+	 */
 
 	__typeof__(self) __weak weakSelf = self;
-	AFHTTPRequestOperationManager *operation = [AFHTTPRequestOperationManager manager];
-	operation.requestSerializer = [AFHTTPRequestSerializer serializer];
-	operation.responseSerializer = [AFJSONResponseSerializer serializer];
-	[operation GET:storiesURL
-		parameters:nil
-		   success:^(AFHTTPRequestOperation *operation, id responseObject) {
-			   weakSelf.storiesAreLoading = NO;
-			   [weakSelf saveStoriesForUser:user
-						 withResponseObject:responseObject];
-			   VLNRLogInfo(@"\nSUCCESS: %@\n", responseObject);
-			   successBlock([weakSelf.stories copy]);
-		   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-			   weakSelf.storiesAreLoading = NO;
-			   VLNRLogError(@"\nFAILED: %@, %@\n", operation.responseObject, error);
-			   failureBlock(error);
-		   }];
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	[manager.requestSerializer setValue:kVLNRParseApplicationID forHTTPHeaderField:@"X-Parse-Application-Id"];
+	[manager.requestSerializer setValue:kVLNRParseRESTAPIKey forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	[manager GET:@"https://api.parse.com/1/classes/Story" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		weakSelf.loading = NO;
+		VLNRLogInfo(@"Response: %@", responseObject);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		weakSelf.loading = NO;
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+	}];
 }
 
 #pragma mark - SAVE methods
