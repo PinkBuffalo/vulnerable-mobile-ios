@@ -2,7 +2,7 @@
 //  Story.h
 //  VLNRABLE
 //
-//  Created by Paris Pinkney on 5/9/14.
+//  Created by Paris Pinkney on 5/23/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
@@ -14,14 +14,15 @@
 
 @interface Story : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * story_id;
-@property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) NSString * author;
-@property (nonatomic, retain) NSString * body;
+@property (nonatomic, retain) NSString * category;
+@property (nonatomic, retain) NSString * content;
+@property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * mood;
+@property (nonatomic, retain) NSNumber * objectId;
 @property (nonatomic, retain) NSString * status;
-@property (nonatomic, retain) NSDate * created_at;
-@property (nonatomic, retain) NSDate * updated_at;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSDate * updatedAt;
 @property (nonatomic, retain) User *user;
+
 
 @end

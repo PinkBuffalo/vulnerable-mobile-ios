@@ -8,6 +8,7 @@
 
 #import "MyAccountViewController.h"
 #import "UserManager.h"
+#import "User.h"
 #import "TableView.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
@@ -65,6 +66,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		   forCellReuseIdentifier:cellIdentifier];
 
 	[self refreshMyAccount:nil];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(refreshMyAccount:)
+												 name:kUserManagerUserDidFinishLoadingNotification
+											   object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -74,17 +80,22 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	self.tabBarController.navigationItem.title = @"My Account";
 }
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - Lazy loading methods
 - (NSMutableArray *)profileRows
 {
-	return [NSMutableArray arrayWithArray:@[ @"Paris",
-											 @"hello@pxpgraphics.com" ]];
+	return [NSMutableArray arrayWithArray:@[ [UserManager sharedManager].user.nickname ?: @"",
+											 [UserManager sharedManager].user.email ?: @"" ]];
 }
 
 - (NSMutableArray *)storiesRows
 {
-	return [NSMutableArray arrayWithArray:@[ @"Favorite Stories",
-											 @"Liked Stories",
+	return [NSMutableArray arrayWithArray:@[ @"My Stories",
+											 @"Favorite Stories",
 											 @"Hidden Stories" ]];
 }
 

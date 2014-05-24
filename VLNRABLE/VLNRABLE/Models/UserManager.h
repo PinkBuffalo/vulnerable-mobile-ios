@@ -6,20 +6,25 @@
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
+extern NSString * const kUserManagerUserDidFinishLoadingNotification;
+extern NSString * const kUserManagerUserDidFailLoadingNotification;
+
 #import <Foundation/Foundation.h>
 
 @class User;
 @class Story;
 
-#define kUserManagerFetchBatchSize 1
-
 typedef void (^UserManagerSuccessBlock)(User *user);
 typedef void (^UserManagerFailureBlock)(NSError *error);
 typedef void (^UserManagerCompletionBlock)(User *user);
+typedef void (^UserManagerUsersSuccessBlock)(NSSet *users);
+typedef void (^UserManagerUsersFailureBlock)(NSError *error);
+typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 
 @interface UserManager : NSObject
 
 @property (nonatomic, readonly, strong) User *user;
+@property (nonatomic, readonly, strong) NSSet *users;
 @property (nonatomic, readonly, getter = isLoading) BOOL loading;
 
 + (UserManager *)sharedManager;
@@ -40,6 +45,11 @@ typedef void (^UserManagerCompletionBlock)(User *user);
 				   successBlock:(UserManagerSuccessBlock)successBlock
 				   failureBlock:(UserManagerFailureBlock)failureBlock;
 
+- (void)getUsersWithSuccessBlock:(UserManagerUsersSuccessBlock)successBlock
+					failureBlock:(UserManagerUsersFailureBlock)failureBlock;
+
 - (void)fetchUserWithCompletionBlock:(UserManagerCompletionBlock)completionBlock;
+
+- (void)fetchUsersWithCompletionBlock:(UserManagerUsersCompletionBlock)completionBlock;
 
 @end

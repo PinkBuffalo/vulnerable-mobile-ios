@@ -8,7 +8,7 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="mood" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="objectId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="objectId" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" attributeType="Date" syncable="YES"/>
@@ -20,7 +20,7 @@
         <attribute name="createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="email" attributeType="String" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="objectId" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="objectId" attributeType="String" syncable="YES"/>
         <attribute name="passcode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" attributeType="String" syncable="YES"/>
         <attribute name="sessionToken" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,8 +31,8 @@
     </entity>
     <elements>
         <element name="Favorite" positionX="-36" positionY="9" width="128" height="58"/>
-        <element name="Metadata" positionX="-54" positionY="-9" width="128" height="30"/>
+        <element name="Metadata" positionX="-54" positionY="-9" width="128" height="163"/>
         <element name="Story" positionX="-18" positionY="90" width="128" height="58"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="30"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="208"/>
     </elements>
 </model>

@@ -2,24 +2,25 @@
 //  User.m
 //  VLNRABLE
 //
-//  Created by Paris Pinkney on 5/9/14.
+//  Created by Paris Pinkney on 5/23/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
 #import "User.h"
 #import "Story.h"
 
-
 @implementation User
 
-@dynamic user_id;
-@dynamic username;
+@dynamic createdAt;
 @dynamic email;
-@dynamic password;
+@dynamic nickname;
+@dynamic objectId;
 @dynamic passcode;
-@dynamic created_at;
-@dynamic updated_at;
-@dynamic stories;
+@dynamic password;
+@dynamic sessionToken;
+@dynamic updatedAt;
+@dynamic username;
 @dynamic favorites;
+@dynamic stories;
 
 @end

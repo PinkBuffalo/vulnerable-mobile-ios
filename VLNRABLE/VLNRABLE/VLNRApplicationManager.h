@@ -95,5 +95,7 @@ extern NSString * const kVLNRParseMasterKey;
 + (NSString *)applicationName;
 + (NSString *)applicationVersion;
 + (NSString *)buildNumber;
++ (NSDateFormatter *)dateToStringFormatterWithDateStyle:(NSDateFormatterStyle)dateStyle;
++ (NSDateFormatter *)stringToDateFormatter;
 
 @end

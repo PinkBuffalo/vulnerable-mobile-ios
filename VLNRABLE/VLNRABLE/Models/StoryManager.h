@@ -11,8 +11,6 @@
 @class Story;
 @class User;
 
-#define kStoryManagerFetchBatchSize 20
-
 typedef void (^StoryManagerSuccessBlock)(NSSet *stories);
 typedef void (^StoryManagerFailureBlock)(NSError *error);
 typedef void (^StoryManagerCompletionBlock)(NSSet *stories);
@@ -24,6 +22,9 @@ typedef void (^StoryManagerCompletionBlock)(NSSet *stories);
 
 + (StoryManager *)sharedManager;
 
+- (void)getStoriesWithSuccessBlock:(StoryManagerSuccessBlock)successBlock
+					  failureBlock:(StoryManagerFailureBlock)failureBlock;
+
 - (void)getStoriesForUser:(User *)user
 			 successBlock:(StoryManagerSuccessBlock)successBlock
 			 failureBlock:(StoryManagerFailureBlock)failureBlock;
@@ -31,6 +32,8 @@ typedef void (^StoryManagerCompletionBlock)(NSSet *stories);
 - (void)postStoryForUser:(User *)user
 			successBlock:(StoryManagerSuccessBlock)successBlock
 			failureBlock:(StoryManagerFailureBlock)failureBlock;
+
+- (void)fetchStoriesWithCompletionBlock:(StoryManagerCompletionBlock)completionBlock;
 
 - (void)fetchStoriesForUser:(User *)user
 			completionBlock:(StoryManagerCompletionBlock)completionBlock;

@@ -7,6 +7,7 @@
 //
 
 #import "CoreDataManager.h"
+#import "NSFileManager+VLNRAdditions.h"
 
 @interface CoreDataManager ()
 
@@ -111,9 +112,8 @@
 
 - (NSURL *)persistentStoreURL
 {
-	if (!_persistentStoreURL) {
-		NSURL *directory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-		_persistentStoreURL = [directory URLByAppendingPathComponent:@"VLNRABLE-v1.sqlite"];
+	if (!_persistentStoreURL) {;
+		_persistentStoreURL = [[NSFileManager URLToApplicationSupportDirectory] URLByAppendingPathComponent:@"VLNRABLE-v1.sqlite"];
 		VLNRLogInfo(@"Persistent Store URL: %@", _persistentStoreURL);
 	}
 	return _persistentStoreURL;
@@ -153,7 +153,6 @@
 	__typeof__(self) __weak weakSelf = self;
 	[self.mainQueueContext performBlock:^{
 		NSError *error;
-		[weakSelf migrationIsNeeded];
 		if (![weakSelf.mainQueueContext save:&error]) {
 			VLNRLogError(@"Error saving main queue context. %@, %@", error, [error userInfo]);
 		}
@@ -176,8 +175,9 @@
 - (void)contextDidSaveMainQueueContext:(NSNotification *)notification
 {
 	@synchronized(self) {
-		[self.privateQueueContext performBlock:^{
-			[self.privateQueueContext mergeChangesFromContextDidSaveNotification:notification];
+		[self.mainQueueContext performBlock:^{
+			[self.mainQueueContext mergeChangesFromContextDidSaveNotification:notification];
+			VLNRLogInfo(@"Save!");
 		}];
 	}
 }
@@ -185,8 +185,9 @@
 - (void)contextDidSavePrivateQueueContext:(NSNotification *)notification
 {
 	@synchronized(self) {
-		[self.mainQueueContext performBlock:^{
-			[self.mainQueueContext mergeChangesFromContextDidSaveNotification:notification];
+		[self.privateQueueContext performBlock:^{
+			[self.privateQueueContext mergeChangesFromContextDidSaveNotification:notification];
+			VLNRLogInfo(@"Save!");
 		}];
 	}
 }

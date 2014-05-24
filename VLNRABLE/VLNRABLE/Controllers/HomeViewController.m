@@ -4,13 +4,14 @@
 //
 //  Created by Paris Pinkney on 4/13/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
-//
+//xx
 
 #import "HomeViewController.h"
 #import "StoryTableViewCell.h"
 #import "UserManager.h"
 #import "StoryManager.h"
 #import "Story.h"
+#import "User.h"
 #import "TableView.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
@@ -106,9 +107,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	StoryTableViewCell *storyCell = (StoryTableViewCell *)cell;
 	Story *story = [[[StoryManager sharedManager].stories allObjects] objectAtIndex:indexPath.row];
 	storyCell.timeLabel.text = @"15m";
-	storyCell.storyLabel.text = story.body;
+	storyCell.storyLabel.text = story.content;
 
-	NSString *storyTitle = [NSString stringWithFormat:@"%@ written by...", story.title];
+	NSString *storyTitle = [NSString stringWithFormat:@"%@ written by %@", story.title, story.user.nickname];
 	NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:storyTitle];
 	NSRange titleRange = [[titleStr string] rangeOfString:story.title];
 	[titleStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor blueColor] range:titleRange];
@@ -128,14 +129,29 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	}
 
 	__typeof__(self) __weak weakSelf = self;
-	[[StoryManager sharedManager] getStoriesForUser:nil successBlock:^(NSSet *stories) {
+	[self refreshUsers:sender completionBlock:^{
+		[[StoryManager sharedManager] getStoriesWithSuccessBlock:^(NSSet *stories) {
+			[weakSelf.tableView reloadData];
+			[(UIRefreshControl *)sender endRefreshing];
+			VLNRLogVerbose(@"Stories: %@", stories);
+		} failureBlock:^(NSError *error) {
+			[weakSelf.tableView reloadData];
+			VLNRLogError(@"Error: %@", error.localizedDescription);
+			[(UIRefreshControl *)sender endRefreshing];
+		}];
+	}];
+}
+
+- (void)refreshUsers:(id)sender completionBlock:(void(^)(void))completionBlock
+{
+	__typeof__(self) __weak weakSelf = self;
+	[[UserManager sharedManager] getUsersWithSuccessBlock:^(NSSet *users) {
 		[weakSelf.tableView reloadData];
-		[(UIRefreshControl *)sender endRefreshing];
-		VLNRLogVerbose(@"\nSUCCESS: %@\n", stories);
+		VLNRLogInfo(@"Users: %@", users);
+		completionBlock();
 	} failureBlock:^(NSError *error) {
-		[weakSelf.tableView reloadData];
-		VLNRLogError(@"\nFAILURE: %@\n", error);
-		[(UIRefreshControl *)sender endRefreshing];
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+		completionBlock();
 	}];
 }
 
