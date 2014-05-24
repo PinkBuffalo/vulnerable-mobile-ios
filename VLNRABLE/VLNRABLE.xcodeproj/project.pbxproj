@@ -38,6 +38,12 @@
 		AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10518FB2BE700520EAE /* TabBarViewController.m */; };
 		AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
 		AD28D10B18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
+		AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
+		AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
+		AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
+		AD4AF8891930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
+		AD4AF88C1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */; };
+		AD4AF88D1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */; };
 		AD4CE77318F6487000147C82 /* Kiwi-XCTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */; };
 		AD4CE77418F6487000147C82 /* Kiwi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77118F6487000147C82 /* Kiwi.framework */; };
 		AD4CE77518F6487000147C82 /* libKiwi-XCTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */; };
@@ -73,8 +79,6 @@
 		ADDF905C191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905A191EA9D80071771E /* UILabel+VLNRAdditions.m */; };
 		ADDF905F191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */; };
 		ADDF9060191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */; };
-		ADDF9063191EB9D00071771E /* VLNRLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9062191EB9D00071771E /* VLNRLogger.m */; };
-		ADDF9064191EB9D00071771E /* VLNRLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9062191EB9D00071771E /* VLNRLogger.m */; };
 		ADDF9067191EBA9B0071771E /* VLNRApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */; };
 		ADDF9068191EBA9B0071771E /* VLNRApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */; };
 		ADE7279618FA59F50036F409 /* LogInView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE7279518FA59F50036F409 /* LogInView.m */; };
@@ -130,6 +134,12 @@
 		AD28D10518FB2BE700520EAE /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = Controllers/TabBarViewController.m; sourceTree = "<group>"; };
 		AD28D10818FB418800520EAE /* StoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryTableViewCell.h; path = Views/StoryTableViewCell.h; sourceTree = "<group>"; };
 		AD28D10918FB418800520EAE /* StoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryTableViewCell.m; path = Views/StoryTableViewCell.m; sourceTree = "<group>"; };
+		AD4AF8821930326200C96451 /* NSFetchRequest+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFetchRequest+VLNRAdditions.h"; path = "Categories/NSFetchRequest+VLNRAdditions.h"; sourceTree = "<group>"; };
+		AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFetchRequest+VLNRAdditions.m"; path = "Categories/NSFetchRequest+VLNRAdditions.m"; sourceTree = "<group>"; };
+		AD4AF8861930330F00C96451 /* NSManagedObject+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+VLNRAdditions.h"; path = "Categories/NSManagedObject+VLNRAdditions.h"; sourceTree = "<group>"; };
+		AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+VLNRAdditions.m"; path = "Categories/NSManagedObject+VLNRAdditions.m"; sourceTree = "<group>"; };
+		AD4AF88A1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectModel+VLNRAdditions.h"; path = "Categories/NSManagedObjectModel+VLNRAdditions.h"; sourceTree = "<group>"; };
+		AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectModel+VLNRAdditions.m"; path = "Categories/NSManagedObjectModel+VLNRAdditions.m"; sourceTree = "<group>"; };
 		AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Kiwi-XCTest.zip"; sourceTree = "<group>"; };
 		AD4CE77118F6487000147C82 /* Kiwi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kiwi.framework; sourceTree = "<group>"; };
 		AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKiwi-XCTest.a"; sourceTree = "<group>"; };
@@ -164,8 +174,6 @@
 		ADDF905A191EA9D80071771E /* UILabel+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+VLNRAdditions.m"; path = "Categories/UILabel+VLNRAdditions.m"; sourceTree = "<group>"; };
 		ADDF905D191EB02A0071771E /* NSArray+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+VLNRAdditions.h"; path = "Categories/NSArray+VLNRAdditions.h"; sourceTree = "<group>"; };
 		ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+VLNRAdditions.m"; path = "Categories/NSArray+VLNRAdditions.m"; sourceTree = "<group>"; };
-		ADDF9061191EB9D00071771E /* VLNRLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRLogger.h; sourceTree = "<group>"; };
-		ADDF9062191EB9D00071771E /* VLNRLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRLogger.m; sourceTree = "<group>"; };
 		ADDF9065191EBA9B0071771E /* VLNRApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRApplicationManager.h; sourceTree = "<group>"; };
 		ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRApplicationManager.m; sourceTree = "<group>"; };
 		ADE7279418FA59F50036F409 /* LogInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogInView.h; path = Views/LogInView.h; sourceTree = "<group>"; };
@@ -333,14 +341,20 @@
 		AD28D0F118FB01E600520EAE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				ADDF905D191EB02A0071771E /* NSArray+VLNRAdditions.h */,
+				ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */,
 				ADDF9051191EA97B0071771E /* NSDictionary+VLNRAdditions.h */,
 				ADDF9052191EA97B0071771E /* NSDictionary+VLNRAdditions.m */,
+				AD4AF8821930326200C96451 /* NSFetchRequest+VLNRAdditions.h */,
+				AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */,
+				AD4AF8861930330F00C96451 /* NSManagedObject+VLNRAdditions.h */,
+				AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */,
+				AD4AF88A1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.h */,
+				AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */,
 				ADDF9059191EA9D80071771E /* UILabel+VLNRAdditions.h */,
 				ADDF905A191EA9D80071771E /* UILabel+VLNRAdditions.m */,
 				ADDF9055191EA9AD0071771E /* UITextField+VLNRAdditions.h */,
 				ADDF9056191EA9AD0071771E /* UITextField+VLNRAdditions.m */,
-				ADDF905D191EB02A0071771E /* NSArray+VLNRAdditions.h */,
-				ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -394,8 +408,6 @@
 			children = (
 				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
 				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
-				ADDF9061191EB9D00071771E /* VLNRLogger.h */,
-				ADDF9062191EB9D00071771E /* VLNRLogger.m */,
 				ADDF9065191EBA9B0071771E /* VLNRApplicationManager.h */,
 				ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */,
 			);
@@ -572,14 +584,16 @@
 				ADDF905B191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
 				ADDF9067191EBA9B0071771E /* VLNRApplicationManager.m in Sources */,
 				ADCC9228192DC4B600700743 /* MyAccountViewController.m in Sources */,
-				ADDF9063191EB9D00071771E /* VLNRLogger.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
 				AD28D10618FB2BE700520EAE /* TabBarViewController.m in Sources */,
 				ADDF9047191DF5820071771E /* Story.m in Sources */,
+				AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */,
 				ADDF904B191DF59A0071771E /* User.m in Sources */,
 				ADDF904F191E97EE0071771E /* StoryManager.m in Sources */,
 				ADDF905F191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,
+				AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */,
 				AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */,
+				AD4AF88C1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */,
 				AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */,
 				AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */,
 				AD28D0FE18FB23E100520EAE /* HomeViewController.m in Sources */,
@@ -605,7 +619,7 @@
 				AD00A2ED18DFCACF00AAABBA /* VLNRABLETests.m in Sources */,
 				ADDF9034191DD79B0071771E /* UserManager.m in Sources */,
 				ADE7279718FA59F50036F409 /* LogInView.m in Sources */,
-				ADDF9064191EB9D00071771E /* VLNRLogger.m in Sources */,
+				AD4AF88D1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */,
 				AD28D10B18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				AD00A2F918DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				AD00A2FE18DFCE7F00AAABBA /* IntroView.m in Sources */,
@@ -618,7 +632,9 @@
 				ADDF9048191DF5820071771E /* Story.m in Sources */,
 				AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */,
 				ADDF9060191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,
+				AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */,
 				ADCC922D192DD30700700743 /* TableView.m in Sources */,
+				AD4AF8891930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */,
 				ADCC9229192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */,
 				ADDF903C191DEF8F0071771E /* CoreDataManager.m in Sources */,

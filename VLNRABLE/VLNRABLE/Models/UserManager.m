@@ -14,6 +14,7 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import "CoreDataManager.h"
 #import "NSDictionary+VLNRAdditions.h"
+#import "NSFetchRequest+VLNRAdditions.h"
 
 @interface UserManager ()
 
@@ -34,19 +35,6 @@
 	});
 	return sharedManager;
 }
-
-//---------------------------------------------
-/* Test User */
-//---------------------------------------------
-//											 //
-//  ID: 3									 //
-//  Name: Paris								 //
-//  Email: paris@email.com					 //
-//  Password: password						 //
-//  Passcode: (null)						 //
-//											 //
-//---------------------------------------------
-//---------------------------------------------
 
 #pragma mark - GET methods
 - (void)getUserWithUserInfo:(NSDictionary *)userInfo
@@ -109,32 +97,31 @@
 	responseObject = [responseObject dictionaryByReplacingNullsWithEmptyStrings];
 
 	// Begin fetch & save requests.
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kUserEntityName];
-	[fetchRequest setReturnsObjectsAsFaults:NO];
-	[fetchRequest setFetchBatchSize:kUserManagerFetchBatchSize];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[User entityName]
+																	batchSize:[User fetchBatchSize]
+																	   faults:NO];
 
 	NSDictionary *userInfo = responseObject[@"user"];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@", [userInfo valueForKey:@"id"]];
 	[fetchRequest setPredicate:predicate];
 
-	NSError *error;
-	User *user = [[[CoreDataManager mainQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
-	if (!user) {
-		user = (User *)[NSEntityDescription insertNewObjectForEntityForName:kUserEntityName
-													 inManagedObjectContext:[CoreDataManager mainQueueContext]];
-	}
-
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
 	[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
 
-	user.user_id = @([[userInfo valueForKey:@"id"] integerValue]);
-	user.username = [userInfo valueForKey:@"name"];
-	user.email = [userInfo valueForKey:@"email"];
-	user.password = [userInfo valueForKey:@"password"];
-	user.passcode = [userInfo valueForKey:@"passcode"];
-	user.created_at = [dateFormatter dateFromString:[userInfo valueForKey:@"created_at"]];
-	user.updated_at = [dateFormatter dateFromString:[userInfo valueForKey:@"updated_at"]];
+	NSError *error;
+	User *user = [[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
+	if (!user) {
+		user = [User insertNewObjectIntoContext:[CoreDataManager privateQueueContext]];
+
+		user.user_id = @([[userInfo valueForKey:@"id"] integerValue]);
+		user.username = [userInfo valueForKey:@"name"];
+		user.email = [userInfo valueForKey:@"email"];
+		user.password = [userInfo valueForKey:@"password"];
+		user.passcode = [userInfo valueForKey:@"passcode"];
+		user.created_at = [dateFormatter dateFromString:[userInfo valueForKey:@"created_at"]];
+		user.updated_at = [dateFormatter dateFromString:[userInfo valueForKey:@"updated_at"]];
+	}
 
 	[self fetchUserWithCompletionBlock:nil];
 	[[CoreDataManager sharedManager] savePrivateQueueContext];
@@ -144,12 +131,12 @@
 - (void)fetchUserWithCompletionBlock:(UserManagerCompletionBlock)completionBlock
 {
 	// Begin fetch request.
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kUserEntityName];
-	[fetchRequest setReturnsObjectsAsFaults:NO];
-	[fetchRequest setFetchBatchSize:kUserManagerFetchBatchSize];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[User entityName]
+																	batchSize:[User fetchBatchSize]
+																	   faults:NO];
 
 	NSError *error;
-	self.user = (User *)[[[CoreDataManager mainQueueContext] executeFetchRequest:fetchRequest error:&error] firstObject];
+	self.user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] firstObject];
 	if (completionBlock) completionBlock(self.user);
 }
 

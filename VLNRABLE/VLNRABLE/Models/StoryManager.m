@@ -13,6 +13,7 @@
 #import "AFNetworkActivityIndicatorManager.h"
 #import "CoreDataManager.h"
 #import "NSDictionary+VLNRAdditions.h"
+#import "NSFetchRequest+VLNRAdditions.h"
 
 @interface StoryManager ()
 
@@ -91,38 +92,65 @@
 	responseObject = [responseObject dictionaryByReplacingNullsWithEmptyStrings];
 
 	// Begin fetch & save requests.
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kStoryEntityName];
-	[fetchRequest setReturnsObjectsAsFaults:NO];
-	[fetchRequest setFetchBatchSize:kStoryManagerFetchBatchSize];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Story entityName]
+																	batchSize:[Story fetchBatchSize]
+																	   faults:NO];
 
 	NSArray *stories = [[NSSet setWithArray:[responseObject valueForKey:@"stories"]] allObjects];
 	for (NSDictionary *storyInfo in stories) {
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"story_id == %@", [storyInfo valueForKey:@"id"]];
 		[fetchRequest setPredicate:predicate];
 
-		NSError *error;
-		Story *story = [[[CoreDataManager mainQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
-		if (!story) {
-			story = (Story *)[NSEntityDescription insertNewObjectForEntityForName:kStoryEntityName
-														   inManagedObjectContext:[CoreDataManager privateQueueContext]];
-		}
-
 		NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 		[dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
 		[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
 
-		// TODO: Figure out how to add these attributes to the rails schema.
-		story.story_id = [storyInfo valueForKey:@"id"];
-		story.author = @"Alan";
-		story.title = @"Hello World!";
-		story.body = [storyInfo valueForKey:@"body"];
-		story.mood = nil;
-		story.status = @"active";
-		story.created_at = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
-		story.updated_at = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
+		NSError *error;
+		Story *story = [[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
+		if (!story) {
+			story = [Story insertNewObjectIntoContext:[CoreDataManager privateQueueContext]];
+
+			story.story_id = [storyInfo valueForKey:@"id"];
+			story.title = [storyInfo valueForKey:@"title"];
+			story.body = [storyInfo valueForKey:@"body"];
+			story.mood = nil;
+			story.status = @"active";
+			story.created_at = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
+			story.updated_at = [dateFormatter dateFromString:[dateFormatter stringFromDate:[NSDate date]]];
+
+			[user addStoriesObject:story];
+		}
+
+		[self saveUserForStory:story withStoryInfo:storyInfo];
+
 	}
 	[self fetchStoriesForUser:user completionBlock:nil];
 	[[CoreDataManager sharedManager] savePrivateQueueContext];
+}
+
+- (void)saveUserForStory:(Story *)story
+		   withStoryInfo:(NSDictionary *)storyInfo
+{
+	if (!storyInfo.allKeys.count || !storyInfo.allValues.count) {
+		return;
+	}
+
+	storyInfo = [storyInfo dictionaryByReplacingNullsWithEmptyStrings];
+
+	// Begin fetch & save requests.
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[User entityName]
+																	batchSize:[User fetchBatchSize]
+																	   faults:NO];
+
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"user_id == %@", @([[storyInfo valueForKeyPath:@"user_id"] integerValue])];
+	[fetchRequest setPredicate:predicate];
+
+	NSError *error;
+	User *user = [[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
+	if (!user) {
+		user = [User insertNewObjectIntoContext:[CoreDataManager privateQueueContext]];
+	}
+	story.user = user;
 }
 
 #pragma mark - POST methods
@@ -138,16 +166,16 @@
 			completionBlock:(StoryManagerCompletionBlock)completionBlock
 {
 	// Begin fetch request.
-	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:kStoryEntityName];
-	[fetchRequest setReturnsObjectsAsFaults:NO];
-	[fetchRequest setFetchBatchSize:kStoryManagerFetchBatchSize];
+	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[Story entityName]
+																	batchSize:[Story fetchBatchSize]
+																	   faults:NO];
 
 	NSError *error;
 	if (user) {
-		user.stories = [NSSet setWithArray:[[CoreDataManager mainQueueContext] executeFetchRequest:fetchRequest error:&error]];
+		user.stories = [NSSet setWithArray:[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error]];
 		if (completionBlock) completionBlock([user.stories copy]);
 	} else {
-		self.stories = [NSSet setWithArray:[[CoreDataManager mainQueueContext] executeFetchRequest:fetchRequest error:&error]];
+		self.stories = [NSSet setWithArray:[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error]];
 		if (completionBlock) completionBlock([self.stories copy]);
 	}
 }

@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-extern NSString * const kStoryEntityName;
-extern NSString * const kUserEntityName;
-
 @interface CoreDataManager : NSObject
 
 + (instancetype)sharedManager;

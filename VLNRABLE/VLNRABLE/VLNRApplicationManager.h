@@ -12,7 +12,7 @@
 /* VLNR imports */
 //---------------------------------------------
 #import "VLNRColor.h"
-#import "VLNRLogger.h"
+#import "DDLog.h"
 
 //---------------------------------------------
 /* Apple device idioms */

@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "TabBarViewController.h"
 #import "CoreDataManager.h"
+#import <Parse/Parse.h>
+#import "DDTTYLogger.h"
 
 @implementation AppDelegate
 
@@ -18,8 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-	VLNRLogger *logger = [[VLNRLogger alloc] init];
-	[DDLog addLogger:logger];
+	[DDLog addLogger:[DDTTYLogger sharedInstance]];
 
 	NSString *version = [NSString stringWithFormat:@"%@ %@ (%@)",
 						 [VLNRApplicationManager applicationName],
@@ -27,6 +28,11 @@
 						 [VLNRApplicationManager buildNumber]];
 
 	VLNRLogInfo(@"%@", version);
+
+	[Parse setApplicationId:@"D3KkkC7xsH324JB48CenGDmfSBJZHH0Ky5tii4qj"
+				  clientKey:@"kRH3AkVdlHSEqPLzQoqhkPAjtsEEyVD5vSpiBFCt"];
+
+	[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -42,6 +48,7 @@
 
 	self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
@@ -56,6 +63,7 @@
 	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
 	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 	[[CoreDataManager sharedManager] saveMainQueueContext];
+	[[CoreDataManager sharedManager] savePrivateQueueContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -75,6 +83,7 @@
 {
 	// Saves changes in the application's managed object context before the application terminates.
 	[[CoreDataManager sharedManager] saveMainQueueContext];
+	[[CoreDataManager sharedManager] savePrivateQueueContext];
 	[self saveContext];
 }
 

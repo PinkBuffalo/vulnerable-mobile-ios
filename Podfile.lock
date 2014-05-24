@@ -17,72 +17,45 @@ PODS:
   - AFNetworking/Serialization (2.0.3)
   - AFNetworking/UIKit (2.0.3):
     - AFNetworking/NSURLConnection
+  - Bolts (1.1.0)
   - CocoaLumberjack (1.8.1):
     - CocoaLumberjack/Extensions
   - CocoaLumberjack/Core (1.8.1)
   - CocoaLumberjack/Extensions (1.8.1):
     - CocoaLumberjack/Core
-  - GoogleAnalytics-iOS-SDK (3.0.6)
-  - GoogleTagManager (3.02)
-  - M13Checkbox (1.0.0)
-  - MZAppearance (1.1.2)
-  - MZFormSheetController (2.3.4):
-    - MZAppearance (~> 1.1.2)
-  - NewRelicAgent (3.289)
+  - Facebook-iOS-SDK (3.14.1):
+    - Bolts
   - Nocilla (0.8.1)
-  - Reachability (3.1.1)
+  - Parse (1.2.19):
+    - Facebook-iOS-SDK (~> 3.11)
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage-ProgressView (0.3.1):
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.6)
   - SVProgressHUD (1.0)
-  - TestFlightFeedback (2.1.0):
-    - TestFlightFeedback/Core
-    - TestFlightSDK (>= 2.0)
-  - TestFlightFeedback/Core (2.1.0):
-    - TestFlightSDK (>= 2.0)
-  - TestFlightLogger (0.0.3):
-    - CocoaLumberjack
-    - TestFlightSDK
-  - TestFlightSDK (3.0.0)
   - TTTAttributedLabel (1.9.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0.0)
   - CocoaLumberjack (~> 1.8.1)
-  - GoogleAnalytics-iOS-SDK (~> 3.0.6)
-  - GoogleTagManager (~> 3.02)
-  - M13Checkbox (~> 1.0.0)
-  - MZFormSheetController (~> 2.3.3)
-  - NewRelicAgent (~> 3.289)
   - Nocilla (~> 0.8.1)
-  - Reachability (~> 3.1.1)
+  - Parse (~> 1.2.19)
   - SDWebImage (~> 3.6)
   - SDWebImage-ProgressView (~> 0.3.1)
   - SVProgressHUD (~> 1.0)
-  - TestFlightFeedback (~> 2.1.0)
-  - TestFlightLogger (~> 0.0.3)
-  - TestFlightSDK (~> 3.0.0)
   - TTTAttributedLabel (~> 1.9.4)
 
 SPEC CHECKSUMS:
-  AFNetworking: e499052cbf3d743e9bb727bb37adb9dc2547ba15
-  CocoaLumberjack: 020378ec400d658923bf5887178394f65f052c90
-  GoogleAnalytics-iOS-SDK: 16dfcc0c4491148bf372edc85a8470cc405ffb72
-  GoogleTagManager: 7643e58a1dac068d93546f6b28d64d368f42bef1
-  M13Checkbox: 6c69dbdad938764f3c2771f787f944440bf9806c
-  MZAppearance: 75bc6c786025c311ebc247b01e1dead5cd29f7c5
-  MZFormSheetController: e14169b86864f515905e3f2775b4d81a2fa836ac
-  NewRelicAgent: c851e3d60e2450c6c3052cf5ae96d5651e930bda
-  Nocilla: 0c8075046df476b1bc6482caa7f6a69db1a9b277
-  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
-  SDWebImage-ProgressView: 472d7eb4ed2663109164afc13b936d8e3e5c8cd6
-  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
-  TestFlightFeedback: 4d5f657b933bc8c054f44fc21a8b2dd302486988
-  TestFlightLogger: 030f80932b79a0fc9414115a63c209bc62bb8f98
-  TestFlightSDK: fe0567a897456b6f65b180541892ef0154986e01
-  TTTAttributedLabel: 617e14e3590a4afc9bc35dd999eb37e888996f36
+  AFNetworking: a4d0e9a64de9242986620dafd1b3cee3b413ac5c
+  Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
+  CocoaLumberjack: 9d198d6e19909b3b113a38c5f06f7bb8eedd0427
+  Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
+  Nocilla: e573c2bf9113c8d77782b695a2f9362b7bc44e72
+  Parse: ffebaecaddd32cb52671010f81567c298ff93d04
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+  SDWebImage-ProgressView: 7b7a9512cbf22d0d6e3d20d9aa8b03e1940d164f
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  TTTAttributedLabel: 57bdd0dd8676d58b24a5d0fd0e6c85aa8d0d045e
 
-COCOAPODS: 0.31.1
+COCOAPODS: 0.33.1

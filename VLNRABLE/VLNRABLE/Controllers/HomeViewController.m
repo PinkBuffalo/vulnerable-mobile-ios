@@ -108,7 +108,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	storyCell.timeLabel.text = @"15m";
 	storyCell.storyLabel.text = story.body;
 
-	NSString *storyTitle = [NSString stringWithFormat:@"%@ written by %@", story.title, story.author];
+	NSString *storyTitle = [NSString stringWithFormat:@"%@ written by...", story.title];
 	NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:storyTitle];
 	NSRange titleRange = [[titleStr string] rangeOfString:story.title];
 	[titleStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor blueColor] range:titleRange];

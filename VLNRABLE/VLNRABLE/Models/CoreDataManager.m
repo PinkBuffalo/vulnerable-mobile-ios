@@ -8,9 +8,6 @@
 
 #import "CoreDataManager.h"
 
-NSString * const kStoryEntityName = @"Story";
-NSString * const kUserEntityName = @"User";
-
 @interface CoreDataManager ()
 
 @property (nonatomic, readwrite, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
