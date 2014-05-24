@@ -2,8 +2,8 @@
 
 #import "LogInView.h"
 #import <QuartzCore/QuartzCore.h>
-#import "UITextField+VLNRTextField.h"
-#import "UILabel+VLNRLabel.h"
+#import "UITextField+VLNRAdditions.h"
+#import "UILabel+VLNRAdditions.h"
 
 #define SIGN_UP_COPY @"New to VLNRABLE? Sign up."
 
@@ -50,9 +50,19 @@
 
 		_emailTextField = [[UITextField alloc] initWithDelegate:delegate
 													placeholder:@"Email Address"];
+		_emailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		_emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
+		_emailTextField.returnKeyType = UIReturnKeyNext;
+		_emailTextField.tag = LogInViewEmailTextFieldTag;
 
 		_passwordTextField = [[UITextField alloc] initWithDelegate:delegate
 													   placeholder:@"Password"];
+		_passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		_passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_passwordTextField.secureTextEntry = YES;
+		_passwordTextField.returnKeyType = UIReturnKeyDone;
+		_passwordTextField.tag = LogInViewPasswordTextFieldTag;
 
 		_forgotPasswordLabel = [[UILabel alloc] initWithTextColor:[VLNRColor blueColor]
 															 font:VLNRABLE_DEFAULT_FONT_SIZE

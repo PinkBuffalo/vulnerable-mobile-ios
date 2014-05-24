@@ -1,5 +1,5 @@
 //
-//  UITextField+VLNRTextField.h
+//  UITextField+VLNRAdditions.h
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 4/13/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITextField (VLNRTextField)
+@interface UITextField (VLNRAdditions)
 
 - (id)initWithDelegate:(id<UITextFieldDelegate>)delegate;
 - (id)initWithDelegate:(id<UITextFieldDelegate>)delegate

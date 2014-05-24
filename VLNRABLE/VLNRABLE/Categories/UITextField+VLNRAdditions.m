@@ -1,14 +1,14 @@
 //
-//  UITextField+VLNRTextField.m
+//  UITextField+VLNRAdditions.m
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 4/13/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
-#import "UITextField+VLNRTextField.h"
+#import "UITextField+VLNRAdditions.h"
 
-@implementation UITextField (VLNRTextField)
+@implementation UITextField (VLNRAdditions)
 
 - (id)init
 {

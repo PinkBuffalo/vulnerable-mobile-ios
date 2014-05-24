@@ -1,8 +1,8 @@
 //
-//  HomeViewController.h
+//  MyAccountViewController.h
 //  VLNRABLE
 //
-//  Created by Paris Pinkney on 4/13/14.
+//  Created by Paris Pinkney on 5/21/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 @class TableView;
 
-@interface HomeViewController : UIViewController
+@interface MyAccountViewController : UIViewController
 
 @property (nonatomic, readonly, strong) TableView *tableView;
 @property (nonatomic, readonly, strong) UIRefreshControl *refreshControl;

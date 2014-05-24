@@ -2,8 +2,8 @@
 
 #import "SignUpView.h"
 #import <QuartzCore/QuartzCore.h>
-#import "UITextField+VLNRTextField.h"
-#import "UILabel+VLNRLabel.h"
+#import "UITextField+VLNRAdditions.h"
+#import "UILabel+VLNRAdditions.h"
 
 #define LOG_IN_COPY @"Already a member? Log in."
 #define LEGAL_COPY @"By joining VLNRABLE, you will receive our email notifications. You may unsubscribe at any time.\n\nTerms of Use | Privacy Policy"
@@ -56,12 +56,24 @@
 
 		_nameTextField = [[UITextField alloc] initWithDelegate:delegate
 												   placeholder:@"First Name or Nickname"];
+		_nameTextField.returnKeyType = UIReturnKeyNext;
+		_nameTextField.tag = SignUpViewNameTextFieldTag;
 
 		_emailTextField = [[UITextField alloc] initWithDelegate:delegate
 													placeholder:@"Email Address"];
+		_emailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		_emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
+		_emailTextField.returnKeyType = UIReturnKeyNext;
+		_emailTextField.tag = SignUpViewEmailTextFieldTag;
 
 		_passwordTextField = [[UITextField alloc] initWithDelegate:delegate
 													   placeholder:@"Password"];
+		_passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+		_passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_passwordTextField.secureTextEntry = YES;
+		_passwordTextField.returnKeyType = UIReturnKeyDone;
+		_passwordTextField.tag = SignUpVeiewPasswordTextFieldTag;
 
 		_ageLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
 												  font:VLNRABLE_DEFAULT_FONT_SIZE

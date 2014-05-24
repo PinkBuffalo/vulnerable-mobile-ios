@@ -1,0 +1,26 @@
+{
+    ACL =     {
+        "*" =         {
+            read = 1;
+        };
+        JWEA3WnV29 =         {
+            read = 1;
+            write = 1;
+        };
+    };
+    createdAt = "2014-05-24T03:37:36.579Z";
+    email = "holler@dennisgable.com";
+    "favorite_stories" =     (
+        daT1swtjU4
+    );
+    nickname = Dennis;
+    objectId = JWEA3WnV29;
+    passcode = 1234;
+    sessionToken = woCaMkKMYMIwNuj6fMhY8MMDL;
+    stories =     (
+        kqMHUFjHxm,
+        BWOsa8KTgV
+    );
+    updatedAt = "2014-05-24T05:12:22.439Z";
+    username = "holler@dennisgable.com";
+}

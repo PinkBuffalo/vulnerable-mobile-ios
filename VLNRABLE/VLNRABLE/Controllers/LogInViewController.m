@@ -10,6 +10,7 @@
 #import "IntroViewController.h"
 #import "SignUpViewController.h"
 #import "LogInView.h"
+#import "UserManager.h"
 
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
@@ -35,6 +36,9 @@
 	UITapGestureRecognizer *scrollTap = [[UITapGestureRecognizer alloc] init];
 	[scrollTap addTarget:self action:@selector(hideKeyboard)];
 	[self.logInView.scrollView addGestureRecognizer:scrollTap];
+
+	self.logInView.emailTextField.text = @"holler@dennisgable.com";
+	self.logInView.passwordTextField.text = @"password123";
 
 	[self.logInView.facebookButton addTarget:self
 									  action:@selector(logInAction)
@@ -78,6 +82,46 @@
 	return _segmentedControl;
 }
 
+#pragma mark - Text field delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	switch (textField.tag) {
+		case LogInViewEmailTextFieldTag:
+			[[self.logInView viewWithTag:(textField.tag + 1)] becomeFirstResponder];
+			break;
+			case LogInViewPasswordTextFieldTag:
+		{
+			if ([self textFieldsAreValid]) {
+				[self logInAction];
+			}
+			break;
+		}
+		default:
+			break;
+	}
+	return YES;
+}
+
+/*
+#pragma mark - Parse delegate
+- (void)logInViewController:(PFLogInViewController *)logInController
+			   didLogInUser:(PFUser *)user
+{
+	VLNRLogInfo(@"User: %@", user);
+}
+
+- (void)logInViewController:(PFLogInViewController *)logInController
+	didFailToLogInWithError:(NSError *)error
+{
+	VLNRLogError(@"Error: %@", error.localizedDescription);
+}
+
+- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController
+{
+	VLNRLogWarn(@"Login Cancelled!");
+}
+ */
+
 #pragma mark - Action methods
 - (void)switchView:(UISegmentedControl *)sender
 {
@@ -95,10 +139,45 @@
 	[self.logInView endEditing:YES];
 }
 
+- (BOOL)textFieldsAreValid
+{
+	BOOL validTextField = NO;
+	for (UIView *subview in self.logInView.scrollView.subviews) {
+		if ([subview isKindOfClass:[UITextField class]]) {
+			UITextField *textField = (UITextField *)subview;
+			if (textField.text.length > 0) {
+				validTextField = YES;
+			} else {
+				validTextField = NO;
+				[textField becomeFirstResponder];
+				break;
+			}
+		}
+	}
+	return validTextField;
+}
+
 - (void)logInAction
 {
-	// TODO: Change these test to the user log in action when ready.
-	[self dismissViewControllerAnimated:YES completion:nil];
+	if ([[UserManager sharedManager] isLoading] || ![self textFieldsAreValid]) {
+		return;
+	}
+
+	NSDictionary *userInfo = @{ @"username": [self.logInView.emailTextField.text copy],
+								@"password": [self.logInView.passwordTextField.text copy] };
+
+	__typeof__(self) __weak weakSelf = self;
+	[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^(User *user) {
+		VLNRLogVerbose(@"\nUser: %@\n", user);
+		[weakSelf dismissViewControllerAnimated:YES completion:nil];
+	} failureBlock:^(NSError *error) {
+		VLNRLogError(@"\nError: %@\n", error);
+		[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
+									message:[error localizedDescription]
+								   delegate:nil
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+	}];
 }
 
 @end

@@ -4,63 +4,80 @@
 //
 //  Created by Paris Pinkney on 4/13/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
-//
+//xx
 
 #import "HomeViewController.h"
 #import "StoryTableViewCell.h"
-#import "AFNetworking.h"
+#import "UserManager.h"
+#import "StoryManager.h"
+#import "Story.h"
+#import "User.h"
+#import "TableView.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
-@interface HomeViewController () <UITabBarControllerDelegate>
+@interface HomeViewController () <UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (nonatomic, strong, readwrite) NSArray *stories;
+@property (nonatomic, readwrite, strong) TableView *tableView;
+@property (nonatomic, readwrite, strong) UIRefreshControl *refreshControl;
 
 @end
 
 @implementation HomeViewController
+
+- (instancetype)init
+{
+	if (self = [super init]) {
+		self.title = @"Home";
+	}
+	return self;
+}
+
+- (void)loadView
+{
+	_tableView = [[TableView alloc] init];
+	_tableView.dataSource = self;
+	_tableView.delegate = self;
+	[self setView:_tableView];
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 
 	self.refreshControl = [[UIRefreshControl alloc] init];
-	if ([self.refreshControl respondsToSelector:@selector(setTintColor:)]) {
-		self.refreshControl.tintColor = [VLNRColor tealColor];
-	}
+
 	[self.refreshControl addTarget:self
-							action:@selector(refresh:)
+							action:@selector(refreshStories:)
 				  forControlEvents:UIControlEventValueChanged];
+
 	[self.tableView addSubview:self.refreshControl];
 
 	self.tableView.backgroundColor = [VLNRColor lightTealColor];
-	if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		self.refreshControl.tintColor = [VLNRColor tealColor];
 		self.tableView.separatorInset = UIEdgeInsetsZero;
+		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
 
 	[self.tableView registerClass:[StoryTableViewCell class]
 		   forCellReuseIdentifier:cellIdentifier];
 
-	self.title = @"Home";
-	self.tabBarController.navigationItem.title = @"Home";
+	[self refreshStories:nil];
 }
 
-- (NSArray *)stories
+- (void)viewDidAppear:(BOOL)animated
 {
-	if (!_stories) {
-		_stories = @[ @"Skeletons in the Closet",
-					  @"What Happened in Vegas",
-					  @"I'm Dating Her Ex",
-					  @"I Didn't Deserve This",
-					  @"I Still Love Her" ];
-	}
-	return _stories;
+	[super viewDidAppear:animated];
+
+	self.tabBarController.navigationItem.title = @"Home";
 }
 
 #pragma mark - Table view data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return self.stories.count;
+	return [StoryManager sharedManager].stories.count;
 }
 
 #pragma mark - Table view delegate
@@ -88,37 +105,54 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	StoryTableViewCell *storyCell = (StoryTableViewCell *)cell;
-	storyCell.titleLabel.text = [self.stories objectAtIndex:indexPath.row];
+	Story *story = [[[StoryManager sharedManager].stories allObjects] objectAtIndex:indexPath.row];
 	storyCell.timeLabel.text = @"15m";
-	storyCell.storyLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis felis erat, quis porttitor dui aliquam id. Fusce in sapien nisl. Vivamus id quam sit amet felis molestie porttitor quis at eros.";
+	storyCell.storyLabel.text = story.content;
 
-	NSMutableAttributedString *categoryStr = [[NSMutableAttributedString alloc] initWithString:@"Trending in: Relationships"];
-	NSRange range = [[categoryStr string] rangeOfString:@"Trending in: "];
-	[categoryStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor grayColor] range:range];
+	NSString *storyTitle = [NSString stringWithFormat:@"%@ written by %@", story.title, story.user.nickname];
+	NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:storyTitle];
+	NSRange titleRange = [[titleStr string] rangeOfString:story.title];
+	[titleStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor blueColor] range:titleRange];
+	storyCell.titleLabel.attributedText = titleStr;
 
+	NSString *storyCategory = @"Trending in: Relationships";
+	NSMutableAttributedString *categoryStr = [[NSMutableAttributedString alloc] initWithString:storyCategory];
+	NSRange categoryRange = [[categoryStr string] rangeOfString:@"Trending in:"];
+	[categoryStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor grayTextColor] range:categoryRange];
 	storyCell.categoryLabel.attributedText = categoryStr;
 }
 
-- (void)refresh:(id)sender
+- (void)refreshStories:(id)sender
 {
-	// TODO: Add real request.
-	NSURL *url = [NSURL URLWithString:@"http://www.google.com/"];
-	NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:url];
-	__typeof__(self) __weak weakSelf = self;
-	AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:urlRequest];
-	[operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-		NSUInteger statusCode = operation.response.statusCode;
-		[weakSelf.tableView reloadData];
-		[(UIRefreshControl *)sender endRefreshing];
-		NSLog(@"\nSUCCESS (%lu):\n%@\n", (unsigned long)statusCode, operation.responseString);
-	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-		NSUInteger statusCode = operation.response.statusCode;
-		[weakSelf.tableView reloadData];
-		[(UIRefreshControl *)sender endRefreshing];
-		NSLog(@"\nFAILURE (%lu):\n%@\n", (unsigned long)statusCode, operation.responseString);
-	}];
+	if ([[StoryManager sharedManager] isLoading]) {
+		return;
+	}
 
-	[[[AFHTTPRequestOperationManager manager] operationQueue] addOperation:operation];
+	__typeof__(self) __weak weakSelf = self;
+	[self refreshUsers:sender completionBlock:^{
+		[[StoryManager sharedManager] getStoriesWithSuccessBlock:^(NSSet *stories) {
+			[weakSelf.tableView reloadData];
+			[(UIRefreshControl *)sender endRefreshing];
+			VLNRLogVerbose(@"Stories: %@", stories);
+		} failureBlock:^(NSError *error) {
+			[weakSelf.tableView reloadData];
+			VLNRLogError(@"Error: %@", error.localizedDescription);
+			[(UIRefreshControl *)sender endRefreshing];
+		}];
+	}];
+}
+
+- (void)refreshUsers:(id)sender completionBlock:(void(^)(void))completionBlock
+{
+	__typeof__(self) __weak weakSelf = self;
+	[[UserManager sharedManager] getUsersWithSuccessBlock:^(NSSet *users) {
+		[weakSelf.tableView reloadData];
+		VLNRLogInfo(@"Users: %@", users);
+		completionBlock();
+	} failureBlock:^(NSError *error) {
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+		completionBlock();
+	}];
 }
 
 @end

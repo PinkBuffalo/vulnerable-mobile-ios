@@ -1,0 +1,77 @@
+//
+//  VLNRApplicationManager.m
+//  VLNRABLE
+//
+//  Created by Paris Pinkney on 5/10/14.
+//  Copyright (c) 2014 VLNRABLE. All rights reserved.
+//
+
+NSString * const kVLNRParseApplicationID = @"D3KkkC7xsH324JB48CenGDmfSBJZHH0Ky5tii4qj";
+NSString * const kVLNRParseClientKey = @"kRH3AkVdlHSEqPLzQoqhkPAjtsEEyVD5vSpiBFCt";
+NSString * const kVLNRParseJavascriptKey = @"tco96RdoDs6JqFTpfDIEc5TgZ893kZU5qzjKQnXU";
+NSString * const kVLNRParseNETKey = @"KlmDYCwg7zUHnbjUSOTfnwsjZPVo9Xr02HXawxq6";
+NSString * const kVLNRParseRESTAPIKey = @"ZE5an4AbvEdeXRQfFfgm6PncswFV9LUB6sLiLpsf";
+NSString * const kVLNRParseMasterKey = @"xs4PUSQba3mV0CVFiXvovmqKzysvqhNSF161QIOd";
+
+// Date Formatter
+NSString * const VLNRDateFormatterStringToDateKey = @"VLNRDateFormatterStringToDateKey";
+NSString * const VLNRDateFormatterDateToStringKey = @"VLNRDateFormatterDateToStringKey";
+
+#import "VLNRApplicationManager.h"
+
+@implementation VLNRApplicationManager
+
+#pragma mark - Singleton access methods
++ (VLNRApplicationManager *)sharedManager
+{
+	static VLNRApplicationManager *sharedManager = nil;
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
+		sharedManager = [[VLNRApplicationManager alloc] init];
+	});
+	return sharedManager;
+}
+
++ (NSString *)applicationName
+{
+	return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleDisplayName"];
+}
+
++ (NSString *)applicationVersion
+{
+	return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleShortVersionString"];
+}
+
++ (NSString *)buildNumber
+{
+	return [[[NSBundle mainBundle] infoDictionary] valueForKey:@"CFBundleVersion"];
+}
+
++ (NSDateFormatter *)dateToStringFormatterWithDateStyle:(NSDateFormatterStyle)dateStyle
+{
+	// Create a thread-safe date formatter.
+	NSMutableDictionary *threadDictionary = [NSThread currentThread].threadDictionary;
+	NSDateFormatter *dateFormatter = [threadDictionary objectForKey:VLNRDateFormatterDateToStringKey];
+	if (!dateFormatter) {
+		dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateStyle:dateStyle];
+		[threadDictionary setObject:dateFormatter forKey:VLNRDateFormatterDateToStringKey];
+	}
+	[dateFormatter setDateStyle:dateStyle];
+	return dateFormatter;
+}
+
++ (NSDateFormatter *)stringToDateFormatter
+{
+	// Create a thread-safe date formatter.
+	NSMutableDictionary *threadDictionary = [NSThread currentThread].threadDictionary;
+	NSDateFormatter *dateFormatter = [threadDictionary objectForKey:VLNRDateFormatterStringToDateKey];
+	if (!dateFormatter) {
+		dateFormatter = [[NSDateFormatter alloc] init];
+		[dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"];
+		[threadDictionary setObject:dateFormatter forKey:VLNRDateFormatterStringToDateKey];
+	}
+	return dateFormatter;
+}
+
+@end

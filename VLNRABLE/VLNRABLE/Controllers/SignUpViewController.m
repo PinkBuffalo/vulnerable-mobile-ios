@@ -10,6 +10,7 @@
 #import "IntroViewController.h"
 #import "LogInViewController.h"
 #import "SignUpView.h"
+#import "UserManager.h"
 
 #define LOG_IN_SEGMENT_INDEX 0
 #define SIGN_UP_SEGMENT_INDEX 1
@@ -78,6 +79,27 @@
 	return _segmentedControl;
 }
 
+#pragma mark - Text field delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	switch (textField.tag) {
+		case SignUpViewNameTextFieldTag:
+		case SignUpViewEmailTextFieldTag:
+			[[self.signUpView viewWithTag:(textField.tag + 1)] becomeFirstResponder];
+			break;
+		case SignUpVeiewPasswordTextFieldTag:
+		{
+			if ([self textFieldsAreValid]) {
+				[self signUpAction];
+			}
+			break;
+		}
+		default:
+			break;
+	}
+	return YES;
+}
+
 #pragma mark - Action methods
 - (void)switchView:(UISegmentedControl *)sender
 {
@@ -95,10 +117,46 @@
 	[self.signUpView endEditing:YES];
 }
 
+- (BOOL)textFieldsAreValid
+{
+	BOOL validTextField = NO;
+	for (UIView *subview in self.signUpView.scrollView.subviews) {
+		if ([subview isKindOfClass:[UITextField class]]) {
+			UITextField *textField = (UITextField *)subview;
+			if (textField.text.length > 0) {
+				validTextField = YES;
+			} else {
+				validTextField = NO;
+				[textField becomeFirstResponder];
+				break;
+			}
+		}
+	}
+	return validTextField;
+}
+
 - (void)signUpAction
 {
-	// TODO: Change these test to the user sign up action when ready.
-	[self dismissViewControllerAnimated:YES completion:nil];
+	if ([[UserManager sharedManager] isLoading] || ![self textFieldsAreValid]) {
+		return;
+	}
+
+	NSDictionary *userinfo = @{ @"nickname": [self.signUpView.nameTextField.text copy],
+								@"username": [self.signUpView.emailTextField.text copy],
+								@"password": [self.signUpView.passwordTextField.text copy] };
+
+	__typeof__(self) __weak weakSelf = self;
+	[[UserManager sharedManager] signUpUserWithUserInfo:userinfo successBlock:^(User *user) {
+		VLNRLogVerbose(@"\nUser: %@\n", user);
+		[weakSelf dismissViewControllerAnimated:YES completion:nil];
+	} failureBlock:^(NSError *error) {
+		VLNRLogError(@"\nError: %@\n", error);
+		[[[UIAlertView alloc] initWithTitle:@"Sign Up Failed"
+									message:[error localizedDescription]
+								   delegate:nil
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+	}];
 }
 
 @end

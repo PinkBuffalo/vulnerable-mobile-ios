@@ -8,7 +8,7 @@
 
 #import "IntroView.h"
 #import <QuartzCore/QuartzCore.h>
-#import "UILabel+VLNRLabel.h"
+#import "UILabel+VLNRAdditions.h"
 
 @interface IntroView ()
 

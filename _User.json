@@ -1,0 +1,53 @@
+{ "results": [
+	{
+        "ACL": {
+            "*": {
+                "read": true
+            },
+            "tmyhyWY2Cr": {
+                "read": true,
+                "write": true
+            }
+        },
+        "bcryptPassword": "$2a$10$hpUl9n78EPIbcHuZ8TLMuOLkW7XS9O6w5BX.vlF8NbluR5COgXkAu",
+        "createdAt": "2014-05-24T03:37:30.555Z",
+        "email": "hello@pxpgraphics.com",
+        "nickname": "Paris",
+        "objectId": "tmyhyWY2Cr",
+        "passcode": "1234",
+        "sessionToken": "y12AsAdxGW95fEQuNlBGRuiXG",
+        "stories": [
+            "wGZ73QnVkG",
+            "daT1swtjU4"
+        ],
+        "updatedAt": "2014-05-24T05:12:25.258Z",
+        "username": "hello@pxpgraphics.com"
+    },
+	{
+        "ACL": {
+            "*": {
+                "read": true
+            },
+            "JWEA3WnV29": {
+                "read": true,
+                "write": true
+            }
+        },
+        "bcryptPassword": "$2a$10$FQ7sZOtllzjzzZ5rsWIDjO71R4ouo4EjElvlOfXMnIhYfT957wqem",
+        "createdAt": "2014-05-24T03:37:36.579Z",
+        "email": "holler@dennisgable.com",
+        "favorite_stories": [
+            "daT1swtjU4"
+        ],
+        "nickname": "Dennis",
+        "objectId": "JWEA3WnV29",
+        "passcode": "1234",
+        "sessionToken": "woCaMkKMYMIwNuj6fMhY8MMDL",
+        "stories": [
+            "kqMHUFjHxm",
+            "BWOsa8KTgV"
+        ],
+        "updatedAt": "2014-05-24T05:12:22.439Z",
+        "username": "holler@dennisgable.com"
+    }
+] }

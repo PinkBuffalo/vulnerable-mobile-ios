@@ -9,6 +9,7 @@
 #import "TabBarViewController.h"
 #import "HomeViewController.h"
 #import "IntroViewController.h"
+#import "MyAccountViewController.h"
 
 @interface TabBarViewController ()
 
@@ -31,14 +32,12 @@
 		vc2.view.backgroundColor = [UIColor yellowColor];
 		vc2.title = @"Write";
 
-		UIViewController *vc3 = [UIViewController new];
-		vc3.view.backgroundColor = [UIColor orangeColor];
-		vc3.title = @"Me";
+		MyAccountViewController *myAccountVC = [[MyAccountViewController alloc] init];
 
 		self.viewControllers = @[ homeVC,
 								  vc1,
 								  vc2,
-								  vc3 ];
+								  myAccountVC ];
 	}
 	return self;
 }
