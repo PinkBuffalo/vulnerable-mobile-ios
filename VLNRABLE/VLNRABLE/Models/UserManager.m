@@ -61,6 +61,31 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 }
 
 #pragma mark - GET methods
+- (void)getUserWithSuccessBlock:(UserManagerSuccessBlock)successBlock
+				   failureBlock:(UserManagerFailureBlock)failureBlock
+{
+	self.loading = YES;
+
+	__typeof__(self) __weak weakSelf = self;
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	[manager.requestSerializer setValue:kVLNRParseApplicationID forHTTPHeaderField:@"X-Parse-Application-Id"];
+	[manager.requestSerializer setValue:kVLNRParseRESTAPIKey forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+	[manager.requestSerializer setValue:self.user.sessionToken forHTTPHeaderField:@"X-Parse-Session-Token"];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	[manager GET:@"https://api.parse.com/1/users/me" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		weakSelf.loading = NO;
+		[weakSelf saveUserWithResponseObject:responseObject];
+		VLNRLogInfo(@"Response: %@", responseObject);
+		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
+		successBlock(weakSelf.user);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		weakSelf.loading = NO;
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFailLoadingNotification object:nil];
+		failureBlock(error);
+	}];
+}
+
 - (void)loginUserWithUserInfo:(NSDictionary *)userInfo
 				 successBlock:(UserManagerSuccessBlock)successBlock
 				 failureBlock:(UserManagerFailureBlock)failureBlock
@@ -147,7 +172,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	}];
 }
 
-#pragma mark - PATCH methods
+#pragma mark - PUT methods
 - (void)updateUserWithUserInfo:(NSDictionary *)userInfo
 				  successBlock:(UserManagerSuccessBlock)successBlock
 				  failureBlock:(UserManagerFailureBlock)failureBlock
@@ -179,12 +204,24 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	}];
 }
 
-#pragma mark - PUT methods
-- (void)replaceUserWithUserInfo:(NSDictionary *)userInfo
-				   successBlock:(UserManagerSuccessBlock)successBlock
-				   failureBlock:(UserManagerFailureBlock)failureBlock
+- (void)updateLocationWithCompletionBlock:(UserManagerCompletionBlock)completionBlock
 {
+	if (!self.locationManager.location) {
+		if (completionBlock) completionBlock(self.user);
+		VLNRLogWarn(@"No location found@");
+		return;
+	}
+	NSDictionary *parameters = @{ @"location": @{ @"__type": @"GeoPoint",
+												  @"latitude": @(self.locationManager.location.coordinate.latitude),
+												  @"longitude": @(self.locationManager.location.coordinate.longitude) }};
 
+	[[UserManager sharedManager] updateUserWithUserInfo:parameters successBlock:^(User *user) {
+		VLNRLogInfo(@"User: %@", user);
+		if (completionBlock) completionBlock(self.user);
+	} failureBlock:^(NSError *error) {
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+		if (completionBlock) completionBlock(self.user);
+	}];
 }
 
 #pragma mark - SAVE methods
@@ -208,7 +245,8 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	user.nickname = responseObject[@"nickname"];
 	user.objectId = responseObject[@"objectId"];
 	user.passcode = responseObject[@"passcode"];
-//	user.latitude = responseObject
+	user.latitude = responseObject[@"latitude"];
+	user.longitude = responseObject[@"longitude"];
 	user.sessionToken = responseObject[@"sessionToken"];
 	user.username = responseObject[@"username"];
 	user.createdAt = [dateFormatter dateFromString:responseObject[@"createdAt"]];
@@ -246,6 +284,8 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 		user.nickname = userInfo[@"nickname"];
 		user.objectId = userInfo[@"objectId"];
 		user.passcode = userInfo[@"passcode"];
+		user.latitude = userInfo[@"latitude"];
+		user.longitude = userInfo[@"longitude"];
 		user.sessionToken = userInfo[@"sessionToken"];
 		user.username = userInfo[@"username"];
 		user.createdAt = [dateFormatter dateFromString:userInfo[@"createdAt"]];
@@ -269,9 +309,8 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	User *user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] firstObject];
 	user.latitude = @(self.locationManager.location.coordinate.latitude);
 	user.longitude = @(self.locationManager.location.coordinate.longitude);
-	self.user = user;
 
-	if (completionBlock) completionBlock(self.user);
+	self.user = user;
 }
 
 - (void)fetchUsersWithCompletionBlock:(UserManagerUsersCompletionBlock)completionBlock
@@ -282,7 +321,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 
 	NSError *error;
 	self.users = [NSSet setWithArray:[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error]];
-	if (completionBlock) completionBlock([self.users copy]);
+	if (completionBlock) completionBlock(self.users);
 }
 
 @end

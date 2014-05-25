@@ -12,15 +12,17 @@
 #import "TableView.h"
 #import "DetailTableViewCell.h"
 
+static NSString * const kUserLocationKey = @"UserLocationKey";
 static NSString *cellIdentifier = @"cellIdentifier";
 
-@interface MyAccountViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MyAccountViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) TableView *tableView;
 @property (nonatomic, readwrite, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *profileInfo;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *storiesInfo;
 @property (nonatomic, readwrite, strong) NSMutableDictionary *settingsInfo;
+@property (nonatomic, readwrite, strong) NSString *location;
 
 @end
 
@@ -66,6 +68,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		   forCellReuseIdentifier:cellIdentifier];
 
 	[self refreshMyAccount:nil];
+
+	[UserManager sharedManager].locationManager.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -84,8 +88,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (NSMutableDictionary *)profileInfo
 {
 	User *user = [UserManager sharedManager].user;
-	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Nickname": user.nickname ?: @"",
-															@"Email": user.email ?: @"" }];
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Email": user.email ?: @"Loading...",
+															@"Nickname": user.nickname ?: @"Loading...",
+															@"Location": self.location ?: @"Loading..." }];
 }
 
 - (NSMutableDictionary *)storiesInfo
@@ -158,6 +163,33 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - Location manager delegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	if ([[userDefaults objectForKey:kUserLocationKey] isEqualToString:self.location]) {
+		return;
+	}
+
+	if (!locations || !locations.count) {
+		return;
+	}
+
+	__typeof__(self) __weak weakSelf = self;
+	CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+	[geocoder reverseGeocodeLocation:[locations firstObject] completionHandler:^(NSArray *placemarks, NSError *error) {
+		for (CLPlacemark *placemark in placemarks) {
+			weakSelf.location = [NSString stringWithFormat:@"%@, %@", placemark.locality, placemark.administrativeArea];
+			[userDefaults setObject:weakSelf.location forKey:kUserLocationKey];
+			if (![userDefaults synchronize]) {
+				VLNRLogError(@"Error: User defaults not synched!");
+			}
+			[weakSelf.tableView reloadData];
+			break;
+		}
+	}];
+}
+
 #pragma mark - Action methods
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -193,14 +225,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	if ([[UserManager sharedManager] isLoading]) {
 		return;
 	}
-
-	NSDictionary *userInfo = @{ @"passcode": @"0000" };
-
-	[[UserManager sharedManager] updateUserWithUserInfo:userInfo successBlock:^(User *user) {
-		VLNRLogInfo(@"User: %@", user);
-	} failureBlock:^(NSError *error) {
-		VLNRLogError(@"Error: %@", error.localizedDescription);
-	}];
 
 	[self.tableView reloadData];
 	[self.refreshControl endRefreshing];

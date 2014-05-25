@@ -30,6 +30,9 @@ typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 
 + (UserManager *)sharedManager;
 
+- (void)getUserWithSuccessBlock:(UserManagerSuccessBlock)successBlock
+				   failureBlock:(UserManagerFailureBlock)failureBlock;
+
 - (void)loginUserWithUserInfo:(NSDictionary *)userInfo
 				 successBlock:(UserManagerSuccessBlock)successBlock
 				 failureBlock:(UserManagerFailureBlock)failureBlock;
@@ -42,9 +45,7 @@ typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 				  successBlock:(UserManagerSuccessBlock)successBlock
 				  failureBlock:(UserManagerFailureBlock)failureBlock;
 
-- (void)replaceUserWithUserInfo:(NSDictionary *)userInfo
-				   successBlock:(UserManagerSuccessBlock)successBlock
-				   failureBlock:(UserManagerFailureBlock)failureBlock;
+- (void)updateLocationWithCompletionBlock:(UserManagerCompletionBlock)completionBlock;
 
 - (void)getUsersWithSuccessBlock:(UserManagerUsersSuccessBlock)successBlock
 					failureBlock:(UserManagerUsersFailureBlock)failureBlock;

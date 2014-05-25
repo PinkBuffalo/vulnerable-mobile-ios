@@ -56,6 +56,7 @@
 
 		_nameTextField = [[UITextField alloc] initWithDelegate:delegate
 												   placeholder:@"First Name or Nickname"];
+		_nameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		_nameTextField.returnKeyType = UIReturnKeyNext;
 		_nameTextField.tag = SignUpViewNameTextFieldTag;
 
@@ -63,6 +64,7 @@
 													placeholder:@"Email Address"];
 		_emailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		_emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		_emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
 		_emailTextField.returnKeyType = UIReturnKeyNext;
 		_emailTextField.tag = SignUpViewEmailTextFieldTag;
@@ -71,6 +73,7 @@
 													   placeholder:@"Password"];
 		_passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		_passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		_passwordTextField.secureTextEntry = YES;
 		_passwordTextField.returnKeyType = UIReturnKeyDone;
 		_passwordTextField.tag = SignUpVeiewPasswordTextFieldTag;
