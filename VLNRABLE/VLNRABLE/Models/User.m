@@ -13,6 +13,8 @@
 
 @dynamic createdAt;
 @dynamic email;
+@dynamic latitude;
+@dynamic longitude;
 @dynamic nickname;
 @dynamic objectId;
 @dynamic passcode;

@@ -58,7 +58,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
 		self.refreshControl.tintColor = [VLNRColor tealColor];
-		self.tableView.contentInset = UIEdgeInsetsMake(100.0f, 0, 0, 0);
+		self.tableView.contentInset = UIEdgeInsetsMake(59.0f, 0, 0, 0);
 		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
 
@@ -66,11 +66,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		   forCellReuseIdentifier:cellIdentifier];
 
 	[self refreshMyAccount:nil];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(refreshMyAccount:)
-												 name:kUserManagerUserDidFinishLoadingNotification
-											   object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -198,6 +193,14 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	if ([[UserManager sharedManager] isLoading]) {
 		return;
 	}
+
+	NSDictionary *userInfo = @{ @"passcode": @"0000" };
+
+	[[UserManager sharedManager] updateUserWithUserInfo:userInfo successBlock:^(User *user) {
+		VLNRLogInfo(@"User: %@", user);
+	} failureBlock:^(NSError *error) {
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+	}];
 
 	[self.tableView reloadData];
 	[self.refreshControl endRefreshing];

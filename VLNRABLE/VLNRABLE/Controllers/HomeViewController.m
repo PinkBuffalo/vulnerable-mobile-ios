@@ -66,6 +66,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		   forCellReuseIdentifier:cellIdentifier];
 
 	[self refreshStories:nil];
+
+	[[UserManager sharedManager].locationManager startUpdatingLocation];
 }
 
 - (void)viewDidAppear:(BOOL)animated

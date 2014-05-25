@@ -25,6 +25,7 @@ typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 
 @property (nonatomic, readonly, strong) User *user;
 @property (nonatomic, readonly, strong) NSSet *users;
+@property (nonatomic, readonly, strong) CLLocationManager *locationManager;
 @property (nonatomic, readonly, getter = isLoading) BOOL loading;
 
 + (UserManager *)sharedManager;

@@ -16,6 +16,8 @@
 
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSNumber * latitude;
+@property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * nickname;
 @property (nonatomic, retain) NSNumber * objectId;
 @property (nonatomic, retain) NSString * passcode;

@@ -10,6 +10,7 @@
 #import "User.h"
 #import "Story.h"
 #import "StoryManager.h"
+#import <CoreLocation/CoreLocation.h>
 #import "AFHTTPRequestOperationManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "CoreDataManager.h"
@@ -22,10 +23,11 @@ static NSString * const kUserSessionTokenKey = @"UserSessionTokenKey";
 NSString * const kUserManagerUserDidFinishLoadingNotification = @"UserManagerUserDidFinishLoadingNotification";
 NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserDidFailLoadingNotification";
 
-@interface UserManager ()
+@interface UserManager () <CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) User *user;
 @property (nonatomic, readwrite, strong) NSSet *users;
+@property (nonatomic, readwrite, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) BOOL loading;
 
 @end
@@ -44,10 +46,24 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	return sharedManager;
 }
 
+#pragma mark - Lazy loading methods
+- (CLLocationManager *)locationManager
+{
+	if (!_locationManager) {
+		_locationManager = [[CLLocationManager alloc] init];
+		_locationManager.delegate = self;
+		_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+		_locationManager.distanceFilter = kCLDistanceFilterNone;
+		_locationManager.headingFilter = kCLHeadingFilterNone;
+        _locationManager.pausesLocationUpdatesAutomatically = YES;
+	}
+	return _locationManager;
+}
+
 #pragma mark - GET methods
 - (void)loginUserWithUserInfo:(NSDictionary *)userInfo
-			   successBlock:(UserManagerSuccessBlock)successBlock
-			   failureBlock:(UserManagerFailureBlock)failureBlock
+				 successBlock:(UserManagerSuccessBlock)successBlock
+				 failureBlock:(UserManagerFailureBlock)failureBlock
 {
 	self.loading = YES;
 
@@ -136,7 +152,31 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 				  successBlock:(UserManagerSuccessBlock)successBlock
 				  failureBlock:(UserManagerFailureBlock)failureBlock
 {
+	self.loading = YES;
 
+	NSString *urlString = [NSString stringWithFormat:@"https://api.parse.com/1/users/%@", self.user.objectId];
+
+	VLNRLogVerbose(@"Parameters: %@", userInfo);
+
+	__typeof__(self) __weak weakSelf = self;
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.requestSerializer = [AFJSONRequestSerializer serializer];
+	[manager.requestSerializer setValue:kVLNRParseApplicationID forHTTPHeaderField:@"X-Parse-Application-Id"];
+	[manager.requestSerializer setValue:kVLNRParseRESTAPIKey forHTTPHeaderField:@"X-Parse-REST-API-Key"];
+	[manager.requestSerializer setValue:self.user.sessionToken forHTTPHeaderField:@"X-Parse-Session-Token"];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	[manager PUT:urlString parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		weakSelf.loading = NO;
+		VLNRLogInfo(@"Response: %@", responseObject);
+		weakSelf.user.updatedAt = [[VLNRAppManager stringToDateFormatter] dateFromString:responseObject[@"updatedAt"]];
+		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
+		successBlock(weakSelf.user);
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		weakSelf.loading = NO;
+		VLNRLogError(@"Error: %@", error.localizedDescription);
+		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFailLoadingNotification object:nil];
+		failureBlock(error);
+	}];
 }
 
 #pragma mark - PUT methods
@@ -168,6 +208,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	user.nickname = responseObject[@"nickname"];
 	user.objectId = responseObject[@"objectId"];
 	user.passcode = responseObject[@"passcode"];
+//	user.latitude = responseObject
 	user.sessionToken = responseObject[@"sessionToken"];
 	user.username = responseObject[@"username"];
 	user.createdAt = [dateFormatter dateFromString:responseObject[@"createdAt"]];
@@ -180,7 +221,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 		VLNRLogError(@"Error: User defaults not synched!");
 	}
 
-	self.user = user;
+	[self fetchUserWithCompletionBlock:nil];
 }
 
 - (void)saveUsersWithResponseObject:(NSDictionary *)responseObject
@@ -221,11 +262,15 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 																	batchSize:1
 																	   faults:NO];
 
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectID == %@", [[NSUserDefaults standardUserDefaults]objectForKey:kUserObjectIdKey]];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", [[NSUserDefaults standardUserDefaults] valueForKey:kUserObjectIdKey]];
 	[fetchRequest setPredicate:predicate];
 
 	NSError *error;
-	self.user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] firstObject];
+	User *user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] firstObject];
+	user.latitude = @(self.locationManager.location.coordinate.latitude);
+	user.longitude = @(self.locationManager.location.coordinate.longitude);
+	self.user = user;
+
 	if (completionBlock) completionBlock(self.user);
 }
 

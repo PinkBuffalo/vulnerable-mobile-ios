@@ -19,6 +19,8 @@
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="createdAt" attributeType="Date" syncable="YES"/>
         <attribute name="email" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="objectId" attributeType="String" syncable="YES"/>
         <attribute name="passcode" optional="YES" attributeType="String" syncable="YES"/>
@@ -33,6 +35,6 @@
         <element name="Favorite" positionX="-36" positionY="9" width="128" height="58"/>
         <element name="Metadata" positionX="-54" positionY="-9" width="128" height="163"/>
         <element name="Story" positionX="-18" positionY="90" width="128" height="58"/>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="208"/>
+        <element name="User" positionX="-63" positionY="-18" width="128" height="240"/>
     </elements>
 </model>

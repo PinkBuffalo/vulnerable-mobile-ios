@@ -133,6 +133,7 @@
 		AD07B82419325B780069C70D /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailTableViewCell.h; path = Views/DetailTableViewCell.h; sourceTree = "<group>"; };
 		AD07B82519325B780069C70D /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTableViewCell.m; path = Views/DetailTableViewCell.m; sourceTree = "<group>"; };
 		AD07B828193274840069C70D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AD07B82F19328A900069C70D /* VLNRLocationManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLNRLocationManagerDelegate.h; path = Protocols/VLNRLocationManagerDelegate.h; sourceTree = "<group>"; };
 		AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedTableViewCell.h; path = Views/GetStartedTableViewCell.h; sourceTree = "<group>"; };
 		AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedTableViewCell.m; path = Views/GetStartedTableViewCell.m; sourceTree = "<group>"; };
 		AD28D0FA18FB10E900520EAE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -272,6 +273,7 @@
 				AD00A2FA18DFCC4400AAABBA /* Controllers */,
 				ADDF9069191EBAA30071771E /* Core */,
 				AD91CCC1191DC0C800537DDE /* Models */,
+				AD07B82E19328A300069C70D /* Protocols */,
 				AD91CCC2191DC0D200537DDE /* Resources */,
 				AD00A2CA18DFCACF00AAABBA /* Supporting Files */,
 				AD00A2FF18DFCE8200AAABBA /* Views */,
@@ -353,6 +355,14 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		AD07B82E19328A300069C70D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AD07B82F19328A900069C70D /* VLNRLocationManagerDelegate.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		AD28D0F118FB01E600520EAE /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,14 +408,14 @@
 		AD91CCC1191DC0C800537DDE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ADE367E719306DAE004E0180 /* Story.h */,
-				ADE367E819306DAE004E0180 /* Story.m */,
-				ADE367DF19306DAE004E0180 /* User.h */,
-				ADE367E019306DAE004E0180 /* User.m */,
 				ADDF9039191DEF8F0071771E /* CoreDataManager.h */,
 				ADDF903A191DEF8F0071771E /* CoreDataManager.m */,
+				ADE367E719306DAE004E0180 /* Story.h */,
+				ADE367E819306DAE004E0180 /* Story.m */,
 				ADDF904D191E97EE0071771E /* StoryManager.h */,
 				ADDF904E191E97EE0071771E /* StoryManager.m */,
+				ADE367DF19306DAE004E0180 /* User.h */,
+				ADE367E019306DAE004E0180 /* User.m */,
 				ADDF9031191DD79B0071771E /* UserManager.h */,
 				ADDF9032191DD79B0071771E /* UserManager.m */,
 			);
@@ -423,10 +433,10 @@
 		ADDF9069191EBAA30071771E /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
-				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
 				ADDF9065191EBA9B0071771E /* VLNRAppManager.h */,
 				ADDF9066191EBA9B0071771E /* VLNRAppManager.m */,
+				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
+				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
