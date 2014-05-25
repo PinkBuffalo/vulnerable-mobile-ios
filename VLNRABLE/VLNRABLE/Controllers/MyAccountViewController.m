@@ -178,11 +178,13 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		}
 		case 1:
 		{
+			detailCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			detailCell.titleLabel.text = [self.storiesInfo.allKeys objectAtIndex:indexPath.row];
 			break;
 		}
 		case 2:
 		{
+			detailCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			detailCell.titleLabel.text = [self.settingsInfo.allKeys objectAtIndex:indexPath.row];
 			break;
 		}

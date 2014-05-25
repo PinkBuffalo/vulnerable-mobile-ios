@@ -4,7 +4,7 @@
 //
 //  Created by Paris Pinkney on 4/13/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
-//xx
+//
 
 #import "HomeViewController.h"
 #import "StoryTableViewCell.h"
@@ -13,6 +13,7 @@
 #import "Story.h"
 #import "User.h"
 #import "TableView.h"
+#import "DateTools.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
@@ -106,7 +107,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
 	StoryTableViewCell *storyCell = (StoryTableViewCell *)cell;
 	Story *story = [[[StoryManager sharedManager].stories allObjects] objectAtIndex:indexPath.row];
-	storyCell.timeLabel.text = @"15m";
+	storyCell.timeLabel.text = [[NSDate date] timeAgoSinceDate:story.updatedAt numericDates:YES];
 	storyCell.storyLabel.text = story.content;
 
 	NSString *storyTitle = [NSString stringWithFormat:@"%@ by %@", story.title, story.user.nickname];

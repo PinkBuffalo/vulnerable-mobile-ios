@@ -23,6 +23,7 @@ PODS:
   - CocoaLumberjack/Core (1.8.1)
   - CocoaLumberjack/Extensions (1.8.1):
     - CocoaLumberjack/Core
+  - DateTools (1.2.0)
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
   - Nocilla (0.8.1)
@@ -39,6 +40,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0.0)
   - CocoaLumberjack (~> 1.8.1)
+  - DateTools (~> 1.2.0)
   - Nocilla (~> 0.8.1)
   - Parse (~> 1.2.19)
   - SDWebImage (~> 3.6)
@@ -50,6 +52,7 @@ SPEC CHECKSUMS:
   AFNetworking: a4d0e9a64de9242986620dafd1b3cee3b413ac5c
   Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
   CocoaLumberjack: 9d198d6e19909b3b113a38c5f06f7bb8eedd0427
+  DateTools: 1765514cd526b2c2ab491b7747df67e0a82e97c1
   Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
   Nocilla: e573c2bf9113c8d77782b695a2f9362b7bc44e72
   Parse: ffebaecaddd32cb52671010f81567c298ff93d04
