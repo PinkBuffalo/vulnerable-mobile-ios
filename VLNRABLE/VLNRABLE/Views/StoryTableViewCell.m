@@ -61,10 +61,6 @@
 											  textAlignment:NSTextAlignmentLeft
 											  numberOfLines:1];
 
-		self.contentView.layer.borderColor = [VLNRColor lightTealTextColor].CGColor;
-		self.contentView.layer.borderWidth = 0.5f;
-
-
 		[self.contentView addSubview:_storyImageView];
 		[self.contentView addSubview:_timeLabel];
 		[self.contentView addSubview:_storyLabel];

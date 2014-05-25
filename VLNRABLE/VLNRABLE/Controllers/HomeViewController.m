@@ -35,7 +35,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)loadView
 {
-	_tableView = [[TableView alloc] init];
+	_tableView = [[TableView alloc] initWithSeparators:YES];
 	_tableView.dataSource = self;
 	_tableView.delegate = self;
 	[self setView:_tableView];

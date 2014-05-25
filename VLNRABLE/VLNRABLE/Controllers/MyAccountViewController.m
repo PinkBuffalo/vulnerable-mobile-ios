@@ -10,6 +10,7 @@
 #import "UserManager.h"
 #import "User.h"
 #import "TableView.h"
+#import "DetailTableViewCell.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
@@ -17,10 +18,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 @property (nonatomic, readwrite, strong) TableView *tableView;
 @property (nonatomic, readwrite, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, readwrite, strong) NSMutableArray *profileRows;
-@property (nonatomic, readwrite, strong) NSMutableArray *storiesRows;
-@property (nonatomic, readwrite, strong) NSMutableArray *settingsRows;
-@property (nonatomic, readwrite, strong) NSMutableDictionary *myAccountInfo;
+@property (nonatomic, readwrite, strong) NSMutableDictionary *profileInfo;
+@property (nonatomic, readwrite, strong) NSMutableDictionary *storiesInfo;
+@property (nonatomic, readwrite, strong) NSMutableDictionary *settingsInfo;
 
 @end
 
@@ -36,7 +36,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)loadView
 {
-	_tableView = [[TableView alloc] initWithSeparators];
+	_tableView = [[TableView alloc] initWithSeparators:YES style:UITableViewStyleGrouped];
 	_tableView.dataSource = self;
 	_tableView.delegate = self;
 	[self setView:_tableView];
@@ -62,7 +62,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
 
-	[self.tableView registerClass:[UITableViewCell class]
+	[self.tableView registerClass:[DetailTableViewCell class]
 		   forCellReuseIdentifier:cellIdentifier];
 
 	[self refreshMyAccount:nil];
@@ -86,30 +86,26 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 
 #pragma mark - Lazy loading methods
-- (NSMutableArray *)profileRows
+- (NSMutableDictionary *)profileInfo
 {
-	return [NSMutableArray arrayWithArray:@[ [UserManager sharedManager].user.nickname ?: @"",
-											 [UserManager sharedManager].user.email ?: @"" ]];
+	User *user = [UserManager sharedManager].user;
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Nickname": user.nickname ?: @"",
+															@"Email": user.email ?: @"" }];
 }
 
-- (NSMutableArray *)storiesRows
+- (NSMutableDictionary *)storiesInfo
 {
-	return [NSMutableArray arrayWithArray:@[ @"My Stories",
-											 @"Favorite Stories",
-											 @"Hidden Stories" ]];
+	User *user = [UserManager sharedManager].user;
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"My Stories": user.stories ?: @"",
+															@"Favorite Stories": user.favorites ?: @"",
+															@"Hidden Stories": user.stories ?: @"" }];
 }
 
-- (NSMutableArray *)settingsRows
+- (NSMutableDictionary *)settingsInfo
 {
-	return [NSMutableArray arrayWithArray:@[ @"Edit Profile",
-											 @"Change Password" ]];
-}
-
-- (NSMutableDictionary *)myAccountInfo
-{
-	return [NSMutableDictionary dictionaryWithDictionary:@{ @"profile" : self.profileRows,
-															@"stories" : self.storiesRows,
-															@"settings" : self.settingsRows }];
+	User *user = [UserManager sharedManager].user;
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Edit Profile": user ?: @"",
+															@"Change Password": user ?: @"" }];
 }
 
 #pragma mark - Table view data source
@@ -122,11 +118,14 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
 	switch (section) {
 		case 0:
-		case 2:
-			return 2;
+			return [self.profileInfo.allValues count];
 			break;
 		case 1:
-			return 3;
+			return [self.storiesInfo.allValues count];
+			break;
+		case 2:
+			return [self.settingsInfo.allValues count];
+			break;
 		default:
 			return 0;
 			break;
@@ -136,36 +135,27 @@ static NSString *cellIdentifier = @"cellIdentifier";
 #pragma mark - Table view delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
-															forIndexPath:indexPath];
+	DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
+																forIndexPath:indexPath];
 
-	cell.textLabel.font = [VLNRAppManager systemFont];
+	[self configureCell:cell forRowAtIndexPath:indexPath];
 
-	switch (indexPath.section) {
-		case 0:
-		{
-			cell.textLabel.text = [self.myAccountInfo[@"profile"] objectAtIndex:indexPath.row];
-			break;
-		}
-		case 1:
-		{
-			cell.textLabel.text = [self.myAccountInfo[@"stories"] objectAtIndex:indexPath.row];
-			break;
-		}
-		case 2:
-		{
-			cell.textLabel.text = [self.myAccountInfo[@"settings"] objectAtIndex:indexPath.row];
-			break;
-		}
-		default:
-			break;
-	}
 	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	return 5.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+	return 5.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 40.0f;
+	return [DetailTableViewCell height];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -174,6 +164,33 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 
 #pragma mark - Action methods
+- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	DetailTableViewCell *detailCell = (DetailTableViewCell *)cell;
+	detailCell.textLabel.font = [VLNRAppManager systemFont];
+
+	switch (indexPath.section) {
+		case 0:
+		{
+			detailCell.titleLabel.text = [self.profileInfo.allKeys objectAtIndex:indexPath.row];
+			detailCell.contentLabel.text = [self.profileInfo.allValues objectAtIndex:indexPath.row];
+			break;
+		}
+		case 1:
+		{
+			detailCell.titleLabel.text = [self.storiesInfo.allKeys objectAtIndex:indexPath.row];
+			break;
+		}
+		case 2:
+		{
+			detailCell.titleLabel.text = [self.settingsInfo.allKeys objectAtIndex:indexPath.row];
+			break;
+		}
+		default:
+			break;
+	}
+}
+
 - (void)refreshMyAccount:(id)sender
 {
 	if ([[UserManager sharedManager] isLoading]) {

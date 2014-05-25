@@ -24,16 +24,37 @@
 {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [VLNRColor lightTealColor];
-		self.separatorColor = [VLNRColor tealColor];
+		self.separatorColor = [VLNRColor lightTealTextColor];
     }
     return self;
 }
 
-- (instancetype)initWithSeparators
+- (instancetype)initWithSeparators:(BOOL)separators
 {
 	if (self = [super init]) {
 		self.backgroundColor = [VLNRColor lightTealColor];
-		self.separatorColor = [VLNRColor tealColor];
+		if (separators) {
+			self.separatorColor = [VLNRColor lightTealTextColor];
+		} else {
+			self.separatorStyle = UITableViewCellSeparatorStyleNone;
+			self.separatorInset = UIEdgeInsetsZero;
+		}
+	}
+	return self;
+}
+
+- (instancetype)initWithSeparators:(BOOL)separators
+							 style:(UITableViewStyle)style
+{
+	if (self = [super init]) {
+		self = [[TableView alloc] initWithFrame:CGRectZero style:style];
+		self.backgroundColor = [VLNRColor lightTealColor];
+		self.separatorInset = UIEdgeInsetsZero;
+		if (separators) {
+			self.separatorColor = [VLNRColor lightTealTextColor];
+		} else {
+			self.separatorStyle = UITableViewCellSeparatorStyleNone;
+		}
 	}
 	return self;
 }

@@ -29,6 +29,9 @@
 		AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRColor.m */; };
 		AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRColor.m */; };
 		AD00A30618DFE30E00AAABBA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD00A30518DFE30E00AAABBA /* QuartzCore.framework */; };
+		AD07B82619325B780069C70D /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD07B82519325B780069C70D /* DetailTableViewCell.m */; };
+		AD07B82719325B780069C70D /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD07B82519325B780069C70D /* DetailTableViewCell.m */; };
+		AD07B829193274840069C70D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD07B828193274840069C70D /* CoreLocation.framework */; };
 		AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */; };
 		AD12D0B518E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */; };
 		AD28D0FB18FB10E900520EAE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD28D0FA18FB10E900520EAE /* CoreText.framework */; };
@@ -127,6 +130,9 @@
 		AD00A30018DFDAB300AAABBA /* VLNRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRColor.h; sourceTree = "<group>"; };
 		AD00A30118DFDAB300AAABBA /* VLNRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRColor.m; sourceTree = "<group>"; };
 		AD00A30518DFE30E00AAABBA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AD07B82419325B780069C70D /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailTableViewCell.h; path = Views/DetailTableViewCell.h; sourceTree = "<group>"; };
+		AD07B82519325B780069C70D /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTableViewCell.m; path = Views/DetailTableViewCell.m; sourceTree = "<group>"; };
+		AD07B828193274840069C70D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedTableViewCell.h; path = Views/GetStartedTableViewCell.h; sourceTree = "<group>"; };
 		AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedTableViewCell.m; path = Views/GetStartedTableViewCell.m; sourceTree = "<group>"; };
 		AD28D0FA18FB10E900520EAE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -192,6 +198,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD07B829193274840069C70D /* CoreLocation.framework in Frameworks */,
 				AD28D0FB18FB10E900520EAE /* CoreText.framework in Frameworks */,
 				AD00A30618DFE30E00AAABBA /* QuartzCore.framework in Frameworks */,
 				AD00A2C418DFCACF00AAABBA /* CoreGraphics.framework in Frameworks */,
@@ -243,6 +250,7 @@
 		AD00A2C018DFCACF00AAABBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD07B828193274840069C70D /* CoreLocation.framework */,
 				AD28D0FA18FB10E900520EAE /* CoreText.framework */,
 				AD00A30518DFE30E00AAABBA /* QuartzCore.framework */,
 				AD00A2C118DFCACF00AAABBA /* Foundation.framework */,
@@ -325,6 +333,8 @@
 		AD00A2FF18DFCE8200AAABBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AD07B82419325B780069C70D /* DetailTableViewCell.h */,
+				AD07B82519325B780069C70D /* DetailTableViewCell.m */,
 				AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */,
 				AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */,
 				ADBE2E0818E142850094196E /* GetStartedView.h */,
@@ -612,6 +622,7 @@
 				AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
 				ADDF903B191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				ADE7279618FA59F50036F409 /* LogInView.m in Sources */,
+				AD07B82619325B780069C70D /* DetailTableViewCell.m in Sources */,
 				ADCC922C192DD30700700743 /* TableView.m in Sources */,
 				ADDF8FD7191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */,
 				ADE7279A18FA5EE00036F409 /* SignUpViewController.m in Sources */,
@@ -642,6 +653,7 @@
 				AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */,
 				ADCC922D192DD30700700743 /* TableView.m in Sources */,
 				AD4AF8891930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */,
+				AD07B82719325B780069C70D /* DetailTableViewCell.m in Sources */,
 				ADCC9229192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				ADE367E219306DAE004E0180 /* User.m in Sources */,
 				AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */,
