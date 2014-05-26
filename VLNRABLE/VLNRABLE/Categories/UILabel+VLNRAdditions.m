@@ -70,24 +70,4 @@
 	return self;
 }
 
-+ (UIFont *)boldSmallSystemFont
-{
-	return [UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]];
-}
-
-+ (UIFont *)boldSystemFont
-{
-	return [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
-}
-
-+ (UIFont *)smallSystemFont
-{
-	return [UIFont systemFontOfSize:[UIFont systemFontSize]];
-}
-
-+ (UIFont *)systemFont
-{
-	return [UIFont systemFontOfSize:[UIFont systemFontSize]];
-}
-
 @end

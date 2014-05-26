@@ -4,7 +4,7 @@
 //
 //  Created by Paris Pinkney on 4/13/14.
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
-//xx
+//
 
 #import "HomeViewController.h"
 #import "StoryTableViewCell.h"
@@ -13,6 +13,7 @@
 #import "Story.h"
 #import "User.h"
 #import "TableView.h"
+#import "DateTools.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
@@ -35,7 +36,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)loadView
 {
-	_tableView = [[TableView alloc] init];
+	_tableView = [[TableView alloc] initWithSeparators:YES];
 	_tableView.dataSource = self;
 	_tableView.delegate = self;
 	[self setView:_tableView];
@@ -65,6 +66,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		   forCellReuseIdentifier:cellIdentifier];
 
 	[self refreshStories:nil];
+
+	[[UserManager sharedManager].locationManager startUpdatingLocation];
+	[[UserManager sharedManager] updateLocationWithCompletionBlock:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -106,19 +110,23 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
 	StoryTableViewCell *storyCell = (StoryTableViewCell *)cell;
 	Story *story = [[[StoryManager sharedManager].stories allObjects] objectAtIndex:indexPath.row];
-	storyCell.timeLabel.text = @"15m";
+	storyCell.timeLabel.text = [[NSDate date] timeAgoSinceDate:story.updatedAt numericDates:YES];
 	storyCell.storyLabel.text = story.content;
 
-	NSString *storyTitle = [NSString stringWithFormat:@"%@ written by %@", story.title, story.user.nickname];
+	NSString *storyTitle = [NSString stringWithFormat:@"%@ by %@", story.title, story.user.nickname];
 	NSMutableAttributedString *titleStr = [[NSMutableAttributedString alloc] initWithString:storyTitle];
 	NSRange titleRange = [[titleStr string] rangeOfString:story.title];
-	[titleStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor blueColor] range:titleRange];
+	[titleStr addAttributes:@{ NSForegroundColorAttributeName: [VLNRColor blueColor],
+							   NSFontAttributeName: [VLNRAppManager boldSmallSystemFont] }
+					  range:titleRange];
 	storyCell.titleLabel.attributedText = titleStr;
 
 	NSString *storyCategory = @"Trending in: Relationships";
 	NSMutableAttributedString *categoryStr = [[NSMutableAttributedString alloc] initWithString:storyCategory];
 	NSRange categoryRange = [[categoryStr string] rangeOfString:@"Trending in:"];
-	[categoryStr addAttribute:NSForegroundColorAttributeName value:[VLNRColor grayTextColor] range:categoryRange];
+	[categoryStr addAttributes:@{ NSForegroundColorAttributeName: [VLNRColor grayTextColor],
+								  NSFontAttributeName: [VLNRAppManager smallSystemFont] }
+						 range:categoryRange];
 	storyCell.categoryLabel.attributedText = categoryStr;
 }
 

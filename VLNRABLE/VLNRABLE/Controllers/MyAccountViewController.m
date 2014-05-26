@@ -10,17 +10,19 @@
 #import "UserManager.h"
 #import "User.h"
 #import "TableView.h"
+#import "DetailTableViewCell.h"
 
+static NSString * const kUserLocationKey = @"UserLocationKey";
 static NSString *cellIdentifier = @"cellIdentifier";
 
-@interface MyAccountViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MyAccountViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, readwrite, strong) TableView *tableView;
 @property (nonatomic, readwrite, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, readwrite, strong) NSMutableArray *profileRows;
-@property (nonatomic, readwrite, strong) NSMutableArray *storiesRows;
-@property (nonatomic, readwrite, strong) NSMutableArray *settingsRows;
-@property (nonatomic, readwrite, strong) NSMutableDictionary *myAccountInfo;
+@property (nonatomic, readwrite, strong) NSMutableDictionary *profileInfo;
+@property (nonatomic, readwrite, strong) NSMutableDictionary *storiesInfo;
+@property (nonatomic, readwrite, strong) NSMutableDictionary *settingsInfo;
+@property (nonatomic, readwrite, strong) NSString *location;
 
 @end
 
@@ -36,7 +38,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (void)loadView
 {
-	_tableView = [[TableView alloc] initWithSeparators];
+	_tableView = [[TableView alloc] initWithSeparators:YES style:UITableViewStyleGrouped];
 	_tableView.dataSource = self;
 	_tableView.delegate = self;
 	[self setView:_tableView];
@@ -58,19 +60,16 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
 		self.refreshControl.tintColor = [VLNRColor tealColor];
-		self.tableView.contentInset = UIEdgeInsetsMake(100.0f, 0, 0, 0);
+		self.tableView.contentInset = UIEdgeInsetsMake(59.0f, 0, 0, 0);
 		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
 
-	[self.tableView registerClass:[UITableViewCell class]
+	[self.tableView registerClass:[DetailTableViewCell class]
 		   forCellReuseIdentifier:cellIdentifier];
 
 	[self refreshMyAccount:nil];
 
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(refreshMyAccount:)
-												 name:kUserManagerUserDidFinishLoadingNotification
-											   object:nil];
+	[UserManager sharedManager].locationManager.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -86,30 +85,27 @@ static NSString *cellIdentifier = @"cellIdentifier";
 }
 
 #pragma mark - Lazy loading methods
-- (NSMutableArray *)profileRows
+- (NSMutableDictionary *)profileInfo
 {
-	return [NSMutableArray arrayWithArray:@[ [UserManager sharedManager].user.nickname ?: @"",
-											 [UserManager sharedManager].user.email ?: @"" ]];
+	User *user = [UserManager sharedManager].user;
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Email": user.email ?: @"Loading...",
+															@"Nickname": user.nickname ?: @"Loading...",
+															@"Location": self.location ?: @"Loading..." }];
 }
 
-- (NSMutableArray *)storiesRows
+- (NSMutableDictionary *)storiesInfo
 {
-	return [NSMutableArray arrayWithArray:@[ @"My Stories",
-											 @"Favorite Stories",
-											 @"Hidden Stories" ]];
+	User *user = [UserManager sharedManager].user;
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"My Stories": user.stories ?: @"",
+															@"Favorite Stories": user.favorites ?: @"",
+															@"Hidden Stories": user.stories ?: @"" }];
 }
 
-- (NSMutableArray *)settingsRows
+- (NSMutableDictionary *)settingsInfo
 {
-	return [NSMutableArray arrayWithArray:@[ @"Edit Profile",
-											 @"Change Password" ]];
-}
-
-- (NSMutableDictionary *)myAccountInfo
-{
-	return [NSMutableDictionary dictionaryWithDictionary:@{ @"profile" : self.profileRows,
-															@"stories" : self.storiesRows,
-															@"settings" : self.settingsRows }];
+	User *user = [UserManager sharedManager].user;
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Edit Profile": user ?: @"",
+															@"Change Password": user ?: @"" }];
 }
 
 #pragma mark - Table view data source
@@ -122,11 +118,14 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
 	switch (section) {
 		case 0:
-		case 2:
-			return 2;
+			return [self.profileInfo.allValues count];
 			break;
 		case 1:
-			return 3;
+			return [self.storiesInfo.allValues count];
+			break;
+		case 2:
+			return [self.settingsInfo.allValues count];
+			break;
 		default:
 			return 0;
 			break;
@@ -136,36 +135,27 @@ static NSString *cellIdentifier = @"cellIdentifier";
 #pragma mark - Table view delegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
-															forIndexPath:indexPath];
+	DetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier
+																forIndexPath:indexPath];
 
-	cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
+	[self configureCell:cell forRowAtIndexPath:indexPath];
 
-	switch (indexPath.section) {
-		case 0:
-		{
-			cell.textLabel.text = [self.myAccountInfo[@"profile"] objectAtIndex:indexPath.row];
-			break;
-		}
-		case 1:
-		{
-			cell.textLabel.text = [self.myAccountInfo[@"stories"] objectAtIndex:indexPath.row];
-			break;
-		}
-		case 2:
-		{
-			cell.textLabel.text = [self.myAccountInfo[@"settings"] objectAtIndex:indexPath.row];
-			break;
-		}
-		default:
-			break;
-	}
 	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	return 5.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+	return 5.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 40.0f;
+	return [DetailTableViewCell height];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -173,7 +163,63 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+#pragma mark - Location manager delegate
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	if ([[userDefaults objectForKey:kUserLocationKey] isEqualToString:self.location]) {
+		return;
+	}
+
+	if (!locations || !locations.count) {
+		return;
+	}
+
+	__typeof__(self) __weak weakSelf = self;
+	CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+	[geocoder reverseGeocodeLocation:[locations firstObject] completionHandler:^(NSArray *placemarks, NSError *error) {
+		for (CLPlacemark *placemark in placemarks) {
+			weakSelf.location = [NSString stringWithFormat:@"%@, %@", placemark.locality, placemark.administrativeArea];
+			[userDefaults setObject:weakSelf.location forKey:kUserLocationKey];
+			if (![userDefaults synchronize]) {
+				VLNRLogError(@"Error: User defaults not synched!");
+			}
+			[weakSelf.tableView reloadData];
+			break;
+		}
+	}];
+}
+
 #pragma mark - Action methods
+- (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	DetailTableViewCell *detailCell = (DetailTableViewCell *)cell;
+	detailCell.textLabel.font = [VLNRAppManager systemFont];
+
+	switch (indexPath.section) {
+		case 0:
+		{
+			detailCell.titleLabel.text = [self.profileInfo.allKeys objectAtIndex:indexPath.row];
+			detailCell.contentLabel.text = [self.profileInfo.allValues objectAtIndex:indexPath.row];
+			break;
+		}
+		case 1:
+		{
+			detailCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			detailCell.titleLabel.text = [self.storiesInfo.allKeys objectAtIndex:indexPath.row];
+			break;
+		}
+		case 2:
+		{
+			detailCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+			detailCell.titleLabel.text = [self.settingsInfo.allKeys objectAtIndex:indexPath.row];
+			break;
+		}
+		default:
+			break;
+	}
+}
+
 - (void)refreshMyAccount:(id)sender
 {
 	if ([[UserManager sharedManager] isLoading]) {

@@ -42,22 +42,22 @@
 		_storyImageView.layer.cornerRadius = 4.0f;
 
 		_titleLabel = [[UILabel alloc] initWithTextColor:[VLNRColor grayTextColor]
-													font:VLNRABLE_DEFAULT_FONT_SIZE
+													font:[VLNRAppManager smallSystemFont]
 										   textAlignment:NSTextAlignmentLeft
 										   numberOfLines:1];
 
 		_timeLabel = [[UILabel alloc] initWithTextColor:[VLNRColor grayTextColor]
-												   font:VLNRABLE_DEFAULT_FONT_SIZE
+												   font:[VLNRAppManager smallSystemFont]
 										  textAlignment:NSTextAlignmentRight
 										  numberOfLines:1];
 
 		_storyLabel = [[UILabel alloc] initWithTextColor:[UIColor blackColor]
-													font:VLNRABLE_DEFAULT_FONT_SIZE
+													font:[VLNRAppManager systemFont]
 										   textAlignment:NSTextAlignmentLeft
-										   numberOfLines:3];
+										   numberOfLines:4];
 
 		_categoryLabel = [[UILabel alloc] initWithTextColor:[VLNRColor blueColor]
-													   font:VLNRABLE_DEFAULT_FONT_SIZE
+													   font:[VLNRAppManager boldSmallSystemFont]
 											  textAlignment:NSTextAlignmentLeft
 											  numberOfLines:1];
 
@@ -110,7 +110,7 @@
 	_storyLabel.frame = CGRectMake(xOrigin,
 								   yOrigin,
 								   insetWidth,
-								   (storyLabelSize.height * 3.0f));
+								   (storyLabelSize.height * _storyLabel.numberOfLines));
 
 	yOrigin += _storyLabel.frame.size.height + (_padding * 1.5f);
 
@@ -124,7 +124,7 @@
 
 + (CGFloat)height
 {
-	return 100.0f;
+	return 140.0f;
 }
 
 @end

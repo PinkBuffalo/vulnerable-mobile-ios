@@ -8,6 +8,7 @@ link_with 'VLNRABLE', 'VLNRABLETests'
 
 pod 'AFNetworking', '~> 2.0.0'
 pod 'CocoaLumberjack', '~> 1.8.1'
+pod 'DateTools', '~> 1.2.0'
 pod 'Nocilla', '~> 0.8.1'
 pod 'Parse', '~> 1.2.19'
 pod 'SDWebImage', '~> 3.6'

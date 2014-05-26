@@ -43,7 +43,7 @@
 		_facebookButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_logInLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
-													font:VLNRABLE_DEFAULT_FONT_SIZE
+													font:[VLNRAppManager systemFont]
 										   textAlignment:NSTextAlignmentCenter
 										   numberOfLines:1];
 		_logInLabel.text = @"or log in with your email address";
@@ -52,6 +52,7 @@
 													placeholder:@"Email Address"];
 		_emailTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		_emailTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_emailTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		_emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
 		_emailTextField.returnKeyType = UIReturnKeyNext;
 		_emailTextField.tag = LogInViewEmailTextFieldTag;
@@ -60,12 +61,13 @@
 													   placeholder:@"Password"];
 		_passwordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		_passwordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+		_passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
 		_passwordTextField.secureTextEntry = YES;
 		_passwordTextField.returnKeyType = UIReturnKeyDone;
 		_passwordTextField.tag = LogInViewPasswordTextFieldTag;
 
 		_forgotPasswordLabel = [[UILabel alloc] initWithTextColor:[VLNRColor blueColor]
-															 font:VLNRABLE_DEFAULT_FONT_SIZE
+															 font:[VLNRAppManager systemFont]
 													textAlignment:NSTextAlignmentLeft
 													numberOfLines:1];
 		_forgotPasswordLabel.text = @"Forgot Password";
@@ -77,7 +79,7 @@
 		_logInButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_signUpLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
-													 font:VLNRABLE_DEFAULT_FONT_SIZE
+													 font:[VLNRAppManager systemFont]
 											textAlignment:NSTextAlignmentCenter
 											numberOfLines:1];
 

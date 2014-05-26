@@ -25,9 +25,13 @@ typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 
 @property (nonatomic, readonly, strong) User *user;
 @property (nonatomic, readonly, strong) NSSet *users;
+@property (nonatomic, readonly, strong) CLLocationManager *locationManager;
 @property (nonatomic, readonly, getter = isLoading) BOOL loading;
 
 + (UserManager *)sharedManager;
+
+- (void)getUserWithSuccessBlock:(UserManagerSuccessBlock)successBlock
+				   failureBlock:(UserManagerFailureBlock)failureBlock;
 
 - (void)loginUserWithUserInfo:(NSDictionary *)userInfo
 				 successBlock:(UserManagerSuccessBlock)successBlock
@@ -41,9 +45,7 @@ typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 				  successBlock:(UserManagerSuccessBlock)successBlock
 				  failureBlock:(UserManagerFailureBlock)failureBlock;
 
-- (void)replaceUserWithUserInfo:(NSDictionary *)userInfo
-				   successBlock:(UserManagerSuccessBlock)successBlock
-				   failureBlock:(UserManagerFailureBlock)failureBlock;
+- (void)updateLocationWithCompletionBlock:(UserManagerCompletionBlock)completionBlock;
 
 - (void)getUsersWithSuccessBlock:(UserManagerUsersSuccessBlock)successBlock
 					failureBlock:(UserManagerUsersFailureBlock)failureBlock;

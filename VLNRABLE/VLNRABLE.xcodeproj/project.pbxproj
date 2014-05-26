@@ -29,6 +29,9 @@
 		AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRColor.m */; };
 		AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */ = {isa = PBXBuildFile; fileRef = AD00A30118DFDAB300AAABBA /* VLNRColor.m */; };
 		AD00A30618DFE30E00AAABBA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD00A30518DFE30E00AAABBA /* QuartzCore.framework */; };
+		AD07B82619325B780069C70D /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD07B82519325B780069C70D /* DetailTableViewCell.m */; };
+		AD07B82719325B780069C70D /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD07B82519325B780069C70D /* DetailTableViewCell.m */; };
+		AD07B829193274840069C70D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD07B828193274840069C70D /* CoreLocation.framework */; };
 		AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */; };
 		AD12D0B518E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */; };
 		AD28D0FB18FB10E900520EAE /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD28D0FA18FB10E900520EAE /* CoreText.framework */; };
@@ -75,8 +78,8 @@
 		ADDF905C191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905A191EA9D80071771E /* UILabel+VLNRAdditions.m */; };
 		ADDF905F191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */; };
 		ADDF9060191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */; };
-		ADDF9067191EBA9B0071771E /* VLNRApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */; };
-		ADDF9068191EBA9B0071771E /* VLNRApplicationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */; };
+		ADDF9067191EBA9B0071771E /* VLNRAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRAppManager.m */; };
+		ADDF9068191EBA9B0071771E /* VLNRAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDF9066191EBA9B0071771E /* VLNRAppManager.m */; };
 		ADE367E119306DAE004E0180 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE367E019306DAE004E0180 /* User.m */; };
 		ADE367E219306DAE004E0180 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE367E019306DAE004E0180 /* User.m */; };
 		ADE367E919306DAE004E0180 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE367E819306DAE004E0180 /* Story.m */; };
@@ -127,6 +130,10 @@
 		AD00A30018DFDAB300AAABBA /* VLNRColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRColor.h; sourceTree = "<group>"; };
 		AD00A30118DFDAB300AAABBA /* VLNRColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRColor.m; sourceTree = "<group>"; };
 		AD00A30518DFE30E00AAABBA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		AD07B82419325B780069C70D /* DetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailTableViewCell.h; path = Views/DetailTableViewCell.h; sourceTree = "<group>"; };
+		AD07B82519325B780069C70D /* DetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTableViewCell.m; path = Views/DetailTableViewCell.m; sourceTree = "<group>"; };
+		AD07B828193274840069C70D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AD07B82F19328A900069C70D /* VLNRLocationManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = VLNRLocationManagerDelegate.h; path = Protocols/VLNRLocationManagerDelegate.h; sourceTree = "<group>"; };
 		AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GetStartedTableViewCell.h; path = Views/GetStartedTableViewCell.h; sourceTree = "<group>"; };
 		AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GetStartedTableViewCell.m; path = Views/GetStartedTableViewCell.m; sourceTree = "<group>"; };
 		AD28D0FA18FB10E900520EAE /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -172,8 +179,8 @@
 		ADDF905A191EA9D80071771E /* UILabel+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UILabel+VLNRAdditions.m"; path = "Categories/UILabel+VLNRAdditions.m"; sourceTree = "<group>"; };
 		ADDF905D191EB02A0071771E /* NSArray+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+VLNRAdditions.h"; path = "Categories/NSArray+VLNRAdditions.h"; sourceTree = "<group>"; };
 		ADDF905E191EB02A0071771E /* NSArray+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+VLNRAdditions.m"; path = "Categories/NSArray+VLNRAdditions.m"; sourceTree = "<group>"; };
-		ADDF9065191EBA9B0071771E /* VLNRApplicationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRApplicationManager.h; sourceTree = "<group>"; };
-		ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRApplicationManager.m; sourceTree = "<group>"; };
+		ADDF9065191EBA9B0071771E /* VLNRAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRAppManager.h; sourceTree = "<group>"; };
+		ADDF9066191EBA9B0071771E /* VLNRAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRAppManager.m; sourceTree = "<group>"; };
 		ADE367DA19306D65004E0180 /* VLNRABLE-v1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "VLNRABLE-v1.xcdatamodel"; sourceTree = "<group>"; };
 		ADE367DF19306DAE004E0180 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
 		ADE367E019306DAE004E0180 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
@@ -192,6 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD07B829193274840069C70D /* CoreLocation.framework in Frameworks */,
 				AD28D0FB18FB10E900520EAE /* CoreText.framework in Frameworks */,
 				AD00A30618DFE30E00AAABBA /* QuartzCore.framework in Frameworks */,
 				AD00A2C418DFCACF00AAABBA /* CoreGraphics.framework in Frameworks */,
@@ -243,6 +251,7 @@
 		AD00A2C018DFCACF00AAABBA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD07B828193274840069C70D /* CoreLocation.framework */,
 				AD28D0FA18FB10E900520EAE /* CoreText.framework */,
 				AD00A30518DFE30E00AAABBA /* QuartzCore.framework */,
 				AD00A2C118DFCACF00AAABBA /* Foundation.framework */,
@@ -264,6 +273,7 @@
 				AD00A2FA18DFCC4400AAABBA /* Controllers */,
 				ADDF9069191EBAA30071771E /* Core */,
 				AD91CCC1191DC0C800537DDE /* Models */,
+				AD07B82E19328A300069C70D /* Protocols */,
 				AD91CCC2191DC0D200537DDE /* Resources */,
 				AD00A2CA18DFCACF00AAABBA /* Supporting Files */,
 				AD00A2FF18DFCE8200AAABBA /* Views */,
@@ -325,6 +335,8 @@
 		AD00A2FF18DFCE8200AAABBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AD07B82419325B780069C70D /* DetailTableViewCell.h */,
+				AD07B82519325B780069C70D /* DetailTableViewCell.m */,
 				AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */,
 				AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */,
 				ADBE2E0818E142850094196E /* GetStartedView.h */,
@@ -341,6 +353,14 @@
 				ADCC922B192DD30700700743 /* TableView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		AD07B82E19328A300069C70D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				AD07B82F19328A900069C70D /* VLNRLocationManagerDelegate.h */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		AD28D0F118FB01E600520EAE /* Categories */ = {
@@ -388,14 +408,14 @@
 		AD91CCC1191DC0C800537DDE /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ADE367E719306DAE004E0180 /* Story.h */,
-				ADE367E819306DAE004E0180 /* Story.m */,
-				ADE367DF19306DAE004E0180 /* User.h */,
-				ADE367E019306DAE004E0180 /* User.m */,
 				ADDF9039191DEF8F0071771E /* CoreDataManager.h */,
 				ADDF903A191DEF8F0071771E /* CoreDataManager.m */,
+				ADE367E719306DAE004E0180 /* Story.h */,
+				ADE367E819306DAE004E0180 /* Story.m */,
 				ADDF904D191E97EE0071771E /* StoryManager.h */,
 				ADDF904E191E97EE0071771E /* StoryManager.m */,
+				ADE367DF19306DAE004E0180 /* User.h */,
+				ADE367E019306DAE004E0180 /* User.m */,
 				ADDF9031191DD79B0071771E /* UserManager.h */,
 				ADDF9032191DD79B0071771E /* UserManager.m */,
 			);
@@ -413,10 +433,10 @@
 		ADDF9069191EBAA30071771E /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				ADDF9065191EBA9B0071771E /* VLNRAppManager.h */,
+				ADDF9066191EBA9B0071771E /* VLNRAppManager.m */,
 				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
 				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
-				ADDF9065191EBA9B0071771E /* VLNRApplicationManager.h */,
-				ADDF9066191EBA9B0071771E /* VLNRApplicationManager.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -590,7 +610,7 @@
 				ADDF9053191EA97B0071771E /* NSDictionary+VLNRAdditions.m in Sources */,
 				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				ADDF905B191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
-				ADDF9067191EBA9B0071771E /* VLNRApplicationManager.m in Sources */,
+				ADDF9067191EBA9B0071771E /* VLNRAppManager.m in Sources */,
 				ADCC9228192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
 				AD28D10618FB2BE700520EAE /* TabBarViewController.m in Sources */,
@@ -612,6 +632,7 @@
 				AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
 				ADDF903B191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				ADE7279618FA59F50036F409 /* LogInView.m in Sources */,
+				AD07B82619325B780069C70D /* DetailTableViewCell.m in Sources */,
 				ADCC922C192DD30700700743 /* TableView.m in Sources */,
 				ADDF8FD7191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */,
 				ADE7279A18FA5EE00036F409 /* SignUpViewController.m in Sources */,
@@ -635,13 +656,14 @@
 				AD28D0FF18FB23E100520EAE /* HomeViewController.m in Sources */,
 				ADDF905C191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
 				ADBE2E0B18E142850094196E /* GetStartedView.m in Sources */,
-				ADDF9068191EBA9B0071771E /* VLNRApplicationManager.m in Sources */,
+				ADDF9068191EBA9B0071771E /* VLNRAppManager.m in Sources */,
 				AD00A30318DFDAB300AAABBA /* VLNRColor.m in Sources */,
 				AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */,
 				ADDF9060191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,
 				AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */,
 				ADCC922D192DD30700700743 /* TableView.m in Sources */,
 				AD4AF8891930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */,
+				AD07B82719325B780069C70D /* DetailTableViewCell.m in Sources */,
 				ADCC9229192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				ADE367E219306DAE004E0180 /* User.m in Sources */,
 				AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */,

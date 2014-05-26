@@ -1,5 +1,5 @@
 //
-//  VLNRApplicationManager.m
+//  VLNRAppManager.m
 //  VLNRABLE
 //
 //  Created by Paris Pinkney on 5/10/14.
@@ -17,17 +17,17 @@ NSString * const kVLNRParseMasterKey = @"xs4PUSQba3mV0CVFiXvovmqKzysvqhNSF161QIO
 NSString * const VLNRDateFormatterStringToDateKey = @"VLNRDateFormatterStringToDateKey";
 NSString * const VLNRDateFormatterDateToStringKey = @"VLNRDateFormatterDateToStringKey";
 
-#import "VLNRApplicationManager.h"
+#import "VLNRAppManager.h"
 
-@implementation VLNRApplicationManager
+@implementation VLNRAppManager
 
 #pragma mark - Singleton access methods
-+ (VLNRApplicationManager *)sharedManager
++ (VLNRAppManager *)sharedManager
 {
-	static VLNRApplicationManager *sharedManager = nil;
+	static VLNRAppManager *sharedManager = nil;
 	static dispatch_once_t onceToken;
 	dispatch_once(&onceToken, ^{
-		sharedManager = [[VLNRApplicationManager alloc] init];
+		sharedManager = [[VLNRAppManager alloc] init];
 	});
 	return sharedManager;
 }
@@ -72,6 +72,26 @@ NSString * const VLNRDateFormatterDateToStringKey = @"VLNRDateFormatterDateToStr
 		[threadDictionary setObject:dateFormatter forKey:VLNRDateFormatterStringToDateKey];
 	}
 	return dateFormatter;
+}
+
++ (UIFont *)boldSmallSystemFont
+{
+	return [UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]];
+}
+
++ (UIFont *)boldSystemFont
+{
+	return [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
+}
+
++ (UIFont *)smallSystemFont
+{
+	return [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+}
+
++ (UIFont *)systemFont
+{
+	return [UIFont systemFontOfSize:[UIFont systemFontSize]];
 }
 
 @end

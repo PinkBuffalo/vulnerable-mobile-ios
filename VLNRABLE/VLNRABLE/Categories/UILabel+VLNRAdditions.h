@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#define VLNRABLE_DEFAULT_FONT_SIZE [UIFont systemFontOfSize:11.0f]
-
 @interface UILabel (VLNRAdditions)
 
 - (id)initWithTextColor:(UIColor *)textColor
@@ -31,10 +29,5 @@
 				   font:(UIFont *)font
           textAlignment:(NSTextAlignment)textAlignment
           numberOfLines:(NSInteger)numberOfLines;
-
-+ (UIFont *)boldSmallSystemFont;
-+ (UIFont *)boldSystemFont;
-+ (UIFont *)smallSystemFont;
-+ (UIFont *)systemFont;
 
 @end

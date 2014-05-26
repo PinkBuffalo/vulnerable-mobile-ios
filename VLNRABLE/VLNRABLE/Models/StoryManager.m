@@ -110,7 +110,7 @@
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", storyInfo[@"objectId"]];
 		[fetchRequest setPredicate:predicate];
 
-		NSDateFormatter *dateFormatter = [VLNRApplicationManager stringToDateFormatter];
+		NSDateFormatter *dateFormatter = [VLNRAppManager stringToDateFormatter];
 
 		NSError *error;
 		Story *story = [[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
@@ -153,7 +153,7 @@
 		NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", storyInfo[@"objectId"]];
 		[fetchRequest setPredicate:predicate];
 
-		NSDateFormatter *dateFormatter = [VLNRApplicationManager stringToDateFormatter];
+		NSDateFormatter *dateFormatter = [VLNRAppManager stringToDateFormatter];
 
 		NSError *error;
 		Story *story = [[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];

@@ -10,6 +10,8 @@
 
 @interface TableView : UITableView
 
-- (instancetype)initWithSeparators;
+- (instancetype)initWithSeparators:(BOOL)separators;
+- (instancetype)initWithSeparators:(BOOL)separators
+							 style:(UITableViewStyle)style;
 
 @end

@@ -60,7 +60,7 @@
 		_signUpButton.layer.cornerRadius = _buttonHeight / 2.0f;
 
 		_learnMoreLabel = [[UILabel alloc] initWithTextColor:[VLNRColor lightGrayColor]
-														font:VLNRABLE_DEFAULT_FONT_SIZE
+														font:[VLNRAppManager smallSystemFont]
 											   textAlignment:NSTextAlignmentCenter
 											   numberOfLines:1];
 		_learnMoreLabel.text = @"Learn more about VLNRABLE   ";
