@@ -27,12 +27,10 @@
 		// TODO: Add actual view controllers once they are created.
 		UIViewController *vc1 = [UIViewController new];
 		vc1.view.backgroundColor = [UIColor cyanColor];
-		vc1.title = @"Discover";
 		UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
 
 		UIViewController *vc2 = [UIViewController new];
 		vc2.view.backgroundColor = [UIColor yellowColor];
-		vc2.title = @"Write";
 		UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:vc2];
 
 		MyAccountViewController *myAccountVC = [[MyAccountViewController alloc] init];
