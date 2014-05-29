@@ -59,7 +59,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
 		self.refreshControl.tintColor = [VLNRColor tealColor];
 		self.tableView.separatorInset = UIEdgeInsetsZero;
-		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
 
 	[self.tableView registerClass:[StoryTableViewCell class]
