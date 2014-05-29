@@ -30,6 +30,8 @@
 
 	[PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
+	[PFFacebookUtils initializeFacebook];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
@@ -73,13 +75,21 @@
 	if ([[CoreDataManager sharedManager] migrationIsNeeded]) {
 		[[CoreDataManager mainQueueContext] persistentStoreCoordinator];
 	}
+	[FBAppCall handleDidBecomeActiveWithSession:[PFFacebookUtils session]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	// Saves changes in the application's managed object context before the application terminates.
-	[[CoreDataManager sharedManager] savePrivateQueueContext];
-	[[CoreDataManager sharedManager] saveMainQueueContext];
+	[self saveManagedObjectContextWhenApplicationWillEnterBackrgound:application];
+	[[PFFacebookUtils session] close];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+	return [FBAppCall handleOpenURL:url
+				  sourceApplication:sourceApplication
+						withSession:[PFFacebookUtils session]];
 }
 
 #pragma mark - Core Data stack

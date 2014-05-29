@@ -19,7 +19,7 @@
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
 @property (nonatomic, retain) NSString * nickname;
-@property (nonatomic, retain) NSNumber * objectId;
+@property (nonatomic, retain) NSString * objectId;
 @property (nonatomic, retain) NSString * passcode;
 @property (nonatomic, retain) NSString * password;
 @property (nonatomic, retain) NSString * sessionToken;

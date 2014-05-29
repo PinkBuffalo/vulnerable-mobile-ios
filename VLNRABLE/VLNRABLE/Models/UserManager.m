@@ -179,18 +179,26 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 {
 	self.loading = YES;
 
-	NSString *urlString = [NSString stringWithFormat:@"https://api.parse.com/1/users/%@", self.user.objectId];
+	NSString *urlString = [NSString stringWithFormat:@"https://api.parse.com/1/users/%@", self.user.objectId ?: [PFUser currentUser].objectId];
+	NSString *sessionToken = self.user.sessionToken ?: userInfo[@"sessionToken"];
 
 	VLNRLogVerbose(@"Parameters: %@", userInfo);
+
+	NSMutableDictionary *parameters = [userInfo mutableCopy];
+	for (NSString *key in userInfo) {
+		if ([key isEqualToString:@"objectId"] || [key isEqualToString:@"sessionToken"]) {
+			[parameters removeObjectForKey:key];
+		}
+	}
 
 	__typeof__(self) __weak weakSelf = self;
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 	manager.requestSerializer = [AFJSONRequestSerializer serializer];
 	[manager.requestSerializer setValue:kVLNRParseApplicationID forHTTPHeaderField:@"X-Parse-Application-Id"];
 	[manager.requestSerializer setValue:kVLNRParseRESTAPIKey forHTTPHeaderField:@"X-Parse-REST-API-Key"];
-	[manager.requestSerializer setValue:self.user.sessionToken forHTTPHeaderField:@"X-Parse-Session-Token"];
+	[manager.requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-Parse-Session-Token"];
 	manager.responseSerializer = [AFJSONResponseSerializer serializer];
-	[manager PUT:urlString parameters:userInfo success:^(AFHTTPRequestOperation *operation, id responseObject) {
+	[manager PUT:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		weakSelf.loading = NO;
 		VLNRLogInfo(@"Response: %@", responseObject);
 		weakSelf.user.updatedAt = [[VLNRAppManager stringToDateFormatter] dateFromString:responseObject[@"updatedAt"]];
@@ -215,12 +223,13 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 												  @"latitude": @(self.locationManager.location.coordinate.latitude),
 												  @"longitude": @(self.locationManager.location.coordinate.longitude) }};
 
+	__typeof__(self) __weak weakSelf = self;
 	[[UserManager sharedManager] updateUserWithUserInfo:parameters successBlock:^(User *user) {
 		VLNRLogInfo(@"User: %@", user);
-		if (completionBlock) completionBlock(self.user);
+		if (completionBlock) completionBlock(weakSelf.user);
 	} failureBlock:^(NSError *error) {
 		VLNRLogError(@"Error: %@", error.localizedDescription);
-		if (completionBlock) completionBlock(self.user);
+		if (completionBlock) completionBlock(weakSelf.user);
 	}];
 }
 
@@ -322,6 +331,51 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	NSError *error;
 	self.users = [NSSet setWithArray:[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error]];
 	if (completionBlock) completionBlock(self.users);
+}
+
+#pragma mark - Facebook methods
+- (void)requestFacebookDataWithCompletionBlock:(UserManagerCompletionBlock)completionBlock
+{
+	User *user;
+	if (!self.user) {
+		user = [User insertNewObjectIntoContext:[CoreDataManager privateQueueContext]];
+		user.objectId = [PFUser currentUser].objectId;
+		user.sessionToken = [PFUser currentUser].sessionToken;
+		self.user = user;
+	}
+
+	__typeof__(self) __weak weakSelf = self;
+	FBRequest *request = [FBRequest requestForMe];
+	[request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+		if (error) {
+			VLNRLogError(@"Error: %@", error);
+		} else {
+			NSDictionary *responseObject = (NSDictionary *)result;
+			NSString *firstName = responseObject[@"first_name"];
+			NSString *email = responseObject[@"email"];
+
+			self.user.nickname = firstName;
+			self.user.email = email;
+
+			NSDictionary *userInfo = @{ @"objectId": [PFUser currentUser].objectId,
+										@"sessionToken": [PFUser currentUser].sessionToken,
+										@"email": email,
+										@"nickname": firstName };
+
+			if ([UserManager sharedManager].isLoading) {
+				if (completionBlock) completionBlock(weakSelf.user);
+				return;
+			}
+
+			[[UserManager sharedManager] updateUserWithUserInfo:userInfo successBlock:^(User *user) {
+				VLNRLogInfo(@"User: %@", user);
+				if (completionBlock) completionBlock(weakSelf.user);
+			} failureBlock:^(NSError *error) {
+				VLNRLogError(@"Error: %@", error);
+				if (completionBlock) completionBlock(weakSelf.user);
+			}];
+		}
+	}];
 }
 
 @end

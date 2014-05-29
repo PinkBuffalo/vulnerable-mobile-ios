@@ -14,6 +14,7 @@
 #import "VLNRColor.h"
 #import "DDLog.h"
 #import <Parse/Parse.h>
+#import <FacebookSDK/FacebookSDK.h>
 
 //---------------------------------------------
 /* Apple device idioms */
