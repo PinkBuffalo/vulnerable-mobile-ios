@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong, readwrite) LogInView *logInView;
 @property (nonatomic, strong, readwrite) UISegmentedControl *segmentedControl;
+@property (nonatomic, strong, readwrite) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -41,7 +42,7 @@
 	self.logInView.passwordTextField.text = @"password123";
 
 	[self.logInView.facebookButton addTarget:self
-									  action:@selector(logInAction)
+									  action:@selector(facebookAction)
 							forControlEvents:UIControlEventTouchUpInside];
 
 	[self.logInView.logInButton addTarget:self
@@ -62,6 +63,7 @@
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+#pragma mark - Lazy loading methods
 - (LogInView *)logInView
 {
 	if (!_logInView) {
@@ -80,6 +82,15 @@
 		[_segmentedControl setWidth:(screenWidth / 4.0f) forSegmentAtIndex:SIGN_UP_SEGMENT_INDEX];
 	}
 	return _segmentedControl;
+}
+
+- (UIActivityIndicatorView *)activityIndicator
+{
+	if (!_activityIndicator) {
+		_activityIndicator = [[UIActivityIndicatorView alloc] init];
+		_activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+	}
+	return _activityIndicator;
 }
 
 #pragma mark - Text field delegate
@@ -101,26 +112,6 @@
 	}
 	return YES;
 }
-
-/*
-#pragma mark - Parse delegate
-- (void)logInViewController:(PFLogInViewController *)logInController
-			   didLogInUser:(PFUser *)user
-{
-	VLNRLogInfo(@"User: %@", user);
-}
-
-- (void)logInViewController:(PFLogInViewController *)logInController
-	didFailToLogInWithError:(NSError *)error
-{
-	VLNRLogError(@"Error: %@", error.localizedDescription);
-}
-
-- (void)logInViewControllerDidCancelLogIn:(PFLogInViewController *)logInController
-{
-	VLNRLogWarn(@"Login Cancelled!");
-}
- */
 
 #pragma mark - Action methods
 - (void)switchView:(UISegmentedControl *)sender
@@ -163,21 +154,61 @@
 		return;
 	}
 
+	[self.activityIndicator startAnimating];
+
 	NSDictionary *userInfo = @{ @"username": [self.logInView.emailTextField.text copy],
 								@"password": [self.logInView.passwordTextField.text copy] };
 
 	__typeof__(self) __weak weakSelf = self;
 	[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^(User *user) {
 		VLNRLogVerbose(@"\nUser: %@\n", user);
+		[weakSelf.activityIndicator stopAnimating];
 		[weakSelf dismissViewControllerAnimated:YES completion:nil];
 	} failureBlock:^(NSError *error) {
 		VLNRLogError(@"\nError: %@\n", error);
+		[weakSelf.activityIndicator stopAnimating];
 		[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
 									message:[error localizedDescription]
 								   delegate:nil
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:nil] show];
 	}];
+}
+
+- (void)facebookAction
+{
+	NSArray *permissions = @[ @"public_profile", @"email", @"user_location" ];
+
+	__typeof__(self) __weak weakSelf = self;
+	[PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
+		[weakSelf.activityIndicator stopAnimating];
+		if (!user) {
+			if (!error) {
+				VLNRLogWarn(@"User cancelled Facebook log in.");
+				[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
+											message:@"User cancelled the log in."
+										   delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+			} else {
+				VLNRLogError(@"Error: %@", error);
+				[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
+											message:error.localizedDescription
+										   delegate:nil
+								  cancelButtonTitle:@"Dismiss"
+								  otherButtonTitles:nil] show];
+			}
+		} else if (user.isNew) {
+			VLNRLogInfo(@"User signed up and logged in with Facebook!");
+			[[UserManager sharedManager] requestFacebookDataWithCompletionBlock:^(User *user) {
+				[weakSelf dismissViewControllerAnimated:YES completion:nil];
+			}];
+		} else {
+			VLNRLogInfo(@"User logged in with Facebook!");
+			[[UserManager sharedManager] requestFacebookDataWithCompletionBlock:^(User *user) {
+				[weakSelf dismissViewControllerAnimated:YES completion:nil];
+			}];
+		}
+	}];
+	[self.activityIndicator startAnimating];
 }
 
 @end

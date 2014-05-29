@@ -19,6 +19,7 @@
 
 @property (nonatomic, strong, readwrite) SignUpView *signUpView;
 @property (nonatomic, strong, readwrite) UISegmentedControl *segmentedControl;
+@property (nonatomic, strong, readwrite) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -38,7 +39,7 @@
 	[self.signUpView.scrollView addGestureRecognizer:scrollTap];
 
 	[self.signUpView.facebookButton addTarget:self
-									   action:@selector(signUpAction)
+									   action:@selector(facebookAction)
 							 forControlEvents:UIControlEventTouchUpInside];
 
 	[self.signUpView.signUpButton addTarget:self
@@ -59,6 +60,7 @@
 	[self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
+#pragma mark - Lazy loading methods
 - (SignUpView *)signUpView
 {
 	if (!_signUpView) {
@@ -77,6 +79,15 @@
 		[_segmentedControl setWidth:(screenWidth / 4.0f) forSegmentAtIndex:SIGN_UP_SEGMENT_INDEX];
 	}
 	return _segmentedControl;
+}
+
+- (UIActivityIndicatorView *)activityIndicator
+{
+	if (!_activityIndicator) {
+		_activityIndicator = [[UIActivityIndicatorView alloc] init];
+		_activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
+	}
+	return _activityIndicator;
 }
 
 #pragma mark - Text field delegate
@@ -157,6 +168,42 @@
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:nil] show];
 	}];
+}
+
+- (void)facebookAction
+{
+	NSArray *permissions = @[ @"public_profile", @"email", @"user_location" ];
+
+	__typeof__(self) __weak weakSelf = self;
+	[PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
+		[weakSelf.activityIndicator stopAnimating];
+		if (!user) {
+			if (!error) {
+				VLNRLogWarn(@"User cancelled Facebook sign up.");
+				[[[UIAlertView alloc] initWithTitle:@"Sign Up Failed"
+											message:@"User cancelled the sign up."
+										   delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+			} else {
+				VLNRLogError(@"Error: %@", error);
+				[[[UIAlertView alloc] initWithTitle:@"Sign Up Failed"
+											message:error.localizedDescription
+										   delegate:nil
+								  cancelButtonTitle:@"Dismiss"
+								  otherButtonTitles:nil] show];
+			}
+		} else if (user.isNew) {
+			VLNRLogInfo(@"User signed up and logged in with Facebook!");
+			[[UserManager sharedManager] requestFacebookDataWithCompletionBlock:^(User *user) {
+				[weakSelf dismissViewControllerAnimated:YES completion:nil];
+			}];
+		} else {
+			VLNRLogInfo(@"User logged in with Facebook!");
+			[[UserManager sharedManager] requestFacebookDataWithCompletionBlock:^(User *user) {
+				[weakSelf dismissViewControllerAnimated:YES completion:nil];
+			}];
+		}
+	}];
+	[self.activityIndicator startAnimating];
 }
 
 @end

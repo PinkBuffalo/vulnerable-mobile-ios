@@ -20,8 +20,27 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string></string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1464893757082317</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
+	<key>FacebookAppID</key>
+	<string>1464893757082317</string>
+	<key>FacebookDisplayName</key>
+	<string>VNLRABLE</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -54,4 +54,6 @@ typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 
 - (void)fetchUsersWithCompletionBlock:(UserManagerUsersCompletionBlock)completionBlock;
 
+- (void)requestFacebookDataWithCompletionBlock:(UserManagerCompletionBlock)completionBlock;
+
 @end
