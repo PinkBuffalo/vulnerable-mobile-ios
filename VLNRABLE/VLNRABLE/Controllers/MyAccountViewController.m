@@ -60,8 +60,6 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
 		self.refreshControl.tintColor = [VLNRColor tealColor];
-		self.tableView.contentInset = UIEdgeInsetsMake(59.0f, 0, 0, 0);
-		self.automaticallyAdjustsScrollViewInsets = NO;
 	}
 
 	[self.tableView registerClass:[DetailTableViewCell class]
@@ -88,9 +86,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (NSMutableDictionary *)profileInfo
 {
 	User *user = [UserManager sharedManager].user;
-	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Email": user.email ?: @"Loading...",
-															@"Nickname": user.nickname ?: @"Loading...",
-															@"Location": self.location ?: @"Loading..." }];
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Email": user.email ?: @"",
+															@"Nickname": user.nickname ?: @"",
+															@"Location": self.location ?: @"" }];
 }
 
 - (NSMutableDictionary *)storiesInfo

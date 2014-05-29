@@ -35,14 +35,15 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
 
-	TabBarViewController *tabBarVC = [[TabBarViewController alloc] init];
-	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tabBarVC];
-	navController.navigationBar.barTintColor = [VLNRColor tealColor];
-	navController.navigationBar.tintColor = [UIColor whiteColor];
-
 	[[UINavigationBar appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName: [UIColor whiteColor] }];
+	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		[[UINavigationBar appearance] setBarTintColor:[VLNRColor tealColor]];
+	}
 	
 	[application setStatusBarStyle:UIStatusBarStyleLightContent];
+
+	TabBarViewController *tabBarVC = [[TabBarViewController alloc] init];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:tabBarVC];
 
 	self.window.rootViewController = navController;
     [self.window makeKeyAndVisible];
