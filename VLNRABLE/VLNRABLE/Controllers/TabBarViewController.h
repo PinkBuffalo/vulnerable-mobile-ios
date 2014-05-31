@@ -10,4 +10,6 @@
 
 @interface TabBarViewController : UITabBarController
 
+@property (nonatomic, readonly) NSUInteger previousSelectedIndex;
+
 @end

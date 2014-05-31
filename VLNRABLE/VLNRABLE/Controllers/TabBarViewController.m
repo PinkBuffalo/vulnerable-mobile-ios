@@ -14,6 +14,11 @@
 
 @interface TabBarViewController ()
 
+@property (nonatomic, readwrite, strong) UINavigationController *homeNavController;
+@property (nonatomic, readwrite, strong) UINavigationController *writeNavController;
+@property (nonatomic, readwrite, strong) UINavigationController *myAccountNavController;
+@property (nonatomic, readwrite) NSUInteger previousSelectedIndex;
+
 @end
 
 @implementation TabBarViewController
@@ -21,9 +26,8 @@
 - (id)init
 {
 	if (self == [super init]) {
-
 		HomeViewController *homeVC = [[HomeViewController alloc] init];
-		UINavigationController *homeNav = [[UINavigationController alloc] initWithRootViewController:homeVC];
+		_homeNavController = [[UINavigationController alloc] initWithRootViewController:homeVC];
 
 		// TODO: Add actual view controllers once they are created.
 		UIViewController *vc1 = [UIViewController new];
@@ -31,15 +35,15 @@
 		UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
 
 		WriteViewController *writeVC = [[WriteViewController alloc] init];
-		UINavigationController *writeNav = [[UINavigationController alloc] initWithRootViewController:writeVC];
+		_writeNavController = [[UINavigationController alloc] initWithRootViewController:writeVC];
 
 		MyAccountViewController *myAccountVC = [[MyAccountViewController alloc] init];
-		UINavigationController *myAccountNav = [[UINavigationController alloc] initWithRootViewController:myAccountVC];
+		_myAccountNavController = [[UINavigationController alloc] initWithRootViewController:myAccountVC];
 
-		self.viewControllers = @[ homeNav,
+		self.viewControllers = @[ _homeNavController,
 								  nav1,
-								  writeNav,
-								  myAccountNav ];
+								  _writeNavController,
+								  _myAccountNavController ];
 	}
 	return self;
 }
@@ -68,6 +72,14 @@
 	navController.navigationBar.barTintColor = [VLNRColor tealColor];
 	navController.navigationBar.tintColor = [UIColor whiteColor];
 	[self.navigationController presentViewController:navController animated:NO completion:nil];
+}
+
+- (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
+{
+	NSUInteger selectedIndex = [tabBar.items indexOfObject:item];
+	if (selectedIndex != [self.viewControllers indexOfObject:_writeNavController]) {
+		self.previousSelectedIndex = selectedIndex;
+	}
 }
 
 @end

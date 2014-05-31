@@ -78,8 +78,10 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	self.tabBarController.navigationItem.title = @"My Account";
 }
 
-- (void)dealloc
+- (void)viewDidDisappear:(BOOL)animated
 {
+	[super viewDidDisappear:animated];
+
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

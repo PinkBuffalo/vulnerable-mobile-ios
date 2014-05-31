@@ -8,10 +8,14 @@
 
 #import "WriteViewController.h"
 #import "WriteView.h"
+#import "TabBarViewController.h"
 
 @interface WriteViewController () <UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, readwrite, strong) WriteView *writeView;
+@property (nonatomic, readwrite, strong) UIView *accessoryView;
+@property (nonatomic, readwrite, strong) UIBarButtonItem *cancelButton;
+@property (nonatomic, readwrite, strong) UIBarButtonItem *doneButton;
 @property (nonatomic, readwrite, strong) NSLayoutConstraint *constraintToAdjust;
 
 @end
@@ -41,9 +45,9 @@
 	}
 
 	UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
-																						   action:@selector(hideKeyboard)];
+																						   action:@selector(hideKeyboard:)];
 
-	[self.navigationController.view addGestureRecognizer:tapGestureRecognizer];
+	[self.tabBarController.navigationController.navigationBar addGestureRecognizer:tapGestureRecognizer];
 
 	[[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -56,11 +60,29 @@
                                                object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+
+	self.tabBarController.navigationItem.leftBarButtonItem = self.cancelButton;
+	self.tabBarController.navigationItem.rightBarButtonItem = self.doneButton;
+
+	[self.writeView.textField becomeFirstResponder];
+}
+
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
 
 	self.tabBarController.navigationItem.title = @"New Story";
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+	[super viewWillDisappear:animated];
+
+	self.tabBarController.navigationItem.leftBarButtonItem = nil;
+	self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -77,73 +99,92 @@
 }
 
 #pragma mark - Lazy loading methods
+- (UIBarButtonItem *)cancelButton
+{
+	if (!_cancelButton) {
+		_cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+																	  target:self
+																	  action:@selector(cancelAction:)];
+		_cancelButton.tintColor = [UIColor whiteColor];
+	}
+	return _cancelButton;
+}
 
+- (UIBarButtonItem *)doneButton
+{
+	if (!_doneButton) {
+		_doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+																	target:self
+																	action:@selector(doneAction:)];
+		_doneButton.tintColor = [UIColor whiteColor];
+	}
+	return _doneButton;
+}
+
+#pragma mark - Text field delegate
+
+
+#pragma mark - Text view delegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+	if (!textView.inputAccessoryView) {
+		textView.inputAccessoryView = self.accessoryView;
+	}
+	return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+	[textView resignFirstResponder];
+	return YES;
+}
 
 #pragma mark - Keyboard delegate
 - (void)keyboardWillShow:(NSNotification *)notification
 {
-    NSDictionary *userInfo = [notification userInfo];
-    [self adjustTextViewByKeyboardState:YES keyboardInfo:userInfo];
+	UITextView *textView = self.writeView.textView;
+
+	// Get view bounds of keyboard.
+	CGRect keyboardRect = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+	keyboardRect = [self.view convertRect:keyboardRect toView:nil];
+
+	// Adjust the content inset to incorporate the keyboard height.
+	UIEdgeInsets contentInsets = textView.contentInset;
+	contentInsets.bottom = CGRectGetHeight(keyboardRect) - self.writeView.textFieldHeight;
+
+	textView.contentInset = contentInsets;
+	textView.scrollIndicatorInsets = contentInsets;
 }
 
 - (void)keyboardWillHide:(NSNotification *)notification
 {
-	NSDictionary *userInfo = [notification userInfo];
-    [self adjustTextViewByKeyboardState:NO keyboardInfo:userInfo];
+	UITextView *textView = self.writeView.textView;
+
+	UIEdgeInsets contentInsets = textView.contentInset;
+	contentInsets.bottom = 0;
+
+	textView.contentInset = contentInsets;
+	textView.scrollIndicatorInsets = contentInsets;
+
+	[textView.superview layoutIfNeeded];
 }
 
 #pragma mark - Action methods
-- (void)adjustTextViewByKeyboardState:(BOOL)showKeyboard keyboardInfo:(NSDictionary *)info
-{
-	UITextView *textView = self.writeView.textView;
-
-    // Transform the UIViewAnimationCurve to a UIViewAnimationOptions mask.
-    UIViewAnimationCurve animationCurve = [info[UIKeyboardAnimationCurveUserInfoKey] unsignedIntegerValue];
-    UIViewAnimationOptions animationOptions = UIViewAnimationOptionBeginFromCurrentState;
-    if (animationCurve == UIViewAnimationCurveEaseIn) {
-        animationOptions |= UIViewAnimationOptionCurveEaseIn;
-    }
-    else if (animationCurve == UIViewAnimationCurveEaseInOut) {
-        animationOptions |= UIViewAnimationOptionCurveEaseInOut;
-    }
-    else if (animationCurve == UIViewAnimationCurveEaseOut) {
-        animationOptions |= UIViewAnimationOptionCurveEaseOut;
-    }
-    else if (animationCurve == UIViewAnimationCurveLinear) {
-        animationOptions |= UIViewAnimationOptionCurveLinear;
-    }
-
-    [textView setNeedsUpdateConstraints];
-
-    if (showKeyboard) {
-        UIDeviceOrientation orientation = (UIDeviceOrientation)self.interfaceOrientation;
-        BOOL isPortrait = UIDeviceOrientationIsPortrait(orientation);
-
-        NSValue *keyboardFrameVal = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
-        CGRect keyboardFrame = [keyboardFrameVal CGRectValue];
-        CGFloat height = isPortrait ? keyboardFrame.size.height : keyboardFrame.size.width;
-
-        // Adjust the constraint constant to include the keyboard's height.
-        self.constraintToAdjust.constant += height;
-    }
-    else {
-        self.constraintToAdjust.constant = 0;
-    }
-
-    NSTimeInterval animationDuration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-
-    [UIView animateWithDuration:animationDuration delay:0 options:animationOptions animations:^{
-        [self.view layoutIfNeeded];
-    } completion:nil];
-
-    // Now that the frame has changed, move to the selection or point of edit.
-    NSRange selectedRange = textView.selectedRange;
-    [textView scrollRangeToVisible:selectedRange];
-}
-
-- (void)hideKeyboard
+- (void)hideKeyboard:(id)sender
 {
 	[self.writeView endEditing:YES];
+}
+
+- (void)cancelAction:(id)sender
+{
+	[self hideKeyboard:sender];
+	[self.tabBarController setSelectedIndex:[(TabBarViewController *)self.tabBarController previousSelectedIndex]];
+}
+
+- (void)doneAction:(id)sender
+{
+	[self hideKeyboard:sender];
+	[self.tabBarController setSelectedIndex:0];
 }
 
 @end

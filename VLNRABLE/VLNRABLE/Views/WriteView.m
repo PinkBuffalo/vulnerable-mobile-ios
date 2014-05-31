@@ -26,10 +26,15 @@
 
 		_textField = [[UITextField alloc] init];
 		_textField.delegate = delegate;
-		_textField.backgroundColor = [UIColor cyanColor];
+		_textField.borderStyle = UITextBorderStyleNone;
+		_textField.backgroundColor = [UIColor whiteColor];
+		_textField.layer.borderColor = [UIColor whiteColor].CGColor;
+		_textField.layer.borderWidth = 0.0f;
 
 		_textView = [[UITextView alloc] init];
 		_textView.delegate = delegate;
+		_textView.layer.borderColor = [VLNRColor lightTealColor].CGColor;
+		_textView.layer.borderWidth = 1.0f;
 
 		[self addSubview:_textField];
 		[self addSubview:_textView];
