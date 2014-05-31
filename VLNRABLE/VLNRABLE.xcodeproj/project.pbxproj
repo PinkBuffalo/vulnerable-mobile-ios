@@ -41,15 +41,16 @@
 		AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10518FB2BE700520EAE /* TabBarViewController.m */; };
 		AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
 		AD28D10B18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
+		AD36241B193983A6000ADC48 /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241A193983A6000ADC48 /* WriteViewController.m */; };
+		AD36241C193983A6000ADC48 /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241A193983A6000ADC48 /* WriteViewController.m */; };
+		AD36241F193983D9000ADC48 /* WriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241E193983D9000ADC48 /* WriteView.m */; };
+		AD362420193983D9000ADC48 /* WriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241E193983D9000ADC48 /* WriteView.m */; };
 		AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
 		AD4AF8891930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
 		AD4AF88C1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */; };
 		AD4AF88D1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */; };
-		AD4CE77318F6487000147C82 /* Kiwi-XCTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */; };
-		AD4CE77418F6487000147C82 /* Kiwi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77118F6487000147C82 /* Kiwi.framework */; };
-		AD4CE77518F6487000147C82 /* libKiwi-XCTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */; };
 		AD4CE77818F64A4300147C82 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CE77718F64A4300147C82 /* LogInViewController.m */; };
 		AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CE77718F64A4300147C82 /* LogInViewController.m */; };
 		AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CE77B18F6539500147C82 /* SignUpView.m */; };
@@ -143,15 +144,16 @@
 		AD28D10518FB2BE700520EAE /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = Controllers/TabBarViewController.m; sourceTree = "<group>"; };
 		AD28D10818FB418800520EAE /* StoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryTableViewCell.h; path = Views/StoryTableViewCell.h; sourceTree = "<group>"; };
 		AD28D10918FB418800520EAE /* StoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryTableViewCell.m; path = Views/StoryTableViewCell.m; sourceTree = "<group>"; };
+		AD362419193983A6000ADC48 /* WriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteViewController.h; path = Controllers/WriteViewController.h; sourceTree = "<group>"; };
+		AD36241A193983A6000ADC48 /* WriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteViewController.m; path = Controllers/WriteViewController.m; sourceTree = "<group>"; };
+		AD36241D193983D9000ADC48 /* WriteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteView.h; path = Views/WriteView.h; sourceTree = "<group>"; };
+		AD36241E193983D9000ADC48 /* WriteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteView.m; path = Views/WriteView.m; sourceTree = "<group>"; };
 		AD4AF8821930326200C96451 /* NSFetchRequest+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFetchRequest+VLNRAdditions.h"; path = "Categories/NSFetchRequest+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFetchRequest+VLNRAdditions.m"; path = "Categories/NSFetchRequest+VLNRAdditions.m"; sourceTree = "<group>"; };
 		AD4AF8861930330F00C96451 /* NSManagedObject+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+VLNRAdditions.h"; path = "Categories/NSManagedObject+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+VLNRAdditions.m"; path = "Categories/NSManagedObject+VLNRAdditions.m"; sourceTree = "<group>"; };
 		AD4AF88A1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectModel+VLNRAdditions.h"; path = "Categories/NSManagedObjectModel+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectModel+VLNRAdditions.m"; path = "Categories/NSManagedObjectModel+VLNRAdditions.m"; sourceTree = "<group>"; };
-		AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Kiwi-XCTest.zip"; sourceTree = "<group>"; };
-		AD4CE77118F6487000147C82 /* Kiwi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kiwi.framework; sourceTree = "<group>"; };
-		AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKiwi-XCTest.a"; sourceTree = "<group>"; };
 		AD4CE77618F64A4300147C82 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogInViewController.h; path = Controllers/LogInViewController.h; sourceTree = "<group>"; };
 		AD4CE77718F64A4300147C82 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogInViewController.m; path = Controllers/LogInViewController.m; sourceTree = "<group>"; };
 		AD4CE77A18F6539500147C82 /* SignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpView.h; path = Views/SignUpView.h; sourceTree = "<group>"; };
@@ -214,9 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD4CE77418F6487000147C82 /* Kiwi.framework in Frameworks */,
 				AD00A2E018DFCACF00AAABBA /* XCTest.framework in Frameworks */,
-				AD4CE77518F6487000147C82 /* libKiwi-XCTest.a in Frameworks */,
 				AD00A2E318DFCACF00AAABBA /* CoreData.framework in Frameworks */,
 				AD00A2E218DFCACF00AAABBA /* UIKit.framework in Frameworks */,
 				AD00A2E118DFCACF00AAABBA /* Foundation.framework in Frameworks */,
@@ -328,6 +328,8 @@
 				ADE7279918FA5EE00036F409 /* SignUpViewController.m */,
 				AD28D10418FB2BE700520EAE /* TabBarViewController.h */,
 				AD28D10518FB2BE700520EAE /* TabBarViewController.m */,
+				AD362419193983A6000ADC48 /* WriteViewController.h */,
+				AD36241A193983A6000ADC48 /* WriteViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -351,6 +353,8 @@
 				AD28D10918FB418800520EAE /* StoryTableViewCell.m */,
 				ADCC922A192DD30700700743 /* TableView.h */,
 				ADCC922B192DD30700700743 /* TableView.m */,
+				AD36241D193983D9000ADC48 /* WriteView.h */,
+				AD36241E193983D9000ADC48 /* WriteView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -389,20 +393,9 @@
 		AD4CE76418F647C900147C82 /* Third Party Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				AD4CE76F18F6487000147C82 /* Kiwi */,
 			);
 			name = "Third Party Libraries";
 			path = "VLNRABLE/Third Party Libraries";
-			sourceTree = "<group>";
-		};
-		AD4CE76F18F6487000147C82 /* Kiwi */ = {
-			isa = PBXGroup;
-			children = (
-				AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */,
-				AD4CE77118F6487000147C82 /* Kiwi.framework */,
-				AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */,
-			);
-			path = Kiwi;
 			sourceTree = "<group>";
 		};
 		AD91CCC1191DC0C800537DDE /* Models */ = {
@@ -529,7 +522,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD4CE77318F6487000147C82 /* Kiwi-XCTest.zip in Resources */,
 				AD00A2EB18DFCACF00AAABBA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +612,8 @@
 				ADDF904F191E97EE0071771E /* StoryManager.m in Sources */,
 				ADDF905F191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,
 				AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */,
+				AD36241F193983D9000ADC48 /* WriteView.m in Sources */,
+				AD36241B193983A6000ADC48 /* WriteViewController.m in Sources */,
 				AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */,
 				AD4AF88C1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */,
 				AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */,
@@ -646,6 +640,7 @@
 			files = (
 				AD12D0B518E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
 				AD00A2ED18DFCACF00AAABBA /* VLNRABLETests.m in Sources */,
+				AD362420193983D9000ADC48 /* WriteView.m in Sources */,
 				ADDF9034191DD79B0071771E /* UserManager.m in Sources */,
 				ADE367EA19306DAE004E0180 /* Story.m in Sources */,
 				ADE7279718FA59F50036F409 /* LogInView.m in Sources */,
@@ -672,6 +667,7 @@
 				AD4CE77D18F6539500147C82 /* SignUpView.m in Sources */,
 				ADDF9050191E97EE0071771E /* StoryManager.m in Sources */,
 				ADDF9058191EA9AD0071771E /* UITextField+VLNRAdditions.m in Sources */,
+				AD36241C193983A6000ADC48 /* WriteViewController.m in Sources */,
 				ADDF8FD8191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */,
 				ADE7279B18FA5EE00036F409 /* SignUpViewController.m in Sources */,
 				ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */,

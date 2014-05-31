@@ -57,6 +57,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	self.tableView.backgroundColor = [VLNRColor lightTealColor];
 
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		self.edgesForExtendedLayout = UIRectEdgeNone;
 		self.refreshControl.tintColor = [VLNRColor tealColor];
 		self.tableView.separatorInset = UIEdgeInsetsZero;
 	}

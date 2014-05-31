@@ -59,6 +59,7 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	self.tableView.backgroundColor = [VLNRColor lightTealColor];
 
 	if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+		self.edgesForExtendedLayout = UIRectEdgeNone;
 		self.refreshControl.tintColor = [VLNRColor tealColor];
 	}
 
@@ -143,12 +144,12 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	return 5.0f;
+	return 0.1f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-	return 5.0f;
+	return 10.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,6 +10,7 @@
 #import "HomeViewController.h"
 #import "IntroViewController.h"
 #import "MyAccountViewController.h"
+#import "WriteViewController.h"
 
 @interface TabBarViewController ()
 
@@ -29,16 +30,15 @@
 		vc1.view.backgroundColor = [UIColor cyanColor];
 		UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:vc1];
 
-		UIViewController *vc2 = [UIViewController new];
-		vc2.view.backgroundColor = [UIColor yellowColor];
-		UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:vc2];
+		WriteViewController *writeVC = [[WriteViewController alloc] init];
+		UINavigationController *writeNav = [[UINavigationController alloc] initWithRootViewController:writeVC];
 
 		MyAccountViewController *myAccountVC = [[MyAccountViewController alloc] init];
 		UINavigationController *myAccountNav = [[UINavigationController alloc] initWithRootViewController:myAccountVC];
 
 		self.viewControllers = @[ homeNav,
 								  nav1,
-								  nav2,
+								  writeNav,
 								  myAccountNav ];
 	}
 	return self;
