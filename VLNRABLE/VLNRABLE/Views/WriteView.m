@@ -13,7 +13,7 @@
 
 @property (nonatomic, readwrite, strong) DetailTextField *textField;
 @property (nonatomic, readwrite, strong) VLNRTextView *textView;
-@property (nonatomic, readwrite, strong) UIToolbar *toolbar;
+@property (nonatomic, readwrite, strong) WriteToolbar *toolbar;
 @property (nonatomic, readwrite, strong) UIScrollView *scrollView;
 
 @end
@@ -29,12 +29,16 @@
 		_scrollView = [[UIScrollView alloc] init];
 		_scrollView.delegate = delegate;
 
+		_toolbar = [[WriteToolbar alloc] init];
+
 		_textField = [[DetailTextField alloc] init];
 		_textField.delegate = delegate;
+		_textField.font = [VLNRAppManager largeSystemFont];
 		_textField.borderStyle = UITextBorderStyleNone;
 		_textField.backgroundColor = [UIColor whiteColor];
 		_textField.layer.borderColor = [UIColor whiteColor].CGColor;
 		_textField.layer.borderWidth = 0.0f;
+		_textField.placeholder = @"Your story needs a title...";
 
 		_textView = [[VLNRTextView alloc] init];
 		_textView.delegate = delegate;

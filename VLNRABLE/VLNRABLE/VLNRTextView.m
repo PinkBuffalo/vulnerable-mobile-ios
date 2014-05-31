@@ -67,7 +67,8 @@ static CGFloat const UIPlaceholderTextChangedAnimationDuration = 0.3f;
 
 - (void)setText:(NSString *)text
 {
-	self.text = text;
+	[super setText:text];
+
 	[self textDidChange:nil];
 }
 

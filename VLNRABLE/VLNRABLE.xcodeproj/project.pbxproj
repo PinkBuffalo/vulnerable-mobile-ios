@@ -47,6 +47,8 @@
 		AD362420193983D9000ADC48 /* WriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241E193983D9000ADC48 /* WriteView.m */; };
 		AD362423193A6A48000ADC48 /* DetailTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362422193A6A48000ADC48 /* DetailTextField.m */; };
 		AD362429193A7AC4000ADC48 /* VLNRTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362428193A7AC4000ADC48 /* VLNRTextView.m */; };
+		AD36242C193A89B0000ADC48 /* WriteToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36242B193A89B0000ADC48 /* WriteToolbar.m */; };
+		AD36242F193A96A7000ADC48 /* VLNRCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36242E193A96A7000ADC48 /* VLNRCheckbox.m */; };
 		AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
@@ -154,6 +156,10 @@
 		AD362422193A6A48000ADC48 /* DetailTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTextField.m; path = Views/DetailTextField.m; sourceTree = "<group>"; };
 		AD362427193A7AC4000ADC48 /* VLNRTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRTextView.h; sourceTree = "<group>"; };
 		AD362428193A7AC4000ADC48 /* VLNRTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRTextView.m; sourceTree = "<group>"; };
+		AD36242A193A89B0000ADC48 /* WriteToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteToolbar.h; path = Views/WriteToolbar.h; sourceTree = "<group>"; };
+		AD36242B193A89B0000ADC48 /* WriteToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteToolbar.m; path = Views/WriteToolbar.m; sourceTree = "<group>"; };
+		AD36242D193A96A7000ADC48 /* VLNRCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRCheckbox.h; sourceTree = "<group>"; };
+		AD36242E193A96A7000ADC48 /* VLNRCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRCheckbox.m; sourceTree = "<group>"; };
 		AD4AF8821930326200C96451 /* NSFetchRequest+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFetchRequest+VLNRAdditions.h"; path = "Categories/NSFetchRequest+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFetchRequest+VLNRAdditions.m"; path = "Categories/NSFetchRequest+VLNRAdditions.m"; sourceTree = "<group>"; };
 		AD4AF8861930330F00C96451 /* NSManagedObject+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+VLNRAdditions.h"; path = "Categories/NSManagedObject+VLNRAdditions.h"; sourceTree = "<group>"; };
@@ -361,6 +367,8 @@
 				AD28D10918FB418800520EAE /* StoryTableViewCell.m */,
 				ADCC922A192DD30700700743 /* TableView.h */,
 				ADCC922B192DD30700700743 /* TableView.m */,
+				AD36242A193A89B0000ADC48 /* WriteToolbar.h */,
+				AD36242B193A89B0000ADC48 /* WriteToolbar.m */,
 				AD36241D193983D9000ADC48 /* WriteView.h */,
 				AD36241E193983D9000ADC48 /* WriteView.m */,
 			);
@@ -440,6 +448,8 @@
 				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
 				AD362427193A7AC4000ADC48 /* VLNRTextView.h */,
 				AD362428193A7AC4000ADC48 /* VLNRTextView.m */,
+				AD36242D193A96A7000ADC48 /* VLNRCheckbox.h */,
+				AD36242E193A96A7000ADC48 /* VLNRCheckbox.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -613,6 +623,7 @@
 				AD362423193A6A48000ADC48 /* DetailTextField.m in Sources */,
 				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				ADDF905B191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
+				AD36242C193A89B0000ADC48 /* WriteToolbar.m in Sources */,
 				ADDF9067191EBA9B0071771E /* VLNRAppManager.m in Sources */,
 				ADCC9228192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
@@ -621,6 +632,7 @@
 				AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */,
 				ADE367E119306DAE004E0180 /* User.m in Sources */,
 				ADDF904F191E97EE0071771E /* StoryManager.m in Sources */,
+				AD36242F193A96A7000ADC48 /* VLNRCheckbox.m in Sources */,
 				ADDF905F191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,
 				AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */,
 				AD36241F193983D9000ADC48 /* WriteView.m in Sources */,

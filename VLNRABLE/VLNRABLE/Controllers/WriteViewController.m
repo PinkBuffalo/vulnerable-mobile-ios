@@ -10,10 +10,11 @@
 #import "WriteView.h"
 #import "TabBarViewController.h"
 
-@interface WriteViewController () <UITextFieldDelegate, UITextViewDelegate>
+#define DISCARD_ALERT_TAG 800
+
+@interface WriteViewController () <UIAlertViewDelegate, UIScrollViewDelegate, UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, readwrite, strong) WriteView *writeView;
-@property (nonatomic, readwrite, strong) UIView *accessoryView;
 @property (nonatomic, readwrite, strong) UIBarButtonItem *cancelButton;
 @property (nonatomic, readwrite, strong) UIBarButtonItem *doneButton;
 @property (nonatomic, readwrite, strong) NSLayoutConstraint *constraintToAdjust;
@@ -37,6 +38,15 @@
 	_writeView.textField.textLabel.textColor = [VLNRColor tealColor];
 	_writeView.textField.textLabel.font = [VLNRAppManager systemFont];
 	_writeView.textField.textLabel.text = @"Title:";
+	_writeView.toolbar.checkbox.text = @"Add Anonymously";
+
+	[_writeView.toolbar.checkbox addTarget:self
+									action:@selector(checkboxAction:)
+						  forControlEvents:UIControlEventTouchUpInside];
+
+	UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(checkboxAction:)];
+	[_writeView.toolbar.checkbox.textLabel addGestureRecognizer:tapGesture];
+
 	[self setView:_writeView];
 }
 
@@ -62,6 +72,11 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(textDidChange:)
+												 name:UITextViewTextDidChangeNotification
+											   object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,6 +96,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+
+	[self textDidChange:nil];
 
 	self.tabBarController.navigationItem.title = @"New Story";
 }
@@ -130,15 +147,47 @@
 }
 
 #pragma mark - Text field delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+	if (!textField.inputAccessoryView) {
+		textField.inputAccessoryView = self.writeView.toolbar;
+		[textField.inputAccessoryView sizeToFit];
+	}
+	return YES;
+}
 
 
 #pragma mark - Text view delegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {
 	if (!textView.inputAccessoryView) {
-		textView.inputAccessoryView = self.accessoryView;
+		textView.inputAccessoryView = self.writeView.toolbar;
+		[textView.inputAccessoryView sizeToFit];
 	}
 	return YES;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+	if (textView.text.length - range.length + text.length > self.writeView.toolbar.maxLength) {
+		return NO;
+	}
+	return YES;
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+	CGRect currentTextLine = [textView caretRectForPosition:textView.selectedTextRange.start];
+	CGFloat overflow = currentTextLine.origin.y + currentTextLine.size.height - (textView.contentOffset.y + textView.bounds.size.height - textView.contentInset.bottom - textView.contentInset.top);
+
+	if (overflow > 0) {
+		CGFloat margin = 7.0f;
+		CGPoint contentOffset = textView.contentOffset;
+		contentOffset.y += overflow + margin;
+		[UIView animateWithDuration:0.3 animations:^{
+			textView.contentOffset = contentOffset;
+		}];
+	}
 }
 
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView
@@ -177,7 +226,41 @@
 	[textView.superview layoutIfNeeded];
 }
 
+#pragma mark - Alert view delegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	switch (alertView.tag) {
+		case DISCARD_ALERT_TAG:
+			if (buttonIndex == 1) {
+				[self discardAction];
+			}
+			break;
+
+		default:
+			break;
+	}
+}
+
 #pragma mark - Action methods
+- (void)textDidChange:(NSNotification *)notification
+{
+	NSUInteger textLength = self.writeView.textView.text.length;
+	NSUInteger currentLength = self.writeView.toolbar.maxLength - textLength;
+	self.writeView.toolbar.textLabel.text = [NSString stringWithFormat:@"%i", currentLength];
+}
+
+- (void)checkboxAction:(id)sender
+{
+	UIButton *checkbox = self.writeView.toolbar.checkbox;
+	if ([checkbox isSelected]) {
+		[checkbox setSelected:NO];
+	} else {
+		[checkbox setSelected:YES];
+	}
+
+	// TODO: Make story author anonymous.
+}
+
 - (void)hideKeyboard:(id)sender
 {
 	[self.writeView endEditing:YES];
@@ -185,14 +268,32 @@
 
 - (void)cancelAction:(id)sender
 {
-	[self hideKeyboard:sender];
-	[self.tabBarController setSelectedIndex:[(TabBarViewController *)self.tabBarController previousSelectedIndex]];
+	if (!self.writeView.textField.text.length && !self.writeView.textView.text.length) {
+		[self discardAction];
+		return;
+	}
+
+	UIAlertView *discardAlert = [[UIAlertView alloc] initWithTitle:@"Are you sure you want to discard this story?"
+														   message:nil
+														  delegate:self
+												 cancelButtonTitle:@"Cancel"
+												 otherButtonTitles:@"Discard", nil];
+	discardAlert.tag = DISCARD_ALERT_TAG;
+	[discardAlert show];
 }
 
 - (void)doneAction:(id)sender
 {
 	[self hideKeyboard:sender];
 	[self.tabBarController setSelectedIndex:0];
+}
+
+- (void)discardAction
+{
+	[self hideKeyboard:nil];
+	self.writeView.textField.text = nil;
+	self.writeView.textView.text = nil;
+	[self.tabBarController setSelectedIndex:[(TabBarViewController *)self.tabBarController previousSelectedIndex]];
 }
 
 @end
