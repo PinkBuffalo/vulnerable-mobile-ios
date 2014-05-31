@@ -17,15 +17,18 @@
 #import "NSDictionary+VLNRAdditions.h"
 #import "NSFetchRequest+VLNRAdditions.h"
 
-static NSString * const kUserObjectIdKey = @"UserObjectIdKey";
-static NSString * const kUserSessionTokenKey = @"UserSessionTokenKey";
+NSString * const kUserEmailKey = @"UserEmailKey";
+NSString * const kUserLocationKey = @"UserLocationKey";
+NSString * const kUserNicknameKey = @"UserNicknameKey";
+NSString * const kUserObjectIdKey = @"UserObjectIdKey";
+NSString * const kUserPasscodeKey = @"UserPasscodeKey";
+NSString * const kUserSessionTokenKey = @"UserSessionTokenKey";
 
 NSString * const kUserManagerUserDidFinishLoadingNotification = @"UserManagerUserDidFinishLoadingNotification";
 NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserDidFailLoadingNotification";
 
 @interface UserManager () <CLLocationManagerDelegate>
 
-@property (nonatomic, readwrite, strong) User *user;
 @property (nonatomic, readwrite, strong) NSSet *users;
 @property (nonatomic, readwrite, strong) CLLocationManager *locationManager;
 @property (nonatomic, assign) BOOL loading;
@@ -67,13 +70,16 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	self.loading = YES;
 
 	__typeof__(self) __weak weakSelf = self;
+
+	NSString *sessionToken = self.user.sessionToken ?: [[NSUserDefaults standardUserDefaults] objectForKey:kUserSessionTokenKey];
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 	[manager.requestSerializer setValue:kVLNRParseApplicationID forHTTPHeaderField:@"X-Parse-Application-Id"];
 	[manager.requestSerializer setValue:kVLNRParseRESTAPIKey forHTTPHeaderField:@"X-Parse-REST-API-Key"];
-	[manager.requestSerializer setValue:self.user.sessionToken forHTTPHeaderField:@"X-Parse-Session-Token"];
+	[manager.requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-Parse-Session-Token"];
 	manager.responseSerializer = [AFJSONResponseSerializer serializer];
 	[manager GET:@"https://api.parse.com/1/users/me" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		weakSelf.loading = NO;
+		[weakSelf saveUserDefaultsWithResponseObject:responseObject];
 		[weakSelf saveUserWithResponseObject:responseObject];
 		VLNRLogInfo(@"Response: %@", responseObject);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
@@ -104,6 +110,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	manager.responseSerializer = [AFJSONResponseSerializer serializer];
 	[manager GET:@"https://api.parse.com/1/login" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		weakSelf.loading = NO;
+		[weakSelf saveUserDefaultsWithResponseObject:responseObject];
 		[weakSelf saveUserWithResponseObject:responseObject];
 		VLNRLogInfo(@"Response: %@", responseObject);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
@@ -160,6 +167,7 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	manager.responseSerializer = [AFJSONResponseSerializer serializer];
 	[manager POST:@"https://api.parse.com/1/users" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		weakSelf.loading = NO;
+		[weakSelf saveUserDefaultsWithResponseObject:responseObject];
 		[weakSelf saveUsersWithResponseObject:responseObject];
 		VLNRLogInfo(@"Response: %@", responseObject);
 		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
@@ -201,7 +209,6 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	[manager PUT:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 		weakSelf.loading = NO;
 		VLNRLogInfo(@"Response: %@", responseObject);
-		weakSelf.user.updatedAt = [[VLNRAppManager stringToDateFormatter] dateFromString:responseObject[@"updatedAt"]];
 		[[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
 		successBlock(weakSelf.user);
 	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -234,6 +241,19 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 }
 
 #pragma mark - SAVE methods
+- (void)saveUserDefaultsWithResponseObject:(NSDictionary *)responseObject
+{
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:responseObject[@"email"] forKey:kUserEmailKey];
+	[defaults setObject:responseObject[@"nickname"] forKey:kUserNicknameKey];
+	[defaults setObject:responseObject[@"objectId"] forKey:kUserObjectIdKey];
+	[defaults setObject:responseObject[@"passcode"] forKey:kUserPasscodeKey];
+	[defaults setObject:responseObject[@"sessionToken"] forKey:kUserSessionTokenKey];
+	if (![defaults synchronize]) {
+		VLNRLogError(@"Error: User defaults not synched!");
+	}
+}
+
 - (void)saveUserWithResponseObject:(NSDictionary *)responseObject
 {
 	NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[User entityName]
@@ -244,6 +264,15 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	[fetchRequest setPredicate:predicate];
 
 	NSDateFormatter *dateFormatter = [VLNRAppManager stringToDateFormatter];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	[defaults setObject:responseObject[@"email"] forKey:kUserEmailKey];
+	[defaults setObject:responseObject[@"nickname"] forKey:kUserNicknameKey];
+	[defaults setObject:responseObject[@"objectId"] forKey:kUserObjectIdKey];
+	[defaults setObject:responseObject[@"passcode"] forKey:kUserPasscodeKey];
+	[defaults setObject:responseObject[@"sessionToken"] forKey:kUserSessionTokenKey];
+	if (![defaults synchronize]) {
+		VLNRLogError(@"Error: User defaults not synched!");
+	}
 
 	NSError *error;
 	User *user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] lastObject];
@@ -260,13 +289,6 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 	user.username = responseObject[@"username"];
 	user.createdAt = [dateFormatter dateFromString:responseObject[@"createdAt"]];
 	user.updatedAt = [dateFormatter dateFromString:responseObject[@"updatedAt"]];
-
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	[userDefaults setObject:user.objectId forKey:kUserObjectIdKey];
-	[userDefaults setObject:user.sessionToken forKey:kUserSessionTokenKey];
-	if (![userDefaults synchronize]) {
-		VLNRLogError(@"Error: User defaults not synched!");
-	}
 
 	[self fetchUserWithCompletionBlock:nil];
 }
@@ -311,14 +333,15 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 																	batchSize:1
 																	   faults:NO];
 
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", [[NSUserDefaults standardUserDefaults] valueForKey:kUserObjectIdKey]];
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"objectId == %@", [defaults valueForKey:kUserObjectIdKey]];
 	[fetchRequest setPredicate:predicate];
 
 	NSError *error;
 	User *user = (User *)[[[CoreDataManager privateQueueContext] executeFetchRequest:fetchRequest error:&error] firstObject];
 	user.latitude = @(self.locationManager.location.coordinate.latitude);
 	user.longitude = @(self.locationManager.location.coordinate.longitude);
-
 	self.user = user;
 }
 
@@ -341,7 +364,8 @@ NSString * const kUserManagerUserDidFailLoadingNotification = @"UserManagerUserD
 		user = [User insertNewObjectIntoContext:[CoreDataManager privateQueueContext]];
 		user.objectId = [PFUser currentUser].objectId;
 		user.sessionToken = [PFUser currentUser].sessionToken;
-		self.user = user;
+		self.user.objectId = user.objectId;
+		self.user.sessionToken = user.sessionToken;
 	}
 
 	__typeof__(self) __weak weakSelf = self;

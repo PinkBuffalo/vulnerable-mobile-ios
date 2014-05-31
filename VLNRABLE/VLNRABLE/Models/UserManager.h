@@ -6,6 +6,13 @@
 //  Copyright (c) 2014 VLNRABLE. All rights reserved.
 //
 
+extern NSString * const kUserEmailKey;
+extern NSString * const kUserLocationKey;
+extern NSString * const kUserNicknameKey;
+extern NSString * const kUserObjectIdKey;
+extern NSString * const kUserPasscodeKey;
+extern NSString * const kUserSessionTokenKey;
+
 extern NSString * const kUserManagerUserDidFinishLoadingNotification;
 extern NSString * const kUserManagerUserDidFailLoadingNotification;
 
@@ -23,7 +30,7 @@ typedef void (^UserManagerUsersCompletionBlock)(NSSet *users);
 
 @interface UserManager : NSObject
 
-@property (nonatomic, readonly, strong) User *user;
+@property (nonatomic, readwrite, strong) User *user;
 @property (nonatomic, readonly, strong) NSSet *users;
 @property (nonatomic, readonly, strong) CLLocationManager *locationManager;
 @property (nonatomic, readonly, getter = isLoading) BOOL loading;

@@ -11,8 +11,8 @@
 #import "User.h"
 #import "TableView.h"
 #import "DetailTableViewCell.h"
+#import "TabBarViewController.h"
 
-static NSString * const kUserLocationKey = @"UserLocationKey";
 static NSString *cellIdentifier = @"cellIdentifier";
 
 @interface MyAccountViewController () <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
@@ -89,8 +89,11 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (NSMutableDictionary *)profileInfo
 {
 	User *user = [UserManager sharedManager].user;
-	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Email": user.email ?: @"",
-															@"Nickname": user.nickname ?: @"",
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	NSString *email = user.email ?: [defaults objectForKey:kUserEmailKey];
+	NSString *nickname = user.nickname ?: [defaults objectForKey:kUserNicknameKey];
+	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Email": email ?: @"",
+															@"Nickname": nickname ?: @"",
 															@"Location": self.location ?: @"" }];
 }
 
@@ -106,7 +109,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
 {
 	User *user = [UserManager sharedManager].user;
 	return [NSMutableDictionary dictionaryWithDictionary:@{ @"Edit Profile": user ?: @"",
-															@"Change Password": user ?: @"" }];
+															@"Change Password": user ?: @"",
+															@"Log Out": user ?: @""}];
 }
 
 #pragma mark - Table view data source
@@ -162,27 +166,37 @@ static NSString *cellIdentifier = @"cellIdentifier";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+	if (indexPath.section == 2 && indexPath.row == 2) {
+		TabBarViewController *tabBarVC = (TabBarViewController *)self.tabBarController;
+		__typeof__(self) __weak weakSelf = self;
+		[tabBarVC presentIntroViewControllerWithAnimation:YES completionBlock:^{
+			weakSelf.profileInfo = nil;
+			weakSelf.storiesInfo = nil;
+			weakSelf.settingsInfo = nil;
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			[defaults removePersistentDomainForName:[[NSBundle mainBundle] bundleIdentifier]];
+			[PFUser logOut];
+		}];
+	}
 }
 
 #pragma mark - Location manager delegate
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	if ([[userDefaults objectForKey:kUserLocationKey] isEqualToString:self.location]) {
-		return;
-	}
-
 	if (!locations || !locations.count) {
 		return;
 	}
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	__typeof__(self) __weak weakSelf = self;
 	CLGeocoder *geocoder = [[CLGeocoder alloc] init];
 	[geocoder reverseGeocodeLocation:[locations firstObject] completionHandler:^(NSArray *placemarks, NSError *error) {
 		for (CLPlacemark *placemark in placemarks) {
 			weakSelf.location = [NSString stringWithFormat:@"%@, %@", placemark.locality, placemark.administrativeArea];
-			[userDefaults setObject:weakSelf.location forKey:kUserLocationKey];
-			if (![userDefaults synchronize]) {
+			[defaults setObject:weakSelf.location forKey:kUserLocationKey];
+			if (![defaults synchronize]) {
 				VLNRLogError(@"Error: User defaults not synched!");
 			}
 			[weakSelf.tableView reloadData];

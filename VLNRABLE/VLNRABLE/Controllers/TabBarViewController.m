@@ -11,6 +11,7 @@
 #import "IntroViewController.h"
 #import "MyAccountViewController.h"
 #import "WriteViewController.h"
+#import "UserManager.h"
 
 @interface TabBarViewController ()
 
@@ -62,16 +63,34 @@
 
 	// TODO: Need to set this key-value to NSUserDefaults.
 	// Change if to !userExists to skip to HomeViewController.
-	BOOL userExists;
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	BOOL userExists = [defaults objectForKey:kUserSessionTokenKey] != nil;
 	if (userExists) {
+		[[UserManager sharedManager] getUserWithSuccessBlock:^(User *user) {
+			VLNRLogVerbose(@"User: %@", user);
+		} failureBlock:^(NSError *error) {
+			VLNRLogError(@"Error: %@", error);
+			[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
+										message:[error localizedDescription]
+									   delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil] show];
+		}];
 		return;
 	}
 
+	[self presentIntroViewControllerWithAnimation:NO completionBlock:nil];
+}
+
+- (void)presentIntroViewControllerWithAnimation:(BOOL)animation
+								completionBlock:(void (^)(void))completionBlock
+{
 	IntroViewController *introVC = [[IntroViewController alloc] init];
 	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:introVC];
 	navController.navigationBar.barTintColor = [VLNRColor tealColor];
 	navController.navigationBar.tintColor = [UIColor whiteColor];
-	[self.navigationController presentViewController:navController animated:NO completion:nil];
+	[self.navigationController presentViewController:navController animated:animation completion:completionBlock];
 }
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
