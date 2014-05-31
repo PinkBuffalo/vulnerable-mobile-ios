@@ -45,6 +45,8 @@
 		AD36241C193983A6000ADC48 /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241A193983A6000ADC48 /* WriteViewController.m */; };
 		AD36241F193983D9000ADC48 /* WriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241E193983D9000ADC48 /* WriteView.m */; };
 		AD362420193983D9000ADC48 /* WriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241E193983D9000ADC48 /* WriteView.m */; };
+		AD362423193A6A48000ADC48 /* DetailTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362422193A6A48000ADC48 /* DetailTextField.m */; };
+		AD362429193A7AC4000ADC48 /* VLNRTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362428193A7AC4000ADC48 /* VLNRTextView.m */; };
 		AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
@@ -148,6 +150,10 @@
 		AD36241A193983A6000ADC48 /* WriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteViewController.m; path = Controllers/WriteViewController.m; sourceTree = "<group>"; };
 		AD36241D193983D9000ADC48 /* WriteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteView.h; path = Views/WriteView.h; sourceTree = "<group>"; };
 		AD36241E193983D9000ADC48 /* WriteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteView.m; path = Views/WriteView.m; sourceTree = "<group>"; };
+		AD362421193A6A48000ADC48 /* DetailTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailTextField.h; path = Views/DetailTextField.h; sourceTree = "<group>"; };
+		AD362422193A6A48000ADC48 /* DetailTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTextField.m; path = Views/DetailTextField.m; sourceTree = "<group>"; };
+		AD362427193A7AC4000ADC48 /* VLNRTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRTextView.h; sourceTree = "<group>"; };
+		AD362428193A7AC4000ADC48 /* VLNRTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRTextView.m; sourceTree = "<group>"; };
 		AD4AF8821930326200C96451 /* NSFetchRequest+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFetchRequest+VLNRAdditions.h"; path = "Categories/NSFetchRequest+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFetchRequest+VLNRAdditions.m"; path = "Categories/NSFetchRequest+VLNRAdditions.m"; sourceTree = "<group>"; };
 		AD4AF8861930330F00C96451 /* NSManagedObject+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+VLNRAdditions.h"; path = "Categories/NSManagedObject+VLNRAdditions.h"; sourceTree = "<group>"; };
@@ -339,6 +345,8 @@
 			children = (
 				AD07B82419325B780069C70D /* DetailTableViewCell.h */,
 				AD07B82519325B780069C70D /* DetailTableViewCell.m */,
+				AD362421193A6A48000ADC48 /* DetailTextField.h */,
+				AD362422193A6A48000ADC48 /* DetailTextField.m */,
 				AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */,
 				AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */,
 				ADBE2E0818E142850094196E /* GetStartedView.h */,
@@ -430,6 +438,8 @@
 				ADDF9066191EBA9B0071771E /* VLNRAppManager.m */,
 				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
 				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
+				AD362427193A7AC4000ADC48 /* VLNRTextView.h */,
+				AD362428193A7AC4000ADC48 /* VLNRTextView.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -600,6 +610,7 @@
 				AD00A2D418DFCACF00AAABBA /* AppDelegate.m in Sources */,
 				ADDF9033191DD79B0071771E /* UserManager.m in Sources */,
 				ADDF9053191EA97B0071771E /* NSDictionary+VLNRAdditions.m in Sources */,
+				AD362423193A6A48000ADC48 /* DetailTextField.m in Sources */,
 				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				ADDF905B191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
 				ADDF9067191EBA9B0071771E /* VLNRAppManager.m in Sources */,
@@ -624,6 +635,7 @@
 				AD00A2F818DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				ADDF9057191EA9AD0071771E /* UITextField+VLNRAdditions.m in Sources */,
 				AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
+				AD362429193A7AC4000ADC48 /* VLNRTextView.m in Sources */,
 				ADDF903B191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				ADE7279618FA59F50036F409 /* LogInView.m in Sources */,
 				AD07B82619325B780069C70D /* DetailTableViewCell.m in Sources */,

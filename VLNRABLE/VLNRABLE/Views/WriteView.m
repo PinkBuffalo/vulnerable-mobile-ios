@@ -7,38 +7,46 @@
 //
 
 #import "WriteView.h"
+#import "VLNRTextView.h"
 
 @interface WriteView ()
 
-@property (nonatomic, readwrite, strong) UITextField *textField;
-@property (nonatomic, readwrite, strong) UITextView *textView;
+@property (nonatomic, readwrite, strong) DetailTextField *textField;
+@property (nonatomic, readwrite, strong) VLNRTextView *textView;
 @property (nonatomic, readwrite, strong) UIToolbar *toolbar;
+@property (nonatomic, readwrite, strong) UIScrollView *scrollView;
 
 @end
 
 @implementation WriteView
 
-- (id)initWithDelegate:(id<UITextFieldDelegate,UITextViewDelegate>)delegate
+- (id)initWithDelegate:(id<UIScrollViewDelegate,UITextFieldDelegate,UITextViewDelegate>)delegate
 {
     if (self = [super init]) {
 		_padding = 5.0f;
 		_textFieldHeight = 44.0f;
 
-		_textField = [[UITextField alloc] init];
+		_scrollView = [[UIScrollView alloc] init];
+		_scrollView.delegate = delegate;
+
+		_textField = [[DetailTextField alloc] init];
 		_textField.delegate = delegate;
 		_textField.borderStyle = UITextBorderStyleNone;
 		_textField.backgroundColor = [UIColor whiteColor];
 		_textField.layer.borderColor = [UIColor whiteColor].CGColor;
 		_textField.layer.borderWidth = 0.0f;
 
-		_textView = [[UITextView alloc] init];
+		_textView = [[VLNRTextView alloc] init];
 		_textView.delegate = delegate;
+		_textView.textColor = [UIColor blackColor];
 		_textView.layer.borderColor = [VLNRColor lightTealColor].CGColor;
 		_textView.layer.borderWidth = 1.0f;
+		_textView.placeholder = @"What story would you like to tell?";
 
-		[self addSubview:_textField];
-		[self addSubview:_textView];
-		[self addSubview:_toolbar];
+		[_scrollView addSubview:_textField];
+		[_scrollView addSubview:_textView];
+		[_scrollView addSubview:_toolbar];
+		[self addSubview:_scrollView];
     }
     return self;
 }
@@ -51,6 +59,8 @@
 
 	CGFloat xOrigin = bounds.origin.x;
 	CGFloat yOrigin = bounds.origin.y;
+
+	_scrollView.frame = bounds;
 
 	_textField.frame = CGRectMake(xOrigin,
 								  yOrigin,

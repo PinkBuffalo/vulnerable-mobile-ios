@@ -7,16 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DetailTextField.h"
+#import "VLNRTextView.h"
 
 @interface WriteView : UIView
 
 @property (nonatomic, readwrite) CGFloat padding;
 @property (nonatomic, readwrite) CGFloat textFieldHeight;
 
-@property (nonatomic, readonly, strong) UITextField *textField;
-@property (nonatomic, readonly, strong) UITextView *textView;
+@property (nonatomic, readonly, strong) DetailTextField *textField;
+@property (nonatomic, readonly, strong) VLNRTextView *textView;
 @property (nonatomic, readonly, strong) UIToolbar *toolbar;
+@property (nonatomic, readonly, strong) UIScrollView *scrollView;
 
-- (instancetype)initWithDelegate:(id<UITextFieldDelegate, UITextViewDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<UIScrollViewDelegate, UITextFieldDelegate, UITextViewDelegate>)delegate;
 
 @end

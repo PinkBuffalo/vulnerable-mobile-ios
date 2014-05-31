@@ -33,6 +33,9 @@
 - (void)loadView
 {
 	_writeView = [[WriteView alloc] initWithDelegate:self];
+	_writeView.textField.textLabel.textColor = [VLNRColor tealColor];
+	_writeView.textField.textLabel.font = [VLNRAppManager systemFont];
+	_writeView.textField.textLabel.text = @"Title:";
 	[self setView:_writeView];
 }
 
