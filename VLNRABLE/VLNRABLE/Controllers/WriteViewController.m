@@ -33,6 +33,7 @@
 - (void)loadView
 {
 	_writeView = [[WriteView alloc] initWithDelegate:self];
+	_writeView.textField.textColor = [UIColor blackColor];
 	_writeView.textField.textLabel.textColor = [VLNRColor tealColor];
 	_writeView.textField.textLabel.font = [VLNRAppManager systemFont];
 	_writeView.textField.textLabel.text = @"Title:";
@@ -70,7 +71,11 @@
 	self.tabBarController.navigationItem.leftBarButtonItem = self.cancelButton;
 	self.tabBarController.navigationItem.rightBarButtonItem = self.doneButton;
 
-	[self.writeView.textField becomeFirstResponder];
+	if (!self.writeView.textField.text.length) {
+		[self.writeView.textField becomeFirstResponder];
+	} else {
+		[self.writeView.textView becomeFirstResponder];
+	}
 }
 
 - (void)viewDidAppear:(BOOL)animated

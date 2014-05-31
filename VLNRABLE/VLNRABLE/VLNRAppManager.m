@@ -76,22 +76,32 @@ NSString * const VLNRDateFormatterDateToStringKey = @"VLNRDateFormatterDateToStr
 
 + (UIFont *)boldSmallSystemFont
 {
-	return [UIFont boldSystemFontOfSize:[UIFont smallSystemFontSize]];
+	return [UIFont fontWithName:@"HelveticaNeue-Medium" size:[UIFont smallSystemFontSize]];
 }
 
 + (UIFont *)boldSystemFont
 {
-	return [UIFont boldSystemFontOfSize:[UIFont systemFontSize]];
+	return [UIFont fontWithName:@"HelveticaNeue-Medium" size:[UIFont systemFontSize]];
+}
+
++ (UIFont *)boldLargeSystemFont
+{
+	return [UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0f];
 }
 
 + (UIFont *)smallSystemFont
 {
-	return [UIFont systemFontOfSize:[UIFont smallSystemFontSize]];
+	return [UIFont fontWithName:@"HelveticaNeue-Light" size:[UIFont smallSystemFontSize]];
 }
 
 + (UIFont *)systemFont
 {
-	return [UIFont systemFontOfSize:[UIFont systemFontSize]];
+	return [UIFont fontWithName:@"HelveticaNeue-Light" size:[UIFont systemFontSize]];
+}
+
++ (UIFont *)largeSystemFont
+{
+	return [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
 }
 
 @end

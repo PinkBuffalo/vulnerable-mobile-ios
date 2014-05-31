@@ -100,7 +100,9 @@ extern NSString * const kVLNRParseMasterKey;
 + (NSDateFormatter *)stringToDateFormatter;
 + (UIFont *)boldSmallSystemFont;
 + (UIFont *)boldSystemFont;
++ (UIFont *)boldLargeSystemFont;
 + (UIFont *)smallSystemFont;
 + (UIFont *)systemFont;
++ (UIFont *)largeSystemFont;
 
 @end

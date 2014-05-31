@@ -25,12 +25,12 @@ static CGFloat const UIPlaceholderTextChangedAnimationDuration = 0.3f;
 	if (self = [super init]) {
 		_padding = 5.0f;
 
-		self.contentInset = UIEdgeInsetsMake(_padding,
-											 _padding,
-											 _padding,
-											 _padding);
+		self.textContainerInset = UIEdgeInsetsMake((_padding * 2.0f),
+												   _padding,
+												   (_padding * 2.0f),
+												   _padding);
 
-		self.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:17.0f];
+		self.font = [VLNRAppManager largeSystemFont];
 
 		_placeholder = @"";
 		_placeholderColor = [UIColor lightGrayColor];
@@ -52,8 +52,7 @@ static CGFloat const UIPlaceholderTextChangedAnimationDuration = 0.3f;
 {
 	if (!_placeholderLabel) {
 		_placeholderLabel = [[UILabel alloc] init];
-		CGRect frame = CGRectInset(self.bounds, (_padding * 2.0f), (_padding * 2.0f));
-		_placeholderLabel.frame = CGRectOffset(frame, 0.0f, 2.5f);
+		_placeholderLabel.frame = CGRectInset(self.bounds, (_padding * 2.0f), (_padding * 2.0f));
 		_placeholderLabel.lineBreakMode = NSLineBreakByWordWrapping;
 		_placeholderLabel.numberOfLines = 0;
 		_placeholderLabel.font = self.font;
