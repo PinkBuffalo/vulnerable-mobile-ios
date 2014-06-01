@@ -88,6 +88,7 @@ extern NSString * const kVLNRParseJavascriptKey;
 extern NSString * const kVLNRParseNETKey;
 extern NSString * const kVLNRParseRESTAPIKey;
 extern NSString * const kVLNRParseMasterKey;
+extern NSString * const kVLNRTestFlightAppTokenKey;
 
 @interface VLNRAppManager : NSObject
 

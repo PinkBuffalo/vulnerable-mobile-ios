@@ -35,7 +35,7 @@ PODS:
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.6)
   - SVProgressHUD (1.0)
-  - TTTAttributedLabel (1.9.4)
+  - TTTAttributedLabel (1.9.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0.0)
@@ -59,6 +59,6 @@ SPEC CHECKSUMS:
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SDWebImage-ProgressView: 7b7a9512cbf22d0d6e3d20d9aa8b03e1940d164f
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
-  TTTAttributedLabel: 57bdd0dd8676d58b24a5d0fd0e6c85aa8d0d045e
+  TTTAttributedLabel: 9f727215d63a358f92317a24c83c94c72de78e80
 
 COCOAPODS: 0.33.1

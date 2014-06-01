@@ -12,6 +12,7 @@ NSString * const kVLNRParseJavascriptKey = @"tco96RdoDs6JqFTpfDIEc5TgZ893kZU5qzj
 NSString * const kVLNRParseNETKey = @"KlmDYCwg7zUHnbjUSOTfnwsjZPVo9Xr02HXawxq6";
 NSString * const kVLNRParseRESTAPIKey = @"ZE5an4AbvEdeXRQfFfgm6PncswFV9LUB6sLiLpsf";
 NSString * const kVLNRParseMasterKey = @"xs4PUSQba3mV0CVFiXvovmqKzysvqhNSF161QIOd";
+NSString * const kVLNRTestFlightAppTokenKey = @"f0c47698-54ee-498c-a9cf-acb8dbf785a4";
 
 // Date Formatter
 NSString * const VLNRDateFormatterStringToDateKey = @"VLNRDateFormatterStringToDateKey";
