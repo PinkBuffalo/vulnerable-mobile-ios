@@ -10,4 +10,9 @@
 
 @interface TabBarViewController : UITabBarController
 
+@property (nonatomic, readonly) NSUInteger previousSelectedIndex;
+
+- (void)presentIntroViewControllerWithAnimation:(BOOL)animation
+								completionBlock:(void(^)(void))completionBlock;
+
 @end

@@ -88,6 +88,7 @@ extern NSString * const kVLNRParseJavascriptKey;
 extern NSString * const kVLNRParseNETKey;
 extern NSString * const kVLNRParseRESTAPIKey;
 extern NSString * const kVLNRParseMasterKey;
+extern NSString * const kVLNRTestFlightAppTokenKey;
 
 @interface VLNRAppManager : NSObject
 
@@ -100,7 +101,9 @@ extern NSString * const kVLNRParseMasterKey;
 + (NSDateFormatter *)stringToDateFormatter;
 + (UIFont *)boldSmallSystemFont;
 + (UIFont *)boldSystemFont;
++ (UIFont *)boldLargeSystemFont;
 + (UIFont *)smallSystemFont;
 + (UIFont *)systemFont;
++ (UIFont *)largeSystemFont;
 
 @end

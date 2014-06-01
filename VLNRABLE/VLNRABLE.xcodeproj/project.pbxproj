@@ -41,15 +41,22 @@
 		AD28D10718FB2BE700520EAE /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10518FB2BE700520EAE /* TabBarViewController.m */; };
 		AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
 		AD28D10B18FB418800520EAE /* StoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD28D10918FB418800520EAE /* StoryTableViewCell.m */; };
+		AD36241B193983A6000ADC48 /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241A193983A6000ADC48 /* WriteViewController.m */; };
+		AD36241C193983A6000ADC48 /* WriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241A193983A6000ADC48 /* WriteViewController.m */; };
+		AD36241F193983D9000ADC48 /* WriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241E193983D9000ADC48 /* WriteView.m */; };
+		AD362420193983D9000ADC48 /* WriteView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36241E193983D9000ADC48 /* WriteView.m */; };
+		AD362423193A6A48000ADC48 /* DetailTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362422193A6A48000ADC48 /* DetailTextField.m */; };
+		AD362429193A7AC4000ADC48 /* VLNRTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362428193A7AC4000ADC48 /* VLNRTextView.m */; };
+		AD36242C193A89B0000ADC48 /* WriteToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36242B193A89B0000ADC48 /* WriteToolbar.m */; };
+		AD36242F193A96A7000ADC48 /* VLNRCheckbox.m in Sources */ = {isa = PBXBuildFile; fileRef = AD36242E193A96A7000ADC48 /* VLNRCheckbox.m */; };
+		AD362432193AF960000ADC48 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362431193AF960000ADC48 /* SearchViewController.m */; };
+		AD362433193AF960000ADC48 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD362431193AF960000ADC48 /* SearchViewController.m */; };
 		AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8851930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */; };
 		AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
 		AD4AF8891930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */; };
 		AD4AF88C1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */; };
 		AD4AF88D1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */; };
-		AD4CE77318F6487000147C82 /* Kiwi-XCTest.zip in Resources */ = {isa = PBXBuildFile; fileRef = AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */; };
-		AD4CE77418F6487000147C82 /* Kiwi.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77118F6487000147C82 /* Kiwi.framework */; };
-		AD4CE77518F6487000147C82 /* libKiwi-XCTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */; };
 		AD4CE77818F64A4300147C82 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CE77718F64A4300147C82 /* LogInViewController.m */; };
 		AD4CE77918F64A4300147C82 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CE77718F64A4300147C82 /* LogInViewController.m */; };
 		AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CE77B18F6539500147C82 /* SignUpView.m */; };
@@ -143,15 +150,26 @@
 		AD28D10518FB2BE700520EAE /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = Controllers/TabBarViewController.m; sourceTree = "<group>"; };
 		AD28D10818FB418800520EAE /* StoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryTableViewCell.h; path = Views/StoryTableViewCell.h; sourceTree = "<group>"; };
 		AD28D10918FB418800520EAE /* StoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryTableViewCell.m; path = Views/StoryTableViewCell.m; sourceTree = "<group>"; };
+		AD362419193983A6000ADC48 /* WriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteViewController.h; path = Controllers/WriteViewController.h; sourceTree = "<group>"; };
+		AD36241A193983A6000ADC48 /* WriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteViewController.m; path = Controllers/WriteViewController.m; sourceTree = "<group>"; };
+		AD36241D193983D9000ADC48 /* WriteView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteView.h; path = Views/WriteView.h; sourceTree = "<group>"; };
+		AD36241E193983D9000ADC48 /* WriteView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteView.m; path = Views/WriteView.m; sourceTree = "<group>"; };
+		AD362421193A6A48000ADC48 /* DetailTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailTextField.h; path = Views/DetailTextField.h; sourceTree = "<group>"; };
+		AD362422193A6A48000ADC48 /* DetailTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailTextField.m; path = Views/DetailTextField.m; sourceTree = "<group>"; };
+		AD362427193A7AC4000ADC48 /* VLNRTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRTextView.h; sourceTree = "<group>"; };
+		AD362428193A7AC4000ADC48 /* VLNRTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRTextView.m; sourceTree = "<group>"; };
+		AD36242A193A89B0000ADC48 /* WriteToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WriteToolbar.h; path = Views/WriteToolbar.h; sourceTree = "<group>"; };
+		AD36242B193A89B0000ADC48 /* WriteToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WriteToolbar.m; path = Views/WriteToolbar.m; sourceTree = "<group>"; };
+		AD36242D193A96A7000ADC48 /* VLNRCheckbox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLNRCheckbox.h; sourceTree = "<group>"; };
+		AD36242E193A96A7000ADC48 /* VLNRCheckbox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VLNRCheckbox.m; sourceTree = "<group>"; };
+		AD362430193AF960000ADC48 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = Controllers/SearchViewController.h; sourceTree = "<group>"; };
+		AD362431193AF960000ADC48 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = Controllers/SearchViewController.m; sourceTree = "<group>"; };
 		AD4AF8821930326200C96451 /* NSFetchRequest+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFetchRequest+VLNRAdditions.h"; path = "Categories/NSFetchRequest+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF8831930326200C96451 /* NSFetchRequest+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFetchRequest+VLNRAdditions.m"; path = "Categories/NSFetchRequest+VLNRAdditions.m"; sourceTree = "<group>"; };
 		AD4AF8861930330F00C96451 /* NSManagedObject+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+VLNRAdditions.h"; path = "Categories/NSManagedObject+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF8871930330F00C96451 /* NSManagedObject+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+VLNRAdditions.m"; path = "Categories/NSManagedObject+VLNRAdditions.m"; sourceTree = "<group>"; };
 		AD4AF88A1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObjectModel+VLNRAdditions.h"; path = "Categories/NSManagedObjectModel+VLNRAdditions.h"; sourceTree = "<group>"; };
 		AD4AF88B1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObjectModel+VLNRAdditions.m"; path = "Categories/NSManagedObjectModel+VLNRAdditions.m"; sourceTree = "<group>"; };
-		AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Kiwi-XCTest.zip"; sourceTree = "<group>"; };
-		AD4CE77118F6487000147C82 /* Kiwi.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kiwi.framework; sourceTree = "<group>"; };
-		AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libKiwi-XCTest.a"; sourceTree = "<group>"; };
 		AD4CE77618F64A4300147C82 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogInViewController.h; path = Controllers/LogInViewController.h; sourceTree = "<group>"; };
 		AD4CE77718F64A4300147C82 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogInViewController.m; path = Controllers/LogInViewController.m; sourceTree = "<group>"; };
 		AD4CE77A18F6539500147C82 /* SignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpView.h; path = Views/SignUpView.h; sourceTree = "<group>"; };
@@ -214,9 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD4CE77418F6487000147C82 /* Kiwi.framework in Frameworks */,
 				AD00A2E018DFCACF00AAABBA /* XCTest.framework in Frameworks */,
-				AD4CE77518F6487000147C82 /* libKiwi-XCTest.a in Frameworks */,
 				AD00A2E318DFCACF00AAABBA /* CoreData.framework in Frameworks */,
 				AD00A2E218DFCACF00AAABBA /* UIKit.framework in Frameworks */,
 				AD00A2E118DFCACF00AAABBA /* Foundation.framework in Frameworks */,
@@ -328,6 +344,10 @@
 				ADE7279918FA5EE00036F409 /* SignUpViewController.m */,
 				AD28D10418FB2BE700520EAE /* TabBarViewController.h */,
 				AD28D10518FB2BE700520EAE /* TabBarViewController.m */,
+				AD362419193983A6000ADC48 /* WriteViewController.h */,
+				AD36241A193983A6000ADC48 /* WriteViewController.m */,
+				AD362430193AF960000ADC48 /* SearchViewController.h */,
+				AD362431193AF960000ADC48 /* SearchViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -337,6 +357,8 @@
 			children = (
 				AD07B82419325B780069C70D /* DetailTableViewCell.h */,
 				AD07B82519325B780069C70D /* DetailTableViewCell.m */,
+				AD362421193A6A48000ADC48 /* DetailTextField.h */,
+				AD362422193A6A48000ADC48 /* DetailTextField.m */,
 				AD12D0B218E2933700DFDAC2 /* GetStartedTableViewCell.h */,
 				AD12D0B318E2933700DFDAC2 /* GetStartedTableViewCell.m */,
 				ADBE2E0818E142850094196E /* GetStartedView.h */,
@@ -351,6 +373,10 @@
 				AD28D10918FB418800520EAE /* StoryTableViewCell.m */,
 				ADCC922A192DD30700700743 /* TableView.h */,
 				ADCC922B192DD30700700743 /* TableView.m */,
+				AD36242A193A89B0000ADC48 /* WriteToolbar.h */,
+				AD36242B193A89B0000ADC48 /* WriteToolbar.m */,
+				AD36241D193983D9000ADC48 /* WriteView.h */,
+				AD36241E193983D9000ADC48 /* WriteView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -389,20 +415,9 @@
 		AD4CE76418F647C900147C82 /* Third Party Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				AD4CE76F18F6487000147C82 /* Kiwi */,
 			);
 			name = "Third Party Libraries";
 			path = "VLNRABLE/Third Party Libraries";
-			sourceTree = "<group>";
-		};
-		AD4CE76F18F6487000147C82 /* Kiwi */ = {
-			isa = PBXGroup;
-			children = (
-				AD4CE77018F6487000147C82 /* Kiwi-XCTest.zip */,
-				AD4CE77118F6487000147C82 /* Kiwi.framework */,
-				AD4CE77218F6487000147C82 /* libKiwi-XCTest.a */,
-			);
-			path = Kiwi;
 			sourceTree = "<group>";
 		};
 		AD91CCC1191DC0C800537DDE /* Models */ = {
@@ -437,6 +452,10 @@
 				ADDF9066191EBA9B0071771E /* VLNRAppManager.m */,
 				AD00A30018DFDAB300AAABBA /* VLNRColor.h */,
 				AD00A30118DFDAB300AAABBA /* VLNRColor.m */,
+				AD362427193A7AC4000ADC48 /* VLNRTextView.h */,
+				AD362428193A7AC4000ADC48 /* VLNRTextView.m */,
+				AD36242D193A96A7000ADC48 /* VLNRCheckbox.h */,
+				AD36242E193A96A7000ADC48 /* VLNRCheckbox.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -492,6 +511,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = VLNRABLE;
 				TargetAttributes = {
+					AD00A2BD18DFCACF00AAABBA = {
+						DevelopmentTeam = SFR4B28XYH;
+					};
 					AD00A2DD18DFCACF00AAABBA = {
 						TestTargetID = AD00A2BD18DFCACF00AAABBA;
 					};
@@ -529,7 +551,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD4CE77318F6487000147C82 /* Kiwi-XCTest.zip in Resources */,
 				AD00A2EB18DFCACF00AAABBA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,8 +629,10 @@
 				AD00A2D418DFCACF00AAABBA /* AppDelegate.m in Sources */,
 				ADDF9033191DD79B0071771E /* UserManager.m in Sources */,
 				ADDF9053191EA97B0071771E /* NSDictionary+VLNRAdditions.m in Sources */,
+				AD362423193A6A48000ADC48 /* DetailTextField.m in Sources */,
 				AD28D10A18FB418800520EAE /* StoryTableViewCell.m in Sources */,
 				ADDF905B191EA9D80071771E /* UILabel+VLNRAdditions.m in Sources */,
+				AD36242C193A89B0000ADC48 /* WriteToolbar.m in Sources */,
 				ADDF9067191EBA9B0071771E /* VLNRAppManager.m in Sources */,
 				ADCC9228192DC4B600700743 /* MyAccountViewController.m in Sources */,
 				AD00A2D018DFCACF00AAABBA /* main.m in Sources */,
@@ -618,9 +641,13 @@
 				AD4AF8841930326200C96451 /* NSFetchRequest+VLNRAdditions.m in Sources */,
 				ADE367E119306DAE004E0180 /* User.m in Sources */,
 				ADDF904F191E97EE0071771E /* StoryManager.m in Sources */,
+				AD36242F193A96A7000ADC48 /* VLNRCheckbox.m in Sources */,
 				ADDF905F191EB02A0071771E /* NSArray+VLNRAdditions.m in Sources */,
 				AD4AF8881930330F00C96451 /* NSManagedObject+VLNRAdditions.m in Sources */,
+				AD36241F193983D9000ADC48 /* WriteView.m in Sources */,
+				AD36241B193983A6000ADC48 /* WriteViewController.m in Sources */,
 				AD00A2FD18DFCE7F00AAABBA /* IntroView.m in Sources */,
+				AD362432193AF960000ADC48 /* SearchViewController.m in Sources */,
 				AD4AF88C1930336F00C96451 /* NSManagedObjectModel+VLNRAdditions.m in Sources */,
 				AD4CE77C18F6539500147C82 /* SignUpView.m in Sources */,
 				AD00A30218DFDAB300AAABBA /* VLNRColor.m in Sources */,
@@ -630,6 +657,7 @@
 				AD00A2F818DFCC4100AAABBA /* IntroViewController.m in Sources */,
 				ADDF9057191EA9AD0071771E /* UITextField+VLNRAdditions.m in Sources */,
 				AD12D0B418E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
+				AD362429193A7AC4000ADC48 /* VLNRTextView.m in Sources */,
 				ADDF903B191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				ADE7279618FA59F50036F409 /* LogInView.m in Sources */,
 				AD07B82619325B780069C70D /* DetailTableViewCell.m in Sources */,
@@ -646,6 +674,7 @@
 			files = (
 				AD12D0B518E2933700DFDAC2 /* GetStartedTableViewCell.m in Sources */,
 				AD00A2ED18DFCACF00AAABBA /* VLNRABLETests.m in Sources */,
+				AD362420193983D9000ADC48 /* WriteView.m in Sources */,
 				ADDF9034191DD79B0071771E /* UserManager.m in Sources */,
 				ADE367EA19306DAE004E0180 /* Story.m in Sources */,
 				ADE7279718FA59F50036F409 /* LogInView.m in Sources */,
@@ -670,8 +699,10 @@
 				ADDF903C191DEF8F0071771E /* CoreDataManager.m in Sources */,
 				ADE367EE1930EF64004E0180 /* NSFileManager+VLNRAdditions.m in Sources */,
 				AD4CE77D18F6539500147C82 /* SignUpView.m in Sources */,
+				AD362433193AF960000ADC48 /* SearchViewController.m in Sources */,
 				ADDF9050191E97EE0071771E /* StoryManager.m in Sources */,
 				ADDF9058191EA9AD0071771E /* UITextField+VLNRAdditions.m in Sources */,
+				AD36241C193983A6000ADC48 /* WriteViewController.m in Sources */,
 				ADDF8FD8191DC5810071771E /* VLNRABLE.xcdatamodeld in Sources */,
 				ADE7279B18FA5EE00036F409 /* SignUpViewController.m in Sources */,
 				ADBE2E0718E1425E0094196E /* GetStartedViewController.m in Sources */,
@@ -791,6 +822,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/VLNRABLE/Third\\ Party\\ Libraries/**",
@@ -839,6 +871,7 @@
 				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/VLNRABLE/Third\\ Party\\ Libraries/**",
