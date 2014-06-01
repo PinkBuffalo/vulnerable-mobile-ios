@@ -14,6 +14,7 @@
 #import "User.h"
 #import "TableView.h"
 #import "DateTools.h"
+#import "SearchViewController.h"
 
 static NSString *cellIdentifier = @"cellIdentifier";
 
@@ -21,6 +22,8 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 @property (nonatomic, readwrite, strong) TableView *tableView;
 @property (nonatomic, readwrite, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, readwrite, strong) UIBarButtonItem *favoriteButton;
+@property (nonatomic, readwrite, strong) UIBarButtonItem *searchButton;
 
 @end
 
@@ -69,6 +72,9 @@ static NSString *cellIdentifier = @"cellIdentifier";
 
 	[[UserManager sharedManager].locationManager startUpdatingLocation];
 	[[UserManager sharedManager] updateLocationWithCompletionBlock:nil];
+
+	self.tabBarController.navigationItem.leftBarButtonItem = self.favoriteButton;
+	self.tabBarController.navigationItem.rightBarButtonItem = self.searchButton;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -76,6 +82,29 @@ static NSString *cellIdentifier = @"cellIdentifier";
 	[super viewDidAppear:animated];
 
 	self.tabBarController.navigationItem.title = @"Home";
+}
+
+#pragma mark - Lazy loading methods
+- (UIBarButtonItem *)favoriteButton
+{
+	if (!_favoriteButton) {
+		_favoriteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks
+																		target:self
+																		action:@selector(favoriteAction:)];
+		_favoriteButton.tintColor = [UIColor whiteColor];
+	}
+	return _favoriteButton;
+}
+
+- (UIBarButtonItem *)searchButton
+{
+	if (!_searchButton) {
+		_searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
+																	  target:self
+																	  action:@selector(searchAction:)];
+		_searchButton.tintColor = [UIColor whiteColor];
+	}
+	return _searchButton;
 }
 
 #pragma mark - Table view data source
@@ -161,6 +190,17 @@ static NSString *cellIdentifier = @"cellIdentifier";
 		VLNRLogError(@"Error: %@", error.localizedDescription);
 		completionBlock();
 	}];
+}
+
+- (void)favoriteAction:(id)sender
+{
+
+}
+
+- (void)searchAction:(id)sender
+{
+	SearchViewController *searchVC = [[SearchViewController alloc] init];
+	[self.navigationController pushViewController:searchVC animated:YES];
 }
 
 @end
